@@ -13,6 +13,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [Español](#español)
 
 # English
+[Go up](#pokedex-ld)
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -27,7 +28,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 # Español
-
+[Ir arriba](#pokedex-ld)
 ## Servidor de desarrollo
 Ejecuta `ng serve` para iniciar un servidor de desarrollo. Accede a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en cualquiera de los archivos fuente.
 
