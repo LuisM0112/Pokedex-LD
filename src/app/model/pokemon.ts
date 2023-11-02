@@ -4,5 +4,6 @@ export class Pokemon {
   description: string = '';
   type1: string = '';
   type2: string = '';
+  height: number = 0;
   weight: number = 0;
 }

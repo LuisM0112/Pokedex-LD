@@ -23,7 +23,7 @@ export class PokemonService {
     // }
     this.fetchAllPokemon();
   }
-  
+
   getPokemones(): Pokemon[] {
     return this.pokemones;
   }
@@ -50,15 +50,16 @@ export class PokemonService {
   }
 
   requestPokemon(id: number): Observable<Pokemon> {
-    return this.http.get('https://pokeapi.co/api/v2/pokemon/&{id}').pipe(
+    return this.http.get('https://pokeapi.co/api/v2/pokemon/'+id).pipe(
       map((response: any) => {
         const pokemon = new Pokemon();
         pokemon.id = response.id;
         pokemon.name = response.name;
         pokemon.description = response.description;
-        pokemon.type1 = response.type1;
-        pokemon.type2 = response.type2;
-        pokemon.weight = response.weight;
+        pokemon.type1 = response.types[0];
+        pokemon.type2 = response.types[1];
+        pokemon.height = response.height/10;
+        pokemon.weight = response.weight/10;
         return pokemon;
       })
     );
