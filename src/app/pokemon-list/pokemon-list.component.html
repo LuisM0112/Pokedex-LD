@@ -1,5 +1,10 @@
 <ul>
   <li class="pokemon" *ngFor="let t of pokemonService.getPokemones()">
+    {{ t.id }}
     {{ t.name }}
+    {{ t.description }}
+    {{ t.type1 }}
+    {{ t.type2 }}
+    {{ t.weight }}
   </li>
 </ul>
