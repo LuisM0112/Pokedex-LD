@@ -1,11 +1,13 @@
-<ul>
-  <li class="pokemon" *ngFor="let t of pokemonService.getPokemones()">
-    {{ t.id }}
-    {{ t.name }}
-    {{ t.description }}
-    {{ t.type1 }}
-    {{ t.type2 }}
-    {{ t.height }}
-    {{ t.weight }}
-  </li>
-</ul>
+<div class="pokemon-list">
+  <div class="pokemon" *ngFor="let t of getPokemones()">
+    <div>{{ idFormatter(t.id) }}</div>
+    <div class="centered">
+      <img class="sprite" src="{{t.sprite}}" alt="{{t.name}} sprite">
+    </div>
+    <div>{{ t.name | titlecase }}</div>
+    <div class="centered">
+      <div>{{ t.type1 | titlecase }}</div>
+      <div>{{ t.type2 | titlecase }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.pokemon-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pokemon{
+  width: 98%;
+  height: 98%;
+  margin: 3px;
+  background-color: rgb(155, 255, 151);
+  border: solid 2px rgb(38, 131, 15);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.sprite{
+  width: 70%;
+  height: 70%;
+}
+
+
+.centered{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

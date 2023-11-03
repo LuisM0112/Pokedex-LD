@@ -1,72 +1,44 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Pokemon } from './model/pokemon';
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
-  pokemones: Pokemon[] = [];
 
   constructor(private http: HttpClient) {
-    // for (let i= 0; i < 493; i++){
-    //   this.pokemon = this.requestPokemon(i+1).subscribe(
-    //     (newPokemon) => {
-    //       this.addPokemon(newPokemon);
-    //     },
-    //     (error) => {
-    //       console.error('Error al obtener Pokémon:', error);
-    //     }
-    //   );
-    //   this.addPokemon(new Pokemon());
-    // }
     this.fetchAllPokemon();
   }
 
-  getPokemones(): Pokemon[] {
-    return this.pokemones;
-  }
-
-  getPokemon(id: number): Pokemon {
-    return <Pokemon>{ ...this.pokemones.find(t => t.id == id) };
-  }
-
-  fetchAllPokemon() {
-    const requests: Observable<Pokemon>[] = [];
+  fetchAllPokemon(): Observable<Pokemon[]> {
+    let requests: Observable<Pokemon>[] = [];
+    let result: Pokemon[] = [];
     for (let i = 1; i <= 493; i++) {
-      const request = this.requestPokemon(i);
+      let request = this.requestPokemon(i);
       requests.push(request);
     }
 
-    forkJoin(requests).subscribe(
-      (pokemones: Pokemon[]) => {
-        this.pokemones = pokemones;
-      },
-      (error) => {
-        console.error('Error fetching Pokemon:', error);
-      }
-    );
+    return forkJoin(requests).pipe(map( (pokemones: Pokemon[]) => pokemones));
   }
 
   requestPokemon(id: number): Observable<Pokemon> {
     return this.http.get('https://pokeapi.co/api/v2/pokemon/'+id).pipe(
-      map((response: any) => {
-        const pokemon = new Pokemon();
-        pokemon.id = response.id;
-        pokemon.name = response.name;
-        pokemon.description = response.description;
-        pokemon.type1 = response.types[0];
-        pokemon.type2 = response.types[1];
-        pokemon.height = response.height/10;
-        pokemon.weight = response.weight/10;
-        return pokemon;
-      })
+      map((response: any) => ({
+        id: response.id,
+        sprite: response.sprites.other['official-artwork'].front_default,
+        name: response.name,
+        type1: response.types[0].type.name,
+        type2: response.types[1].type.name,
+        height: response.height/10,
+        weight: response.weight/10,
+      }))
     );
   }
 
-  // addPokemon(pokemon: Pokemon){
-  //   this.pokemones.push(pokemon);
+  // private stringFormatter(word: string): string {
+  //   return word.charAt(0).toUpperCase() + word.slice(1);
   // }
-
 }

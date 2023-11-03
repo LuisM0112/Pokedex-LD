@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../model/pokemon';
 import { PokemonService } from '../pokemon.service';
 
@@ -7,7 +7,28 @@ import { PokemonService } from '../pokemon.service';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
-export class PokemonListComponent {
-  pokemon: Pokemon = new Pokemon();
+export class PokemonListComponent implements OnInit{
+  pokemones: Pokemon[] = [];
+
   constructor(public pokemonService: PokemonService) { }
+  
+  ngOnInit() {
+    this.pokemonService.fetchAllPokemon().subscribe(((pokemones: Pokemon[]) => this.pokemones = pokemones));
+  }
+
+  getPokemones(): Pokemon[] {
+    return this.pokemones;
+  }
+
+  setPokemones(pokemones: Pokemon[]){
+    this.pokemones = pokemones;
+  }
+
+  getPokemon(id: number): Pokemon {
+    return <Pokemon>{ ...this.pokemones.find(t => t.id == id) };
+  }
+
+  public idFormatter(id: number): string{
+    return id.toString().padStart(3, '0');
+  }
 }
