@@ -47,13 +47,12 @@ export class PokemonListComponent implements OnInit {
   };
 
   getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
-    const backgroundStyle: { [key: string]: string } = {};
+    let backgroundStyle: { [key: string]: string } = {};
     
     if (pokemon.type1 && pokemon.type2) {
       backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type1]} 0%, ${this.typeColors[pokemon.type2]} 100%)`;
     } else backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type1]} 0%, ${this.typeColors['default']} 100%)`;
 
-  
     return backgroundStyle;
   }
 }
