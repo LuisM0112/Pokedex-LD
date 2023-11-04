@@ -1,33 +1,46 @@
+
+body{
+  font-size: 30px;
+}
+
+
 .pokemon-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
 .pokemon{
-  width: 98%;
-  height: 98%;
-  margin: 3px;
-  background-color: rgb(155, 255, 151);
-  border: solid 2px rgb(38, 131, 15);
-  border-radius: 20px;
+  width: 93%;
+  height: 93%;
+  margin: 15px;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(217,217,217,1) 56%, rgba(125,125,125,1) 100%);
+  border: solid 5px rgb(0, 0, 0);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-self: center;
 }
 
 .id{
-  margin: 10px;
+  font-size: 30px;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 5px;
   font-weight: bolder;
 }
 
 .name{
-  margin: 10px;
-  font-weight: bolder;
+  margin: auto;
+  margin-bottom: 15px;
+  font-weight: bolder
+  
+
 }
 
 .sprite{
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
+  margin: auto;
 }
 
 .centered{
@@ -40,12 +53,15 @@
   text-align: center;
   padding: 3px;
   width: 100px;
-  margin: 3px;
-  border: solid 1px black;
+  margin: 4px;
+  margin-bottom: 20px;
+  border: solid 3px black;
   border-radius: 10px;
+  padding-bottom: 10pxs;
 }
 
 .types > div:empty{
   visibility: hidden;
   position: absolute;
 }
+
