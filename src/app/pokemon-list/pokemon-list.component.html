@@ -1,16 +1,13 @@
-<html>
-<body>
-
 <div class="pokemon-list">
-    <div class="pokemon" *ngFor="let t of getPokemones()">
+  <div class="pokemon" *ngFor="let t of getPokemones()" [ngStyle]="getGradientBackground(t)">
     <div class="id">{{ t.id | idFormat }}</div>
     <div class="centered">
       <img class="sprite" src="{{t.sprite}}" alt="{{t.name}} sprite">
     </div>
     <div class="name">{{ t.name | titlecase }}</div>
     <div class="centered types">
-      <div class="type {{t.type1}}">{{ t.type1 | titlecase }}</div>
-      <div class="type {{t.type2}}">{{ t.type2 | titlecase }}</div>
+      <div class="type" [ngStyle]="{ 'background-color': typeColors[t.type1] }">{{ t.type1 | titlecase }}</div>
+      <div class="type" [ngStyle]="{ 'background-color': typeColors[t.type2] }">{{ t.type2 | titlecase }}</div>
     </div>
   </div>
 </div>
