@@ -1,5 +1,8 @@
+<html>
+<body>
+
 <div class="pokemon-list">
-  <div class="pokemon" *ngFor="let t of getPokemones()">
+    <div class="pokemon" *ngFor="let t of getPokemones()">
     <div class="id">{{ t.id | idFormat }}</div>
     <div class="centered">
       <img class="sprite" src="{{t.sprite}}" alt="{{t.name}} sprite">
