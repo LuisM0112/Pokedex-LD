@@ -3,25 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Pokemon } from './model/pokemon';
-import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
 
-  constructor(private http: HttpClient) {
-    this.fetchAllPokemon();
-  }
+  constructor(private http: HttpClient) {}
 
   fetchAllPokemon(): Observable<Pokemon[]> {
     let requests: Observable<Pokemon>[] = [];
-    let result: Pokemon[] = [];
     for (let i = 1; i <= 493; i++) {
       let request = this.requestPokemon(i);
       requests.push(request);
     }
 
-    return forkJoin(requests).pipe(map( (pokemones: Pokemon[]) => pokemones));
+    return forkJoin(requests).pipe(map((pokemones: Pokemon[]) => pokemones));
   }
 
   requestPokemon(id: number): Observable<Pokemon> {
@@ -30,15 +26,11 @@ export class PokemonService {
         id: response.id,
         sprite: response.sprites.other['official-artwork'].front_default,
         name: response.name,
-        type1: response.types[0].type.name,
-        type2: response.types[1].type.name,
+        type1: response.types[0] ? response.types[0].type.name : '',
+        type2: response.types[1] ? response.types[1].type.name : '',
         height: response.height/10,
         weight: response.weight/10,
       }))
     );
   }
-
-  // private stringFormatter(word: string): string {
-  //   return word.charAt(0).toUpperCase() + word.slice(1);
-  // }
 }

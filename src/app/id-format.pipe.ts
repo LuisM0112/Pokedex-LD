@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class IdFormatPipe implements PipeTransform {
 
-  transform(id: number): string {
+  transform(id: number, ...args: unknown[]): string {
     return isNaN(id)? "Invalid Input" : id.toString().padStart(3, '0');
   }
 

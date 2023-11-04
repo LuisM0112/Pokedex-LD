@@ -9,11 +9,15 @@ import { PokemonService } from '../pokemon.service';
 })
 export class PokemonListComponent implements OnInit{
   pokemones: Pokemon[] = [];
+  types = document.querySelectorAll('.type');
 
-  constructor(public pokemonService: PokemonService) { }
+  constructor(public pokemonService: PokemonService) {
+    
+  }
   
   ngOnInit() {
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: Pokemon[]) => this.pokemones = pokemones));
+    // this.setTypesColors();
   }
 
   getPokemones(): Pokemon[] {
@@ -28,7 +32,26 @@ export class PokemonListComponent implements OnInit{
     return <Pokemon>{ ...this.pokemones.find(t => t.id == id) };
   }
 
-  public idFormatter(id: number): string{
-    return id.toString().padStart(3, '0');
-  }
+  // setTypesColors(){
+  //   for (let i = 1; i <= 493; i++) {
+  //     let text = this.getPokemon(i).type1;
+  //     const type = document.querySelectorAll('*:contains(Normal)');
+  //     switch (text) {
+  //       case "normal":
+  //         type.classList.add('normal');
+  //         break;
+      
+  //       case "Fire":
+  //         type.classList.add('fire');
+  //         break;
+      
+  //       case "Water":
+  //         type.classList.add('water');
+  //         break;
+      
+  //       default:
+  //         break;
+  //     };
+  //   }
+  // }
 }

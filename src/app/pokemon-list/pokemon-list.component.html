@@ -1,13 +1,13 @@
 <div class="pokemon-list">
   <div class="pokemon" *ngFor="let t of getPokemones()">
-    <div>{{ idFormatter(t.id) }}</div>
+    <div class="id">{{ t.id | idFormat }}</div>
     <div class="centered">
       <img class="sprite" src="{{t.sprite}}" alt="{{t.name}} sprite">
     </div>
-    <div>{{ t.name | titlecase }}</div>
-    <div class="centered">
-      <div>{{ t.type1 | titlecase }}</div>
-      <div>{{ t.type2 | titlecase }}</div>
+    <div class="name">{{ t.name | titlecase }}</div>
+    <div class="centered types">
+      <div class="type">{{ t.type1 | titlecase }}</div>
+      <div class="type">{{ t.type2 | titlecase }}</div>
     </div>
   </div>
 </div>
