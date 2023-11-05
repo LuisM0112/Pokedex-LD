@@ -1,6 +1,6 @@
 
 .pokemon-list{
-  --default: rgb(175, 175, 175);
+  --default: rgba(146, 146, 146, 0.418);
   --normal: rgb(168, 168, 120);
   --fire: rgb(240, 128, 48);
   --water: rgb(104, 144, 240);
@@ -32,8 +32,8 @@
   width: 93%;
   height: 93%;
   margin: 15px;
-  border: solid 5px rgb(0, 0, 0);
   border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
   display: flex;
   flex-direction: column;
   justify-self: center;
