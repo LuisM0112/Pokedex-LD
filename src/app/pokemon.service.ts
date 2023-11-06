@@ -13,7 +13,7 @@ export class PokemonService {
 
   fetchAllPokemon(): Observable<Pokemon[]> {
     let requests: Observable<Pokemon>[] = [];
-    for (let i = 1; i <= 493; i++) {
+    for (let i = 1; i <= 999; i++) {
       let request = this.requestPokemon(i);
       requests.push(request);
     }

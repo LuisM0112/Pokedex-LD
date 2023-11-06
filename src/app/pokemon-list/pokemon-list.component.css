@@ -3,21 +3,21 @@
   --default: rgba(146, 146, 146, 0.418);
   --normal: rgb(168, 168, 120);
   --fire: rgb(240, 128, 48);
-  --water: rgb(104, 144, 240);
-  --grass: rgb(120, 200, 80);
-  --electric: rgb(248, 208, 48);
-  --ice: rgb(152, 216, 216);
+  --water: rgb(76, 113, 199);
+  --grass: rgb(91, 202, 36);
+  --electric: rgb(247, 253, 91);
+  --ice: rgb(93, 228, 228);
   --fighting: rgb(192, 48, 40);
   --poison: rgb(160, 64, 160);
-  --ground: rgb(224, 192, 104);
+  --ground: rgb(157, 137, 83);
   --flying: rgb(168, 144, 240);
   --psychic: rgb(248, 88, 136);
-  --bug: rgb(168, 184, 32);
-  --rock: rgb(184, 160, 56);
+  --bug: rgb(183, 199, 81);
+  --rock: rgb(133, 98, 3);
   --ghost: rgb(112, 88, 152);
-  --dragon: rgb(112, 56, 248);
-  --dark: rgb(112, 88, 72);
-  --steel: rgb(184, 184, 208);
+  --dragon: rgb(114, 66, 224);
+  --dark: rgb(103, 79, 63);
+  --steel: rgb(148, 145, 145);
   --fairy: rgb(240, 182, 188);
 }
 
@@ -60,6 +60,10 @@
   width: 80%;
   height: 80%;
   margin: auto;
+}
+
+.sprite:hover{
+  transform: scale(1.1);
 }
 
 .centered{
