@@ -1,7 +1,5 @@
-<link rel="icon" type="image/jpg" href="/favicon.jpg"/>
-
-<div class="pokemon-list">
-  <div class="pokemon" *ngFor="let t of getPokemones()" [ngStyle]="getGradientBackground(t)">
+<div id="pokemon-list">
+  <div class="pokemon" *ngFor="let t of getPokemonesFiltered()" [ngStyle]="getGradientBackground(t)">
     <div class="id">{{ t.id | idFormat }}</div>
     <div class="centered">
       <img class="sprite" src="{{t.sprite}}" alt="{{t.name}} sprite">

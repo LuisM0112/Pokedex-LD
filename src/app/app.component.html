@@ -1,2 +1,2 @@
-<app-header></app-header>
-<app-pokemon-list></app-pokemon-list>
+<app-header (inputTextEvent)="updateFilterReceived($event)"></app-header>
+<app-pokemon-list [filter]="filterReceived"></app-pokemon-list>

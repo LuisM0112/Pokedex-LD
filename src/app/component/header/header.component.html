@@ -1,3 +1,5 @@
-<div>
-    <input id="searchBar" type="text" placeholder="🔍︎" [(ngModel)]="input"/>
+<div id="searchBar">
+    <span>🔍︎</span>
+    <input type="text" placeholder="Search" [(ngModel)]="inputText" (keyup)="sendInputText()"/>
+    <span id="menu">☰</span>
 </div>

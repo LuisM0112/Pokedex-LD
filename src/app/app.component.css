@@ -1,0 +1,14 @@
+
+/* Animations */
+@keyframes pulse {
+  0% {box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.744);}
+  100% {box-shadow: 0 0 0 8px rgba(204,169,44, 0);}
+}
+
+@keyframes shake {
+  0%  {rotate:0deg;}
+  25%  {rotate:-10deg;}
+  50%  {rotate:0deg;}
+  75% {rotate:10deg;}
+  100% {rotate:0deg;}
+}
