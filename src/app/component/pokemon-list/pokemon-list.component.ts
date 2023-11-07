@@ -32,7 +32,7 @@ export class PokemonListComponent implements OnInit {
     
     if (pokemon.type1 && pokemon.type2) {
       backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type2]} 0%, ${this.typeColors[pokemon.type1]} 100%)`;
-    } else backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type1]} 0%, ${this.typeColors[pokemon.type1]} 40%,  ${this.typeColors['null']} 100%)`;
+    } else backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type1]} 0%, ${this.typeColors[pokemon.type1]} 40%,  ${this.typeColors.null} 100%)`;
 
     return backgroundStyle;
   }
