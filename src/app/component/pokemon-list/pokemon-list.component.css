@@ -18,7 +18,6 @@
   justify-self: center;
   transition: 250ms;
   cursor: pointer;
-  
 }
 .pokemon:hover{
   transform: scale(1.02);
@@ -43,7 +42,6 @@
 .name{
   font-size: larger;
   margin: auto auto 15px;
-  font-size: ;
 }
 
 .sprite{

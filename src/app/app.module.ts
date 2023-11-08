@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { PokemonListComponent } from './component/pokemon-list/pokemon-list.component';
 import { IdFormatPipe } from './id-format.pipe';
 import { HeaderComponent } from './component/header/header.component';
+import { FootterComponent } from './component/footter/footter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonListComponent,
     IdFormatPipe,
-    HeaderComponent
+    HeaderComponent,
+    FootterComponent
   ],
   imports: [
     BrowserModule,
