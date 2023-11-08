@@ -1,0 +1,20 @@
+{
+  "type-1": "normal",
+  "type-2": "fire",
+  "type-3": "water",
+  "type-4": "grass",
+  "type-5": "electric",
+  "type-6": "ice",
+  "type-7": "fighting",
+  "type-8": "poison",
+  "type-9": "ground",
+  "type-10": "flying",
+  "type-11": "psychic",
+  "type-12": "bug",
+  "type-13": "rock",
+  "type-14": "ghost",
+  "type-15": "dragon",
+  "type-16": "dark",
+  "type-17": "steel",
+  "type-18": "fairy"
+}

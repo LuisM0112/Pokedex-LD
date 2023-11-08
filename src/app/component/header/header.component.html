@@ -1,5 +1,17 @@
-<div id="searchBar">
-    <span>🔍︎</span>
-    <input type="text" placeholder="Search" [(ngModel)]="inputText" (keyup)="sendInputText()"/>
-    <span id="menu">☰</span>
+<div class="header-container">
+    <div id="search-bar">
+        <span>🔍︎</span>
+        <input type="text" placeholder="Search" [(ngModel)]="inputText" (keyup)="sendInputText()" />
+        <span id="menu">☰</span>
+        <div id="filter-container">
+            <div id="types-container" class="types">
+                <div class="type" *ngFor="let type of getTypes()" [ngStyle]="{ 'background-color': typeColors[type] }">
+                    {{type.toString() | titlecase }}
+                </div>
+            </div>
+            <div id="gen-container">
+    
+            </div>
+        </div>
+    </div>
 </div>

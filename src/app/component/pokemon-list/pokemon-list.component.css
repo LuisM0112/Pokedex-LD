@@ -62,7 +62,7 @@
   margin: initial;
 }
 
-.types > div:not(:empty){
+.type:not(:empty){
   color: white;
   font-weight: bolder;
   text-align: center;

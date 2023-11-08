@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  filterReceived = '';
+  filter = '';
 
   constructor(){}
 
-  updateFilterReceived(event: any){
-    this.filterReceived = event.inputText;
+  updateFilter(event: any){
+    this.filter = event.inputText;
   }
 }
