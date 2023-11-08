@@ -10,8 +10,8 @@ export class HeaderComponent {
   inputTextEvent = new EventEmitter();
 
   inputText = "";
-  
+
   sendInputText(){
-    this.inputTextEvent.emit({inputText: this.inputText});
+    this.inputTextEvent.emit({inputText: this.inputText.toLowerCase()});
   }
 }

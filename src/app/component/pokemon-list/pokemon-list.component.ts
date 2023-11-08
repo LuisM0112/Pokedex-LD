@@ -13,7 +13,7 @@ export class PokemonListComponent implements OnInit {
   typeColors: any = jsonData;
 
   @Input()
-  filter: any;
+  filterReceived: any;
 
   constructor(public pokemonService: PokemonService) {}
 
@@ -26,7 +26,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   getPokemonesFiltered(): Pokemon[] {
-    return this.getPokemones().filter((Pokemon)=> Pokemon.name.includes(this.filter));
+    return this.getPokemones().filter((Pokemon)=> Pokemon.name.includes(this.filterReceived));
   }
 
   getPokemon(id: number): Pokemon {
