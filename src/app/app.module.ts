@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PokemonListComponent } from './component/pokemon-list/pokemon-list.component';
 import { IdFormatPipe } from './id-format.pipe';
 import { HeaderComponent } from './component/header/header.component';
-import { FootterComponent } from './component/footter/footter.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { FootterComponent } from './component/footter/footter.component';
     PokemonListComponent,
     IdFormatPipe,
     HeaderComponent,
-    FootterComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
