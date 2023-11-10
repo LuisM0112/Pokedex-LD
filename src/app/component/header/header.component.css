@@ -59,9 +59,6 @@ span{
 #menu:hover{
   background: #00000028;
 }
-#filter-container{
-  visibility: collapse;
-}
 
 #types-container{
   z-index: 1;

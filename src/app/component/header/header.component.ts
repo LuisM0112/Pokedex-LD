@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit{
   inputTextEvent = new EventEmitter();
 
   inputText = "";
+  visibility = "collapse";
 
   ngOnInit(): void {
     this.types = this.fillTypes();
@@ -35,5 +36,9 @@ export class HeaderComponent implements OnInit{
 
   getTypes(): string[]{
     return this.types;
+  }
+
+  changeFilterPanelVisibility(){
+    (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
 }
