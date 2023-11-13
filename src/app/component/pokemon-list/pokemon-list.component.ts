@@ -8,12 +8,18 @@ import * as jsonData from '../../../assets/data/typeColors.json'
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
+
+/**
+ * This Pokemon-list class is going to take the array of pokemon to be displayed
+ * by the HTML component, and it sets the background style for the pokemon element
+ */
 export class PokemonListComponent implements OnInit {
-  pokemones: Pokemon[] = [];
-  typeColors: any = jsonData;
+
+  pokemones: Pokemon[] = [];  // Will contain the array of every pokemon
+  typeColors: any = jsonData; // Has the data of the corresponding color for each type
 
   @Input()
-  filter: any;
+  filter: any;  // Gets the filter that is going to be applied to the pokemon array form the search bar
 
   constructor(public pokemonService: PokemonService) {}
 
@@ -33,6 +39,11 @@ export class PokemonListComponent implements OnInit {
     return <Pokemon>{ ...this.pokemones.find(t => t.id == id) };
   }
 
+  /**
+   * Gets the background gradient which is going to be applied to the pokemon card
+   * @param pokemon 
+   * @returns 
+   */
   getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
     let backgroundStyle: { [key: string]: string } = {};
 

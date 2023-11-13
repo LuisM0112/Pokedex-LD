@@ -7,20 +7,35 @@ import { Pokemon } from './model/pokemon';
 @Injectable({
   providedIn: 'root'
 })
+
+/** 
+ * This Pokemon Service Class will be used by the pokemon-list component
+ * to get the list of pokemon to be displayed
+ */
 export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * This method stores in a list all the pokemon requested from the api
+   * @returns Observable of an array of pokemon
+   */
   fetchAllPokemon(): Observable<Pokemon[]> {
-    let requests: Observable<Pokemon>[] = [];
+    let requests: Observable<Pokemon>[] = []; // Observable of the pokemon array
     for (let i = 1; i <= 999; i++) {
       let request = this.requestPokemon(i);
       requests.push(request);
     }
 
+    // When every pokemon is requested it returns the array
     return forkJoin(requests).pipe(map((pokemones: Pokemon[]) => pokemones));
   }
 
+  /**
+   * This method will request the Pokeapi for the pokemon by the corresponding ID
+   * @param id Id of the pokemon that is going to be requested
+   * @returns Observable of a pokemon with it's attributes
+   */
   requestPokemon(id: number): Observable<Pokemon> {
     return this.http.get('https://pokeapi.co/api/v2/pokemon/'+id).pipe(
       map((response: any) => ({
