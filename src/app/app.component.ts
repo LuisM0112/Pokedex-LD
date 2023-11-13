@@ -6,11 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  filter = '';
+  filterText: string = '';
+  filterTypes: string[] = [];
+  filterGens: number[] = [];
 
   constructor(){}
 
-  updateFilter(event: any){
-    this.filter = event.filter;
+  updateFilterText(event: any){
+    this.filterText = event.filter;
+  }
+  updateFilterTypes(event: any){
+    this.filterTypes = event.filter;
+  }
+  updateFilterGens(event: any){
+    this.filterGens = event.filter;
   }
 }

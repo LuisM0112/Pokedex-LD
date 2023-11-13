@@ -5,13 +5,13 @@
         <span id="menu" (click)="changeFilterPanelVisibility()">☰</span>
         <div id="filter-container" [ngStyle]="{'visibility': visibility}">
             <div id="types-container" class="types">
-                <div class="type button" *ngFor="let type of getTypes()" [ngStyle]="{ 'background-color': typeColors[type] }">
+                <div class="type button" *ngFor="let type of getTypes(); index as i" (click)="changeFilterTypesStatus(i); sendInputTypes()" [ngClass]="getTypeStatus(i)" [ngStyle]="{ 'background-color': typeColors[type] }">
                     {{type.toString() | titlecase }}
                 </div>
             </div>
-
+            <hr>
             <div id="gen-container">
-                <div class="gen button" *ngFor="let gen of getGens(); index as i" (click)="filterByGeneration(1); changeButtonStatus(i+18); test(i+18)" [class.activo]="gen">
+                <div class="gen button" *ngFor="let gen of getGens(); index as i" (click)="changeFilterGensStatus(i); sendInputGens()" [ngClass]="getGenStatus(i)">
                     {{gen.toString() | titlecase}}
                 </div>
             </div>

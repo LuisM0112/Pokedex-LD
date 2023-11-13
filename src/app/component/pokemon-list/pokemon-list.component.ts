@@ -19,7 +19,11 @@ export class PokemonListComponent implements OnInit {
   typeColors: any = jsonData; // Has the data of the corresponding color for each type
 
   @Input()
-  filter: any;  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  filterText: string = '';  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  @Input()
+  filterTypes: string[] = [];  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  @Input()
+  filterGens: number[] = [];  // Gets the filter that is going to be applied to the pokemon array form the search bar
 
   constructor(public pokemonService: PokemonService) {}
 
@@ -27,12 +31,16 @@ export class PokemonListComponent implements OnInit {
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: Pokemon[]) => this.pokemones = pokemones));
   }
 
-  getPokemones(): Pokemon[] {
-    return this.pokemones;
-  }
-
   getPokemonesFiltered(): Pokemon[] {
-    return this.getPokemones().filter((Pokemon)=> Pokemon.name.includes(this.filter) || Pokemon.id.toString().includes(this.filter));
+    let result: Pokemon[] = this.pokemones;
+
+    if (this.filterGens.length > 0) result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
+
+    if (this.filterTypes.length > 0) result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
+
+    if (this.filterText) result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.id.toString().includes(this.filterText));
+
+    return result;
   }
 
   getPokemon(id: number): Pokemon {

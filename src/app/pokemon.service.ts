@@ -52,23 +52,25 @@ export class PokemonService {
   }
 
   private calculateGeneration(id: number): number {
+    let result: number = 0;
     if (id <= 151) {
-      return 1;
+      result = 1;
     } else if (id <= 251) {
-      return 2;
+      result = 2;
     } else if (id <= 386) {
-      return 3;
+      result = 3;
     } else if (id <= 493) {
-      return 4;
+      result = 4;
     } else if (id <= 649) {
-      return 5;
+      result = 5;
     } else if (id <= 721) {
-      return 6;
+      result = 6;
     } else if (id <= 809) {
-      return 7;
+      result = 7;
     } else {
-      return 8;
+      result = 8;
     }
+    return result;
   }
 
 }

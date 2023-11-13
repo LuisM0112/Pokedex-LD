@@ -62,21 +62,18 @@ span{
 
 #types-container{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   width: min-content;
 }
 
 #gen-container{
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   width: min-content;
-  border-radius: 15px;
-  user-select: none;
 }
 
 .gen{
   background: radial-gradient(circle, rgb(161, 161, 161) 0%, rgb(141, 140, 140) 42%, rgb(81, 81, 81) 100%);
-
 }
 
 
@@ -93,9 +90,17 @@ span{
   cursor: pointer;
 }
 .button:hover{
-  opacity: 70%;
+  opacity: 50%;
   transform: scale(1.1);
   animation: pulse 1.2s infinite;
+}
+.button:active{
+  transform: scale(1);
+}
+
+.active{
+  opacity: 70%;
+  transform: scale(1.1);
 }
 
 #filter-container{
@@ -107,6 +112,12 @@ span{
   border-radius: 15px;
   padding: 10px;
   user-select: none;
-  
+}
+
+hr{
+  height: 10px;
+  border: hidden;
+  border-radius: 5px;
+  background-color: rgb(168, 168, 168);
 }
 

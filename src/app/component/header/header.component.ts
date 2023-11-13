@@ -12,37 +12,52 @@ export class HeaderComponent implements OnInit{
   typeColors: any = jsonTypeColors;
   typesData: any = jsonTypes;
 
-  filters: Filter[] = [];
+  typesFilter: Filter[] = [];
+  gensFilter: Filter[] = [];
 
   types: string[] = [];
   gens: string[] = ['gen 1', 'gen 2', 'gen 3', 'gen 4', 'gen 5', 'gen 6', 'gen 7', 'gen 8'];
 
   @Output()
-  filterEvent = new EventEmitter();
+  filterTextEvent = new EventEmitter();
+
+  @Output()
+  filterTypesEvent = new EventEmitter();
+
+  @Output()
+  filterGensEvent = new EventEmitter();
 
   inputText = "";
-  inputFiltros: string[] = [];
+  
   visibility = "collapse";
 
   ngOnInit(): void {
     this.types = this.fillTypes();
-    this.filters = this.fillFilters();
-    for (let i = 0; i < 26; i++) {
-      console.log(this.filters[i].name);
-    }
+    this.typesFilter = this.fillTypesFilters();
+    this.gensFilter = this.fillGensFilters();
   }
 
   sendInputText(){
-    this.filterEvent.emit({filter: this.inputText.toLowerCase()});
+    this.filterTextEvent.emit({filter: this.inputText.toLowerCase()});
+  }
+  sendInputTypes(){
+    this.filterTypesEvent.emit({filter: this.getSelectedTypes()});
+  }
+  sendInputGens(){
+    this.filterGensEvent.emit({filter: this.getSelectedGens()});
   }
 
-  fillFilters(): Filter[]{
+  fillTypesFilters(): Filter[]{
     let filters: Filter[] = [];
     for (let i = 0; i < 18; i++) {
-      filters.push(new Filter(i ,'type', this.types[i].toString(), false))
+      filters.push(new Filter(i, this.types[i].toString(), false))
     }
-    for (let i = 0; i < 8; i++) {
-      filters.push(new Filter(i, 'gen', this.gens[i], false))
+    return filters;
+  }
+  fillGensFilters(): Filter[]{
+    let filters: Filter[] = [];
+    for (let i = 0; i < 18; i++) {
+      filters.push(new Filter(i+1, this.gens[i], false))
     }
     return filters;
   }
@@ -58,7 +73,6 @@ export class HeaderComponent implements OnInit{
   getTypes(): string[]{
     return this.types;
   }
-
   getGens(): string[]{
     return this.gens;
   }
@@ -67,24 +81,32 @@ export class HeaderComponent implements OnInit{
     (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
   
-  changeButtonStatus(index: number): void{
-    this.filters[index].active = !this.filters[index].active;
+  changeFilterTypesStatus(index: number): void{
+    this.typesFilter[index].active = !this.typesFilter[index].active;
   }
-
-  test(i: number){
-    console.log(i);
+  changeFilterGensStatus(index: number): void{
+    this.gensFilter[index].active = !this.gensFilter[index].active;
   }
   
-  filterByGeneration(generation: number): void {
-    // Puedes llamar a tu lógica de filtrado aquí
-    // Por ejemplo, puedes emitir un evento con el número de generación seleccionado
-    // y manejar ese evento en tu componente principal o donde sea necesario.
-    // También puedes llamar a un método del servicio que realiza el filtrado.
-    // Aquí te doy un ejemplo simple usando el EventEmitter:
-    
-    // Emitir un evento con el número de generación seleccionado
-    // this.inputTextEvent.emit({ inputText: '', generation: generation });
-    // this.inputGen.push
+  getTypeStatus(index: number): string{
+    return this.typesFilter[index].active ? 'active' : '';
+  }
+  getGenStatus(index: number): string{
+    return this.gensFilter[index].active ? 'active' : '';
   }
 
+  getSelectedTypes(): string[]{
+    let selectedTypes: string[] = [];
+    for (let i = 0; i < 18; i++) {
+      if (this.typesFilter[i].active) selectedTypes.push(this.typesFilter[i].name);
+    }
+    return selectedTypes;
+  }
+  getSelectedGens(): number[]{
+    let selectedTypes: number[] = [];
+    for (let i = 0; i < 8; i++) {
+      if (this.gensFilter[i].active) selectedTypes.push(this.gensFilter[i].id);
+    }
+    return selectedTypes;
+  }
 }
