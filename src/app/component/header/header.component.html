@@ -11,10 +11,9 @@
             </div>
 
             <div id="gen-container">
-                <div class="gen button" (click)="filterByGeneration(1)">Gen 1</div>
-                <div class="gen button" (click)="filterByGeneration(2)">Gen 2</div>
-                <div class="gen button" (click)="filterByGeneration(3)">Gen 3</div>
-                <div class="gen button" (click)="filterByGeneration(4)">Gen 4</div>
+                <div class="gen button" *ngFor="let gen of getGens(); index as i" (click)="filterByGeneration(1); changeButtonStatus(i+18); test(i+18)" [class.activo]="gen">
+                    {{gen.toString() | titlecase}}
+                </div>
             </div>
         </div>
     </div>

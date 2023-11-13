@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as jsonTypeColors from '../../../assets/data/typeColors.json'
 import * as jsonTypes from '../../../assets/data/types.json'
+import { Filter } from 'src/app/model/filter';
 
 @Component({
   selector: 'app-header',
@@ -8,22 +9,42 @@ import * as jsonTypes from '../../../assets/data/types.json'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-  types: string[] = [];
   typeColors: any = jsonTypeColors;
   typesData: any = jsonTypes;
 
+  filters: Filter[] = [];
+
+  types: string[] = [];
+  gens: string[] = ['gen 1', 'gen 2', 'gen 3', 'gen 4', 'gen 5', 'gen 6', 'gen 7', 'gen 8'];
+
   @Output()
-  inputTextEvent = new EventEmitter();
+  filterEvent = new EventEmitter();
 
   inputText = "";
+  inputFiltros: string[] = [];
   visibility = "collapse";
 
   ngOnInit(): void {
     this.types = this.fillTypes();
+    this.filters = this.fillFilters();
+    for (let i = 0; i < 26; i++) {
+      console.log(this.filters[i].name);
+    }
   }
 
   sendInputText(){
-    this.inputTextEvent.emit({inputText: this.inputText.toLowerCase()});
+    this.filterEvent.emit({filter: this.inputText.toLowerCase()});
+  }
+
+  fillFilters(): Filter[]{
+    let filters: Filter[] = [];
+    for (let i = 0; i < 18; i++) {
+      filters.push(new Filter(i ,'type', this.types[i].toString(), false))
+    }
+    for (let i = 0; i < 8; i++) {
+      filters.push(new Filter(i, 'gen', this.gens[i], false))
+    }
+    return filters;
   }
 
   fillTypes(): string[]{
@@ -38,8 +59,20 @@ export class HeaderComponent implements OnInit{
     return this.types;
   }
 
+  getGens(): string[]{
+    return this.gens;
+  }
+
   changeFilterPanelVisibility(){
     (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
+  }
+  
+  changeButtonStatus(index: number): void{
+    this.filters[index].active = !this.filters[index].active;
+  }
+
+  test(i: number){
+    console.log(i);
   }
   
   filterByGeneration(generation: number): void {
@@ -50,7 +83,8 @@ export class HeaderComponent implements OnInit{
     // Aquí te doy un ejemplo simple usando el EventEmitter:
     
     // Emitir un evento con el número de generación seleccionado
-    this.inputTextEvent.emit({ inputText: '', generation: generation });
+    // this.inputTextEvent.emit({ inputText: '', generation: generation });
+    // this.inputGen.push
   }
 
 }

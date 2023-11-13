@@ -11,6 +11,6 @@ export class AppComponent {
   constructor(){}
 
   updateFilter(event: any){
-    this.filter = event.inputText;
+    this.filter = event.filter;
   }
 }
