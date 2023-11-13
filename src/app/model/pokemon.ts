@@ -6,4 +6,5 @@ export class Pokemon {
   type2: string = '';
   height: number = 0;
   weight: number = 0;
+  generation: number = 0;
 }
