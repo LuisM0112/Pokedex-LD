@@ -1,4 +1,18 @@
 
+app-header{
+  z-index: 1;
+  width: 100%;
+  position: sticky;
+  top:0;
+  left: 0;
+}
+
+app-footer{
+  z-index: 1;
+  width: 100%;
+  position: sticky;
+}
+
 /* Animations */
 @keyframes pulse {
   0% {box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.744);}

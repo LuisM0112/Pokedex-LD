@@ -18,7 +18,6 @@
   justify-self: center;
   transition: 250ms;
   cursor: pointer;
-  
 }
 .pokemon:hover{
   transform: scale(1.02);
@@ -63,7 +62,7 @@
   margin: initial;
 }
 
-.types > div:not(:empty){
+.type:not(:empty){
   color: white;
   font-weight: bolder;
   text-align: center;
