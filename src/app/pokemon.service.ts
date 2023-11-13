@@ -31,7 +31,30 @@ export class PokemonService {
         type2: response.types[1] ? response.types[1].type.name : '',
         height: response.height/10,
         weight: response.weight/10,
+        generation: this.calculateGeneration(response.id),
       }))
     );
   }
+
+  private calculateGeneration(id: number): number {
+    if (id <= 151) {
+      return 1;
+    } else if (id <= 251) {
+      return 2;
+    } else if (id <= 386) {
+      return 3;
+    } else if (id <= 493) {
+      return 4;
+    } else if (id <= 649) {
+      return 5;
+    } else if (id <= 721) {
+      return 6;
+    } else if (id <= 809) {
+      return 7;
+    } else {
+      return 8;
+    }
+  }
+
 }
+

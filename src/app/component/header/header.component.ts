@@ -41,4 +41,16 @@ export class HeaderComponent implements OnInit{
   changeFilterPanelVisibility(){
     (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
+  
+  filterByGeneration(generation: number): void {
+    // Puedes llamar a tu lógica de filtrado aquí
+    // Por ejemplo, puedes emitir un evento con el número de generación seleccionado
+    // y manejar ese evento en tu componente principal o donde sea necesario.
+    // También puedes llamar a un método del servicio que realiza el filtrado.
+    // Aquí te doy un ejemplo simple usando el EventEmitter:
+    
+    // Emitir un evento con el número de generación seleccionado
+    this.inputTextEvent.emit({ inputText: '', generation: generation });
+  }
+
 }
