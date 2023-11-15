@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit{
   filterGensEvent = new EventEmitter();
 
   inputText = "";
-  
+
   visibility = "collapse";
 
   ngOnInit(): void {
@@ -80,14 +80,14 @@ export class HeaderComponent implements OnInit{
   changeFilterPanelVisibility(){
     (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
-  
+
   changeFilterTypesStatus(index: number): void{
     this.typesFilter[index].active = !this.typesFilter[index].active;
   }
   changeFilterGensStatus(index: number): void{
     this.gensFilter[index].active = !this.gensFilter[index].active;
   }
-  
+
   getTypeStatus(index: number): string{
     return this.typesFilter[index].active ? 'active' : '';
   }
