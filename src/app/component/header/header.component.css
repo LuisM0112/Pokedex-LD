@@ -64,12 +64,14 @@ span{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   width: min-content;
+  padding-top: 3px;
 }
 
 #gen-container{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: min-content;
+  padding-bottom: 3px;
 }
 
 .gen{
@@ -98,8 +100,10 @@ span{
 }
 
 .active{
-  opacity: 70%;
-  transform: scale(1.1);
+  opacity: 90%;
+  transform: scale(0.9);
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 47%, rgba(0,0,0,1) 55%, rgba(253,45,45,1) 63%);
 }
 
 #filter-container{
@@ -114,8 +118,11 @@ span{
 }
 
 hr{
-  height: 10px;
-  border: hidden;
-  border-radius: 5px;
-  background-color: rgb(168, 168, 168);
+  border: 3px solid #666;
+  border-radius: 300px/10px;
+  height: 0px; 
+  text-align: center;
+  box-shadow: 0 1px 5px 1px rgb(114, 114, 114);
+  margin-top: 12px;
+  margin-bottom: 10px;
 }
