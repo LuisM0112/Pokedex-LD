@@ -2,7 +2,7 @@
   <div class="pokemon" *ngFor="let pokemon of getPokemonesFiltered()" [ngStyle]="getGradientBackground(pokemon)">
     <div class="id">{{ pokemon.id | idFormat }}</div>
     <div class="centered">
-      <img class="sprite" src="{{pokemon.sprite}}" alt="{{pokemon.name}} sprite">
+      <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
     </div>
     <div class="name">{{ pokemon.name | titlecase }}</div>
     <div class="centered types">

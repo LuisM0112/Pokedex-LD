@@ -40,13 +40,42 @@ export class PokemonService {
     return this.http.get('https://pokeapi.co/api/v2/pokemon/'+id).pipe(
       map((response: any) => ({
         id: response.id,
-        sprite: response.sprites.other['official-artwork'].front_default,
+        spriteNormal: response.sprites.other['official-artwork'].front_default,
+        spriteShiny: response.sprites.other['official-artwork'].front_shiny,
         name: response.name,
         type1: response.types[0] ? response.types[0].type.name : '',
         type2: response.types[1] ? response.types[1].type.name : '',
         height: response.height/10,
         weight: response.weight/10,
         generation: this.calculateGeneration(response.id),
+        hp: response.stats[0].base_stat,
+        attack: response.stats[1].base_stat,
+        defense: response.stats[2].base_stat,
+        specialAttack: response.stats[3].base_stat,
+        specialDefense: response.stats[4].base_stat,
+        speed: response.stats[5].base_stat,
+      }))
+    );
+  }
+  // 29
+  requestPokemonDescription(id: number): Observable<Pokemon> {
+    return this.http.get('https://pokeapi.co/api/v2/pokemon-species/'+id+'/').pipe(
+      map((response: any) => ({
+        id: response.id,
+        spriteNormal: response.sprites.other['official-artwork'].front_default,
+        spriteShiny: response.sprites.other['official-artwork'].front_shiny,
+        name: response.name,
+        type1: response.types[0] ? response.types[0].type.name : '',
+        type2: response.types[1] ? response.types[1].type.name : '',
+        height: response.height/10,
+        weight: response.weight/10,
+        generation: this.calculateGeneration(response.id),
+        hp: response.stats[0].base_stat,
+        attack: response.stats[1].base_stat,
+        defense: response.stats[2].base_stat,
+        specialAttack: response.stats[3].base_stat,
+        specialDefense: response.stats[4].base_stat,
+        speed: response.stats[5].base_stat,
       }))
     );
   }
