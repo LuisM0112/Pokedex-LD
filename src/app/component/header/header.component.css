@@ -129,45 +129,37 @@ hr{
   margin-bottom: 10px;
 }
 
-.gen:nth-child(1) {
-  /* Gradiente para el primer juego de la primera generación */
-  background: linear-gradient(to bottom,  rgb(11, 188, 11), rgb(229, 58, 11))/* Colores representativos */
+/* .gen:nth-child(1) {
+  background: linear-gradient(to bottom,  rgb(11, 188, 11), rgb(229, 58, 11))
 }
 
 .gen:nth-child(2) {
-  /* Gradiente para el segundo juego de la primera generación */
-  background: linear-gradient(to bottom, rgb(175, 173, 167),rgb(214, 214, 4)); /* Colores representativos */
+  background: linear-gradient(to bottom, rgb(175, 173, 167),rgb(214, 214, 4)); 
 }
 
 .gen:nth-child(3) {
-  /* Gradiente para el primer juego de la segunda generación */
-  background: linear-gradient(to bottom,  rgb(255, 8, 8), rgb(74, 171, 29), rgb(39, 25, 195)); /* Colores representativos */
+  background: linear-gradient(to bottom,  rgb(255, 8, 8), rgb(74, 171, 29), rgb(39, 25, 195)); 
 }
 
 .gen:nth-child(4) {
-  
-  background: linear-gradient(to bottom,  rgb(82, 148, 223),  rgb(231, 66, 220)); /* Colores representativos */
+  background: linear-gradient(to bottom,  rgb(82, 148, 223),  rgb(231, 66, 220)); 
 }
 
 .gen:nth-child(5) {
-  /* Gradiente para la quinta generación */
-  background: linear-gradient(to bottom,  rgb(198, 198, 190),rgb(40, 39, 39)); /* Colores representativos */
+  background: linear-gradient(to bottom,  rgb(198, 198, 190),rgb(40, 39, 39)); 
 }
 
 .gen:nth-child(6) {
-  /* Gradiente para la sexta generación */
-  background: linear-gradient(to bottom,  rgb(0, 94, 255), rgb(177, 18, 42)) /* Colores representativos */
+  background: linear-gradient(to bottom,  rgb(0, 94, 255), rgb(177, 18, 42)) 
 }
 
 .gen:nth-child(7) {
-  /* Gradiente para la séptima generación */
-  background: linear-gradient(to bottom, rgb(255, 123, 0),  rgb(136, 0, 255)); /* Colores representativos */
+  background: linear-gradient(to bottom, rgb(255, 123, 0),  rgb(136, 0, 255)); 
 }
 
 .gen:nth-child(8) {
-  /* Gradiente para la octava generación */
-  background: linear-gradient(to bottom, rgb(188, 54, 41), rgb(45, 135, 220)); /* Colores representativos */
-}
+  background: linear-gradient(to bottom, rgb(188, 54, 41), rgb(45, 135, 220)); 
+} */
 
 /* Estilos para centrar la imagen y efecto de brillo */
 .logo {

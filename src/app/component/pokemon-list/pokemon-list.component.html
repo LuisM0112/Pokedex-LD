@@ -6,8 +6,8 @@
     </div>
     <div class="name">{{ pokemon.name | titlecase }}</div>
     <div class="centered types">
-      <div class="type" [ngStyle]="{ 'background-color': typeColors[pokemon.type1] }">{{ pokemon.type1 | titlecase }}</div>
-      <div class="type" [ngStyle]="{ 'background-color': typeColors[pokemon.type2] }">{{ pokemon.type2 | titlecase }}</div>
+      <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type1) }">{{ pokemon.type1 | titlecase }}</div>
+      <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type2) }">{{ pokemon.type2 | titlecase }}</div>
     </div>
   </div>
 </div>

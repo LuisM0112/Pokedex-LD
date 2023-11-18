@@ -1,0 +1,44 @@
+{
+  "generations": [
+    {
+      "name": "gen 1",
+      "limit": 151,
+      "colors": "linear-gradient(to bottom, rgb(11, 188, 11), rgb(229, 58, 11))"
+    },
+    {
+      "name": "gen 2",
+      "limit": 251,
+      "colors": "linear-gradient(to bottom, rgb(175, 173, 167), rgb(214, 214, 4))"
+    },
+    {
+      "name": "gen 3",
+      "limit": 386,
+      "colors": "linear-gradient(to bottom, rgb(255, 8, 8), rgb(74, 171, 29), rgb(39, 25, 195))"
+    },
+    {
+      "name": "gen 4",
+      "limit": 493,
+      "colors": "linear-gradient(to bottom, rgb(82, 148, 223), rgb(231, 66, 220))"
+    },
+    {
+      "name": "gen 5",
+      "limit": 649,
+      "colors": "linear-gradient(to bottom, rgb(198, 198, 190), rgb(40, 39, 39))"
+    },
+    {
+      "name": "gen 6",
+      "limit": 721,
+      "colors": "linear-gradient(to bottom, rgb(0, 94, 255), rgb(177, 18, 42))"
+    },
+    {
+      "name": "gen 7",
+      "limit": 809,
+      "colors": "linear-gradient(to bottom, rgb(255, 123, 0), rgb(136, 0, 255))"
+    },
+    {
+      "name": "gen 8",
+      "limit": null,
+      "colors": "linear-gradient(to bottom, rgb(188, 54, 41), rgb(45, 135, 220))"
+    }
+  ]
+}
