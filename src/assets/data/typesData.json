@@ -2,6 +2,7 @@
   "types": [
     {
       "name": "normal",
+      "color": "rgba(168, 168, 120, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -21,11 +22,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(168, 168, 120, 1)"
+      }
     },
     {
       "name": "fire",
+      "color": "rgba(240, 128, 48, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -45,11 +46,11 @@
         "dark": 1,
         "steel": 2,
         "fairy": 1
-      },
-      "color": "rgba(240, 128, 48, 1)"
+      }
     },
     {
       "name": "water",
+      "color": "rgba(104, 144, 240, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 2,
@@ -69,11 +70,11 @@
         "dark": 1,
         "steel": 1,
         "fairy": 1
-      },
-      "color": "rgba(104, 144, 240, 1)"
+      }
     },
     {
       "name": "grass",
+      "color": "rgba(120, 200, 80, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -93,11 +94,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(120, 200, 80, 1)"
+      }
     },
     {
       "name": "electric",
+      "color": "rgba(248, 216, 48, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -117,11 +118,11 @@
         "dark": 1,
         "steel": 1,
         "fairy": 1
-      },
-      "color": "rgba(248, 216, 48, 1)"
+      }
     },
     {
       "name": "ice",
+      "color": "rgba(152, 216, 216, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -141,11 +142,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(152, 216, 216, 1)"
+      }
     },
     {
       "name": "fighting",
+      "color": "rgba(192, 48, 40, 1)",
       "effectiveness": {
         "normal": 2,
         "fire": 1,
@@ -165,11 +166,11 @@
         "dark": 2,
         "steel": 2,
         "fairy": 0.5
-      },
-      "color": "rgba(192, 48, 40, 1)"
+      }
     },
     {
       "name": "poison",
+      "color": "rgba(160, 64, 160, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -189,11 +190,11 @@
         "dark": 1,
         "steel": 0,
         "fairy": 2
-      },
-      "color": "rgba(160, 64, 160, 1)"
+      }
     },
     {
       "name": "ground",
+      "color": "rgba(224, 200, 104, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 2,
@@ -213,11 +214,11 @@
         "dark": 1,
         "steel": 2,
         "fairy": 1
-      },
-      "color": "rgba(224, 200, 104, 1)"
+      }
     },
     {
       "name": "flying",
+      "color": "rgba(168, 144, 240, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -237,11 +238,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(168, 144, 240, 1)"
+      }
     },
     {
       "name": "psychic",
+      "color": "rgba(248, 88, 136, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -261,11 +262,11 @@
         "dark": 0,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(248, 88, 136, 1)"
+      }
     },
     {
       "name": "bug",
+      "color": "rgba(168, 184, 32, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -285,11 +286,11 @@
         "dark": 2,
         "steel": 0.5,
         "fairy": 0.5
-      },
-      "color": "rgba(168, 184, 32, 1)"
+      }
     },
     {
       "name": "rock",
+      "color": "rgba(184, 160, 56, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 2,
@@ -309,11 +310,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(184, 160, 56, 1)"
+      }
     },
     {
       "name": "ghost",
+      "color": "rgba(112, 88, 152, 1)",
       "effectiveness": {
         "normal": 0,
         "fire": 1,
@@ -333,11 +334,11 @@
         "dark": 0.5,
         "steel": 1,
         "fairy": 1
-      },
-      "color": "rgba(112, 88, 152, 1)"
+      }
     },
     {
       "name": "dragon",
+      "color": "rgba(112, 56, 248, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -357,11 +358,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 0
-      },
-      "color": "rgba(112, 56, 248, 1)"
+      }
     },
     {
       "name": "dark",
+      "color": "rgba(112, 88, 72, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 1,
@@ -381,11 +382,11 @@
         "dark": 0.5,
         "steel": 1,
         "fairy": 0.5
-      },
-      "color": "rgba(112, 88, 72, 1)"
+      }
     },
     {
       "name": "steel",
+      "color": "rgba(184, 184, 216, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -405,11 +406,11 @@
         "dark": 1,
         "steel": 0.5,
         "fairy": 2
-      },
-      "color": "rgba(184, 184, 216, 1)"
+      }
     },
     {
       "name": "fairy",
+      "color": "rgba(240, 182, 188, 1)",
       "effectiveness": {
         "normal": 1,
         "fire": 0.5,
@@ -429,8 +430,7 @@
         "dark": 2,
         "steel": 0.5,
         "fairy": 1
-      },
-      "color": "rgba(240, 182, 188, 1)"
+      }
     },
     {
       "name": "null",
