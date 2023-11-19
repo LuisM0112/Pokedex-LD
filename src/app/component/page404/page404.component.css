@@ -1,0 +1,8 @@
+@import url(https://db.onlinewebfonts.com/c/6120639772c6c60a2fad6742051c6feb?family=Unown);
+@import url(../../app.component.css);
+
+*{
+  font-family: "Unown";
+  font-size: 500%;
+  text-align: center;
+}

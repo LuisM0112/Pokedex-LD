@@ -1,0 +1,12 @@
+
+app-header{
+  z-index: 2;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+app-pokemon-list{
+  z-index: 3;
+}

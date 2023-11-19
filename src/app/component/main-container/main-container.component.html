@@ -1,0 +1,2 @@
+<app-header (filterTextEvent)="updateFilterText($event)" (filterTypesEvent)="updateFilterTypes($event)" (filterGensEvent)="updateFilterGens($event)"></app-header>
+<app-pokemon-list [filterText]="filterText" [filterTypes]="filterTypes" [filterGens]="filterGens"></app-pokemon-list>

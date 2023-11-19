@@ -11,6 +11,8 @@ import { IdFormatPipe } from './id-format.pipe';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { PokemonDetailsComponent } from './component/pokemon-details/pokemon-details.component';
+import { MainContainerComponent } from './component/main-container/main-container.component';
+import { Page404Component } from './component/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { PokemonDetailsComponent } from './component/pokemon-details/pokemon-det
     IdFormatPipe,
     HeaderComponent,
     FooterComponent,
-    PokemonDetailsComponent
+    PokemonDetailsComponent,
+    MainContainerComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

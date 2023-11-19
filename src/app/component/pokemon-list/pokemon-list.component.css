@@ -24,26 +24,6 @@
   animation: pulse 1.2s infinite ;
 }
 
-.id{
-  margin: 20px 20px;
-  padding: 5px;
-  width: min-content;
-  background-color: rgba(243, 243, 243, 0.418);
-  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
-  border-radius: 10px;
-}
-.id:before{
-  content: 'nº\00A0';
-}
-.pokemon:hover .id{
-  animation: shake 0.3s;
-}
-
-.name{
-  font-size: larger;
-  margin: auto auto 15px;
-}
-
 .sprite{
   width: 80%;
   height: 80%;

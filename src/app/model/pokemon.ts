@@ -3,6 +3,7 @@ export class Pokemon {
   spriteNormal: string = '';
   spriteShiny: string = '';
   name: string = '';
+  description: string = '';
   type1: string = '';
   type2: string = '';
   height: number = 0;

@@ -1,1 +1,53 @@
-<p>pokemon-details works!</p>
+<div id="pokemon-details">
+  <div id="block-1">
+    <div class="id">{{ pokemon.id | idFormat }}</div>
+    <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
+    <div class="name">{{ pokemon.name | titlecase }}</div>
+    <div class="type">{{ pokemon.type1 | titlecase }}</div>
+    <div class="type">{{ pokemon.type2 | titlecase }}</div>
+    <div class="height">{{ pokemon.height }}</div>
+    <div class="weight">{{ pokemon.weight }}</div>
+    <div class="description">{{ pokemon.description }}</div>
+  </div>
+  <div id="block-2">
+    <ul id="stats">
+      <li>
+        <span class="stat-name">Health: {{ pokemon.hp }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.hp / 255 * 100"> </div>
+        </div>
+      </li>
+      <li>
+        <span class="stat-name">Attack: {{ pokemon.attack }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.attack / 255 * 100"> </div>
+        </div>
+      </li>
+      <li>
+        <span class="stat-name">Defense: {{ pokemon.defense }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.defense / 255 * 100"> </div>
+        </div>
+      </li>
+      <li>
+        <span class="stat-name">Special Attack: {{ pokemon.specialAttack }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.specialAttack / 255 * 100"> </div>
+        </div>
+      </li>
+      <li>
+        <span class="stat-name">Special Defense: {{ pokemon.specialDefense }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.specialDefense / 255 * 100"> </div>
+        </div>
+      </li>
+      <li>
+        <span class="stat-name">Speed: {{ pokemon.speed }}</span>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" [style.width.%]="pokemon.speed / 255 * 100"> </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<img id="home" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { Pokemon } from './model/pokemon';
 
 import * as jsonGens from '../assets/data/generationsData.json';
@@ -36,18 +36,32 @@ export class PokemonService {
     return forkJoin(requests).pipe(map((pokemones: Pokemon[]) => pokemones));
   }
 
+  fetchPokemon(id: number): Observable<Pokemon> {
+    return this.requestPokemon(id).pipe(
+      switchMap((pokemon: Pokemon) => {
+        return this.requestPokemonDescription(id).pipe(
+          map((description: string) => {
+            pokemon.description = description;
+            return pokemon;
+          })
+        );
+      })
+    );
+  }
+
   /**
    * This method will request the Pokeapi for the pokemon by the corresponding ID
    * @param id Id of the pokemon that is going to be requested
    * @returns Observable of a pokemon with it's attributes
    */
   requestPokemon(id: number): Observable<Pokemon> {
-    return this.http.get('https://pokeapi.co/api/v2/pokemon/'+id).pipe(
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon/${id}`).pipe(
       map((response: any) => ({
         id: response.id,
         spriteNormal: response.sprites.other['official-artwork'].front_default,
         spriteShiny: response.sprites.other['official-artwork'].front_shiny,
         name: response.name,
+        description: '',
         type1: response.types[0] ? response.types[0].type.name : '',
         type2: response.types[1] ? response.types[1].type.name : '',
         height: response.height/10,
@@ -66,8 +80,8 @@ export class PokemonService {
   requestPokemonDescription(id: number): Observable<string> {
     return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`).pipe(
       map((response: any) => {
-        const descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
-        const description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
+        let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
+        let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
         return description;
       })
     );

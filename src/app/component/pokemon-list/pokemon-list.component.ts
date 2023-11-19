@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pokemon } from '../../model/pokemon';
+import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
+import { Pokemon } from '../../model/pokemon';
 // import * as jsonData from '../../../assets/data/typeColors.json'
 
-import * as jsonTypes from '../../../assets/data/typesData.json'; // Importa los datos de typesData.json
+import * as jsonTypes from '../../../assets/data/typesData.json';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -21,16 +22,19 @@ export class PokemonListComponent implements OnInit {
 
   // typeColors: any = jsonData; // Has the data of the corresponding color for each type
 
-  typeData: any = jsonTypes; // Utiliza typesData.json
+  typeData: any = jsonTypes; // Contains the data for each type
 
   @Input()
-  filterText: string = '';  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  filterText: string = '';    // Gets the name or id to filter the array
   @Input()
-  filterTypes: string[] = [];  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  filterTypes: string[] = []; // Gets the types selected to filter the array
   @Input()
-  filterGens: number[] = [];  // Gets the filter that is going to be applied to the pokemon array form the search bar
+  filterGens: number[] = [];  // Gets the generations selected to filter the array
 
-  constructor(public pokemonService: PokemonService) {}
+  constructor(
+    public pokemonService: PokemonService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: Pokemon[]) => this.pokemones = pokemones));
@@ -48,15 +52,6 @@ export class PokemonListComponent implements OnInit {
     return result;
   }
 
-  getPokemon(id: number): Pokemon {
-    return <Pokemon>{ ...this.pokemones.find(t => t.id == id) };
-  }
-
-  /**
-   * Gets the background gradient which is going to be applied to the pokemon card
-   * @param pokemon 
-   * @returns 
-   */
   // getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
   //   let backgroundStyle: { [key: string]: string } = {};
 
@@ -67,6 +62,11 @@ export class PokemonListComponent implements OnInit {
   //   return backgroundStyle;
   // }
 
+  /**
+   * Gets the background gradient which is going to be applied to the pokemon card
+   * @param pokemon the pokemon to apply the background gradient
+   * @returns the background gradient with it's types colors
+   */
   getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
     let backgroundStyle: { [key: string]: string } = {};
 
@@ -79,6 +79,11 @@ export class PokemonListComponent implements OnInit {
     return backgroundStyle;
   }
 
+  /**
+   * Gets the background color which is going to be applied to the type box of the pokemon
+   * @param pokemon the pokemon to apply the background color for it's types
+   * @returns the background color for the type
+   */
   getTypeColor(type: string): string {
     let foundType = this.typeData.types.find((t: any) => t.name === type);
     return foundType ? foundType.color : this.typeData.types.find((t: any) => t.name === 'null').color;
