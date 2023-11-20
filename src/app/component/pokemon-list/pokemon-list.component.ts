@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { Pokemon } from '../../model/pokemon';
-// import * as jsonData from '../../../assets/data/typeColors.json'
 
 import * as jsonTypes from '../../../assets/data/typesData.json';
 
@@ -20,7 +19,7 @@ export class PokemonListComponent implements OnInit {
 
   pokemones: Pokemon[] = [];  // Will contain the array of every pokemon
 
-  typeData: any = jsonTypes; // Contains the data for each type
+  typesData: any = jsonTypes; // Contains the data for each type
 
   @Input()
   filterText: string = '';    // Gets the name or id to filter the array
@@ -59,9 +58,9 @@ export class PokemonListComponent implements OnInit {
     let backgroundStyle: { [key: string]: string } = {};
 
     if (pokemon.type1 && pokemon.type2) {
-      backgroundStyle['background'] = `radial-gradient(${this.typeData.types.find((type: any) => type.name === pokemon.type2).color} 0%, ${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 100%)`;
+      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type2).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 100%)`;
     } else {
-      backgroundStyle['background'] = `radial-gradient(${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 40%, rgba(146, 146, 146, 0.5) 100%)`;
+      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 40%, rgba(146, 146, 146, 0.5) 100%)`;
     }
 
     return backgroundStyle;
@@ -73,7 +72,7 @@ export class PokemonListComponent implements OnInit {
    * @returns the background color for the type
    */
   getTypeColor(type: string): string {
-    let foundType = this.typeData.types.find((t: any) => t.name === type);
+    let foundType = this.typesData.types.find((t: any) => t.name === type);
     return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
   }
 }

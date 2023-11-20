@@ -14,6 +14,7 @@ export class PokemonDetailsComponent implements OnInit{
   typesData: any = jsonTypes;
 
   pokemon: Pokemon = new Pokemon;
+  isNormalSprite: boolean = true;
 
   weakList: string[] = [];
   veryWeakList: string[] = [];
@@ -78,4 +79,45 @@ export class PokemonDetailsComponent implements OnInit{
     }
   }
 
+  getPercentage(value: number): string {
+    const maxStatValue = 255; // Valor máximo de las estadísticas
+    const percentage = (value / maxStatValue) * 100; // Calcula el porcentaje
+    return `${percentage}%`; // Retorna el porcentaje como string para utilizarlo en el estilo
+
+  }
+
+  toggleSprite(): void {
+    this.isNormalSprite = !this.isNormalSprite;
+  }
+
+  getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
+    let backgroundStyle: { [key: string]: string } = {};
+  
+    if (pokemon.type1 && pokemon.type2) {
+      let foundType1 = this.typesData.types.find((type: any) => type.name === pokemon.type1);
+      let foundType2 = this.typesData.types.find((type: any) => type.name === pokemon.type2);
+  
+      if (foundType1 && foundType2) {
+        backgroundStyle['background'] = `radial-gradient(${foundType2.color} 0%, ${foundType1.color} 100%)`;
+      }
+    } else if (pokemon.type1) {
+      let foundType = this.typesData.types.find((type: any) => type.name === pokemon.type1);
+      
+      if (foundType) {
+        backgroundStyle['background'] = `radial-gradient(${foundType.color} 0%, ${foundType.color} 40%,  ${this.typesData.types.find((type: any) => type.name === 'null').color} 100%)`;
+      }
+    }
+  
+    return backgroundStyle;
+  }
+
+  /**
+   * Gets the background color which is going to be applied to the type box of the pokemon
+   * @param pokemon the pokemon to apply the background color for it's types
+   * @returns the background color for the type
+   */
+  getTypeColor(type: string): string {
+    let foundType = this.typesData.types.find((t: any) => t.name === type);
+    return foundType ? foundType.color : this.typesData.types.find((t: any) => t.name === 'null').color;
+  }
 }
