@@ -29,8 +29,67 @@ export class PokemonDetailsComponent implements OnInit{
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.params['id']; // Obtain pokemon id from the URL
-    this.pokemonService.fetchPokemon(id).subscribe((pokemon: Pokemon) => {this.pokemon = pokemon;});
+    this.pokemonService.fetchPokemon(id).subscribe((pokemon: Pokemon) => {
+      this.pokemon = pokemon;
+      this.sortTypes(pokemon.type1, pokemon.type2);
+    });
   }
 
+  sortTypes(type1: string, type2: string){
+    if (type1 && type2) {
+      let a = this.typesData.types.find((t: any) => t.name === type1);
+      let b = this.typesData.types.find((t: any) => t.name === type2);
+      for (let pos of this.typesData.types) {
+        if (a.effectiveness[pos.name] == 0 || b.effectiveness[pos.name] == 0){
+          this.notEffectiveList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 2 && b.effectiveness[pos.name] == 2){
+          this.veryWeakList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 2 && b.effectiveness[pos.name] == 0.5){
+          this.neutralList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 2){
+          this.neutralList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 2 || b.effectiveness[pos.name] == 2){
+          this.weakList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 1 && b.effectiveness[pos.name] == 1){
+          this.neutralList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 1 && b.effectiveness[pos.name] == 0.5){
+          this.strongList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 1){
+          this.strongList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 0.5){
+          this.veryStrongList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0.5 || b.effectiveness[pos.name] == 0.5){
+          this.strongList.push(pos.name);
+        }
+      }
+    } else {
+      let a = this.typesData.types.find((t: any) => t.name === type1);
+      for (let pos of this.typesData.types) {
+        if (a.effectiveness[pos.name] == 2) {
+          this.weakList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 1){
+          this.neutralList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0.5){
+          this.strongList.push(pos.name);
+        } else if (a.effectiveness[pos.name] == 0){
+          this.notEffectiveList.push(pos.name);
+        }
+      }
+    }
+    // if (type2) {
+    //   let b = this.typesData.types.find((t: any) => t.name === type2);
+    //   for (let pos of this.typesData.types) {
+    //     if (b.effectiveness[pos.name] == 2) {
+    //       this.weakList.push(pos.name);
+    //     } else if (b.effectiveness[pos.name] == 1) {
+    //       this.neutralList.push(pos.name);
+    //     } else if (b.effectiveness[pos.name] == 0.5){
+    //       this.strongList.push(pos.name);
+    //     } else if (b.effectiveness[pos.name] == 0){
+    //       this.notEffectiveList.push(pos.name);
+    //     }
+    //   }
+    // }
+  }
 
 }

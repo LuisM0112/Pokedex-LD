@@ -61,7 +61,7 @@ export class PokemonListComponent implements OnInit {
     if (pokemon.type1 && pokemon.type2) {
       backgroundStyle['background'] = `radial-gradient(${this.typeData.types.find((type: any) => type.name === pokemon.type2).color} 0%, ${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 100%)`;
     } else {
-      backgroundStyle['background'] = `radial-gradient(${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 40%,  ${this.typeData.types.find((type: any) => type.name === 'null').color} 100%)`;
+      backgroundStyle['background'] = `radial-gradient(${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typeData.types.find((type: any) => type.name === pokemon.type1).color} 40%, rgba(146, 146, 146, 0.5) 100%)`;
     }
 
     return backgroundStyle;
@@ -74,6 +74,6 @@ export class PokemonListComponent implements OnInit {
    */
   getTypeColor(type: string): string {
     let foundType = this.typeData.types.find((t: any) => t.name === type);
-    return foundType ? foundType.color : this.typeData.types.find((t: any) => t.name === 'null').color;
+    return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
   }
 }
