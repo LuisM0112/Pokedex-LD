@@ -23,7 +23,6 @@
   font-size: larger;
 }
 
-
 #pokemon-details{
   display: flex;
   width: 100%;
@@ -32,10 +31,7 @@
 
 .pokemon{
   height: auto;
-
 }
-
-
 
 .name{
   font-size: x-large;
@@ -46,19 +42,27 @@
 }
 
 .stat-bar {
-  height: 15px;
-  background-color: #ffffff;
+  height: 17px;
+  background-color: #ffffffc4;
   border-radius: 5px;
   overflow: hidden;
   width: 500px;
-  
+}
+
+.rope:hover {
+  filter: brightness(1.2);
+  transform: scale(0.9);
 }
 
 .stat-bar-fill {
   height: 100%;
-  background-color: #3498db;
+  background-color: #298fd3;
   border-radius: 5px;
   animation: fillAnimation 2s forwards;
+}
+
+.stat-name{
+  font-weight: bold;
 }
 
 
