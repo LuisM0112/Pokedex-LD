@@ -50,7 +50,7 @@ export class PokemonService {
   }
 
   /**
-   * This method will request the Pokeapi for the pokemon by the corresponding ID
+   * This method will request the PokeApi for the pokemon by the corresponding ID
    * @param id Id of the pokemon that is going to be requested
    * @returns Observable of a pokemon with it's attributes
    */

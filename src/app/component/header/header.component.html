@@ -2,7 +2,7 @@
     <div id="search-bar">
         <span>🔍︎</span>
         <input type="search" placeholder="Busca tu Pokemon" [(ngModel)]="inputText" (ngModelChange)="sendInputText()"/>
-        <span id="menu" (click)="changeFilterPanelVisibility()">☰</span>
+        <span id="menu" (click)="changePanelVisibility()">☰</span>
         <div id="filter-container" [ngStyle]="{'visibility': visibility}">
             <div id="types-container" class="types">
                 <div class="type button" *ngFor="let type of getTypes(); index as i" (click)="changeFilterTypesStatus(i); sendInputTypes()" [ngClass]="getTypeStatus(i)" [ngStyle]="{'background-color': type.color}">

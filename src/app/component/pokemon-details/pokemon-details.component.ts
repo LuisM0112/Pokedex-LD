@@ -15,6 +15,7 @@ export class PokemonDetailsComponent implements OnInit{
 
   pokemon: Pokemon = new Pokemon;
   isNormalSprite: boolean = true;
+  visibility = "collapse";
 
   weakList: string[] = [];
   veryWeakList: string[] = [];
@@ -36,52 +37,38 @@ export class PokemonDetailsComponent implements OnInit{
     });
   }
 
-  sortTypes(type1: string, type2: string){
-    if (type1 && type2) {
-      let a = this.typesData.types.find((t: any) => t.name === type1);
-      let b = this.typesData.types.find((t: any) => t.name === type2);
-      for (let pos of this.typesData.types) {
-        if (a.effectiveness[pos.name] == 0 || b.effectiveness[pos.name] == 0){
-          this.notEffectiveList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 2 && b.effectiveness[pos.name] == 2){
-          this.veryWeakList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 2 && b.effectiveness[pos.name] == 0.5){
-          this.neutralList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 2){
-          this.neutralList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 2 || b.effectiveness[pos.name] == 2){
-          this.weakList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 1 && b.effectiveness[pos.name] == 1){
-          this.neutralList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 1 && b.effectiveness[pos.name] == 0.5){
-          this.strongList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 1){
-          this.strongList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0.5 && b.effectiveness[pos.name] == 0.5){
-          this.veryStrongList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0.5 || b.effectiveness[pos.name] == 0.5){
-          this.strongList.push(pos.name);
-        }
-      }
-    } else {
-      let a = this.typesData.types.find((t: any) => t.name === type1);
-      for (let pos of this.typesData.types) {
-        if (a.effectiveness[pos.name] == 2) {
-          this.weakList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 1){
-          this.neutralList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0.5){
-          this.strongList.push(pos.name);
-        } else if (a.effectiveness[pos.name] == 0){
-          this.notEffectiveList.push(pos.name);
-        }
+  sortTypes(type1: string, type2: string) {
+    let getType = (typeName: string) => this.typesData.types.find((t: any) => t.name === typeName);
+    let typeA = getType(type1);
+    let typeB = type2 ? getType(type2) : null;
+
+    for (let pos of this.typesData.types) {
+      let effectiveness = typeA.effectiveness[pos.name];
+      let otherEffectiveness = typeB ? typeB.effectiveness[pos.name] : null;
+
+      if (effectiveness === 0 || (otherEffectiveness !== null && otherEffectiveness === 0)) {
+        this.notEffectiveList.push(pos.name);
+      } else if (effectiveness === 2 && otherEffectiveness === 2) {
+        this.veryWeakList.push(pos.name);
+      } else if ((effectiveness === 2 && otherEffectiveness === 0.5) || (effectiveness === 0.5 && otherEffectiveness === 2)) {
+        this.neutralList.push(pos.name);
+      } else if (effectiveness === 2 || otherEffectiveness === 2) {
+        this.weakList.push(pos.name);
+      } else if (effectiveness === 1 && otherEffectiveness === 1) {
+        this.neutralList.push(pos.name);
+      } else if ((effectiveness === 1 && otherEffectiveness === 0.5) || (effectiveness === 0.5 && otherEffectiveness === 1)) {
+        this.strongList.push(pos.name);
+      } else if (effectiveness === 0.5 && otherEffectiveness === 0.5) {
+        this.veryStrongList.push(pos.name);
+      } else if (effectiveness === 0.5 || otherEffectiveness === 0.5) {
+        this.strongList.push(pos.name);
       }
     }
   }
 
   getPercentage(value: number): string {
-    const maxStatValue = 255; // Valor máximo de las estadísticas
-    const percentage = (value / maxStatValue) * 100; // Calcula el porcentaje
+    let maxStatValue = 255; // Valor máximo de las estadísticas
+    let percentage = (value / maxStatValue) * 100; // Calcula el porcentaje
     return `${percentage}%`; // Retorna el porcentaje como string para utilizarlo en el estilo
 
   }
@@ -118,6 +105,10 @@ export class PokemonDetailsComponent implements OnInit{
    */
   getTypeColor(type: string): string {
     let foundType = this.typesData.types.find((t: any) => t.name === type);
-    return foundType ? foundType.color : this.typesData.types.find((t: any) => t.name === 'null').color;
+    return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
+  }
+
+  changePanelVisibility(){
+    (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
 }

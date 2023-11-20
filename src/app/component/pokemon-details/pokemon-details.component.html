@@ -17,7 +17,9 @@
     <img class="rope" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
   </div>
   <div id="block-2">
-
+    <span id="menu" (click)="changePanelVisibility()">☰</span>
+    <div id="evolution-container" [ngStyle]="{'visibility': visibility}">
+    </div>
     <ul id="stats">
       
       <h2>Height and weight</h2>

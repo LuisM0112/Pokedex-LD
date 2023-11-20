@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit{
     }));
   }
 
-  changeFilterPanelVisibility(){
+  changePanelVisibility(){
     (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
 
