@@ -76,20 +76,6 @@ export class PokemonDetailsComponent implements OnInit{
         }
       }
     }
-    // if (type2) {
-    //   let b = this.typesData.types.find((t: any) => t.name === type2);
-    //   for (let pos of this.typesData.types) {
-    //     if (b.effectiveness[pos.name] == 2) {
-    //       this.weakList.push(pos.name);
-    //     } else if (b.effectiveness[pos.name] == 1) {
-    //       this.neutralList.push(pos.name);
-    //     } else if (b.effectiveness[pos.name] == 0.5){
-    //       this.strongList.push(pos.name);
-    //     } else if (b.effectiveness[pos.name] == 0){
-    //       this.notEffectiveList.push(pos.name);
-    //     }
-    //   }
-    // }
   }
 
 }
