@@ -1,10 +1,12 @@
 <div id="pokemon-details">
   <div id="block-1">
     <div class="id">{{ pokemon.id | idFormat }}</div>
-    <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
+    <img class="centered sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
     <div class="name">{{ pokemon.name | titlecase }}</div>
-    <div class="type">{{ pokemon.type1 | titlecase }}</div>
-    <div class="type">{{ pokemon.type2 | titlecase }}</div>
+    <div class="centered types">
+      <div class="type">{{ pokemon.type1 | titlecase }}</div>
+      <div class="type">{{ pokemon.type2 | titlecase }}</div>
+    </div>
     <div class="height">{{ pokemon.height }}</div>
     <div class="weight">{{ pokemon.weight }}</div>
     <div class="description">{{ pokemon.description }}</div>
@@ -48,6 +50,37 @@
         </div>
       </li>
     </ul>
+    <div id="effectiveness">
+      <ul>
+        Very Weak
+        <li *ngFor="let type of this.veryWeakList">{{ type }}</li>
+      </ul>
+    
+      <ul>
+        Weak
+        <li *ngFor="let type of this.weakList">{{ type }}</li>
+      </ul>
+    
+      <ul>
+        Neutral
+        <li *ngFor="let type of this.neutralList">{{ type }}</li>
+      </ul>
+    
+      <ul>
+        Strong
+        <li *ngFor="let type of this.strongList">{{ type }}</li>
+      </ul>
+    
+      <ul>
+        Very Strong
+        <li *ngFor="let type of this.veryStrongList">{{ type }}</li>
+      </ul>
+    
+      <ul>
+        Not Effective
+        <li *ngFor="let type of this.notEffectiveList">{{ type }}</li>
+      </ul>
+    </div>
   </div>
 </div>
 <img id="home" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
