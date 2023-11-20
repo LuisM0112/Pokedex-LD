@@ -1,9 +1,44 @@
 @import url(../../app.component.css);
 
+#block-1{
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#block-2{
+  background-color: rgba(154, 154, 154, 0.8);
+  width: auto;
+  height: auto; 
+  margin: 20px;
+  padding-right: 40px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  transition: 250ms;
+  cursor: pointer;
+  font-size: larger;
+}
+
+
 #pokemon-details{
   display: flex;
   width: 100%;
   flex-direction: row;
+}
+
+.pokemon{
+  height: auto;
+
+}
+
+
+
+.name{
+  font-size: x-large;
 }
 
 #stats{
@@ -12,13 +47,33 @@
 
 .stat-bar {
   height: 15px;
-  background-color: #ddd;
+  background-color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
+  width: 500px;
+  
 }
 
 .stat-bar-fill {
   height: 100%;
   background-color: #3498db;
   border-radius: 5px;
+  animation: fillAnimation 2s forwards;
 }
+
+
+.height::after {
+  content: ' m'; /* Agrega Metros después de la altura */
+}
+
+.weight::after {
+  content: ' kg'; /* Agrega Kg después del peso */
+}
+
+@keyframes fillAnimation {
+  to {
+    width: var(--stat-value);
+  }
+}
+
+

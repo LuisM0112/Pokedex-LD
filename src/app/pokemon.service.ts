@@ -82,6 +82,10 @@ export class PokemonService {
       map((response: any) => {
         let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
         let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
+        
+        // Limpiar la descripción: eliminar caracteres especiales y saltos de línea
+        description = description.replace(/[\r\n\t\f\v]/g, " ");
+
         return description;
       })
     );
