@@ -20,8 +20,6 @@ export class PokemonListComponent implements OnInit {
 
   pokemones: Pokemon[] = [];  // Will contain the array of every pokemon
 
-  // typeColors: any = jsonData; // Has the data of the corresponding color for each type
-
   typeData: any = jsonTypes; // Contains the data for each type
 
   @Input()
@@ -51,16 +49,6 @@ export class PokemonListComponent implements OnInit {
 
     return result;
   }
-
-  // getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
-  //   let backgroundStyle: { [key: string]: string } = {};
-
-  //   if (pokemon.type1 && pokemon.type2) {
-  //     backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type2]} 0%, ${this.typeColors[pokemon.type1]} 100%)`;
-  //   } else backgroundStyle['background'] = `radial-gradient(${this.typeColors[pokemon.type1]} 0%, ${this.typeColors[pokemon.type1]} 40%,  ${this.typeColors.null} 100%)`;
-
-  //   return backgroundStyle;
-  // }
 
   /**
    * Gets the background gradient which is going to be applied to the pokemon card
