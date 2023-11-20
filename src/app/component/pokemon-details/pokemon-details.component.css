@@ -37,8 +37,12 @@
   font-size: x-large;
 }
 
-#stats{
+li{
   list-style: none;
+}
+
+#effectiveness{
+  display: flex;
 }
 
 .stat-bar {

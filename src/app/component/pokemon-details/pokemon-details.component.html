@@ -64,5 +64,31 @@
         </div>
       </li>
     </ul>
+    <div id="effectiveness">
+      <ul>
+        Very Weak
+        <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</li>
+      </ul>
+    
+      <ul>
+        Weak
+        <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</li>
+      </ul>
+    
+      <ul>
+        Strong
+        <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</li>
+      </ul>
+    
+      <ul>
+        Very Strong
+        <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</li>
+      </ul>
+    
+      <ul>
+        Not Effective
+        <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</li>
+      </ul>
+    </div>
   </div>
 </div>
