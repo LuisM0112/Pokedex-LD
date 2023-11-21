@@ -5,6 +5,8 @@ import { map, switchMap } from 'rxjs/operators'
 import { Pokemon } from './model/pokemon';
 
 import * as jsonGens from '../assets/data/generationsData.json';
+import { BasicPokemon } from './interface/basic-pokemon';
+import { FullPokemon } from './interface/full-pokemon';
 
 @Injectable({
   providedIn: 'root'
@@ -25,30 +27,66 @@ export class PokemonService {
    * This method stores in a list all the pokemon requested from the api
    * @returns Observable of an array of pokemon
    */
-  fetchAllPokemon(): Observable<Pokemon[]> {
-    let requests: Observable<Pokemon>[] = []; // Observable of the pokemon array
+  fetchAllPokemon(): Observable<BasicPokemon[]> {
+    let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
     for (let i = 1; i <= 999; i++) {
-      let request = this.requestPokemon(i);
+      let request = this.requestBasicPokemon(i);
       requests.push(request);
     }
 
     // When every pokemon is requested it returns the array
-    return forkJoin(requests).pipe(map((pokemones: Pokemon[]) => pokemones));
+    return forkJoin(requests).pipe(map((pokemones: BasicPokemon[]) => pokemones));
   }
 
-  fetchPokemon(id: number): Observable<Pokemon> {
-    return this.requestPokemon(id).pipe(
-      switchMap((pokemon: Pokemon) => {
-        return this.requestPokemonDescription(id).pipe(
-          map((description: string) => {
-            pokemon.description = description;
-            return pokemon;
-          })
-        );
+  requestBasicPokemon(id: number): Observable<BasicPokemon> {
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon/${id}`).pipe(
+      map((response: any) => ({
+        id: response.id,
+        spriteNormal: response.sprites.other['official-artwork'].front_default,
+        spriteShiny: response.sprites.other['official-artwork'].front_shiny,
+        name: response.name,
+        generation: this.getGeneration(response.id),
+        type1: response.types[0] ? response.types[0].type.name : '',
+        type2: response.types[1] ? response.types[1].type.name : '',
+      }))
+    );
+  }
+
+  requestFullPokemon(id: number): Observable<FullPokemon> {
+    return forkJoin({
+      basicInfo: this.requestBasicPokemon(id),
+      description: this.requestPokemonDescription(id),
+    }).pipe(
+      map((data: any) => ({...data.basicInfo, description: data.description,}) as FullPokemon)
+    );
+  }
+
+  requestPokemonDescription(id: number): Observable<string> {
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`).pipe(
+      map((response: any) => {
+        let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
+        let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
+        
+        // Limpiar la descripción: eliminar caracteres especiales y saltos de línea
+        description = description.replace(/[\r\n\t\f\v]/g, " ");
+
+        return description;
       })
     );
   }
 
+  private getGeneration(id: number): number {
+    let result: number = 0;
+    for (let i = 0; i < this.generationLimits.length; i++) {
+      if (id <= this.generationLimits[i]) {
+        result = i + 1;
+        break;
+      }
+    }
+    return result;
+  }
+
+  /* ////////////////////////////// */
   /**
    * This method will request the PokeApi for the pokemon by the corresponding ID
    * @param id Id of the pokemon that is going to be requested
@@ -77,28 +115,16 @@ export class PokemonService {
     );
   }
 
-  requestPokemonDescription(id: number): Observable<string> {
-    return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`).pipe(
-      map((response: any) => {
-        let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
-        let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
-        
-        // Limpiar la descripción: eliminar caracteres especiales y saltos de línea
-        description = description.replace(/[\r\n\t\f\v]/g, " ");
-
-        return description;
+  fetchPokemon(id: number): Observable<Pokemon> {
+    return this.requestPokemon(id).pipe(
+      switchMap((pokemon: Pokemon) => {
+        return this.requestPokemonDescription(id).pipe(
+          map((description: string) => {
+            pokemon.description = description;
+            return pokemon;
+          })
+        );
       })
     );
-  }
-
-  private getGeneration(id: number): number {
-    let result: number = 0;
-    for (let i = 0; i < this.generationLimits.length; i++) {
-      if (id <= this.generationLimits[i]) {
-        result = i + 1;
-        break;
-      }
-    }
-    return result;
   }
 }

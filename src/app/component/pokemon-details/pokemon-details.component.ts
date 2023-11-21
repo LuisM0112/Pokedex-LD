@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/model/pokemon';
 import { PokemonService } from 'src/app/pokemon.service';
 import * as jsonTypes from '../../../assets/data/typesData.json';
+import { FullPokemon } from 'src/app/interface/full-pokemon';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -13,7 +14,7 @@ export class PokemonDetailsComponent implements OnInit{
 
   typesData: any = jsonTypes;
 
-  pokemon: Pokemon = new Pokemon;
+  pokemon: FullPokemon = new Pokemon;
   isNormalSprite: boolean = true;
   visibility = "collapse";
 
@@ -31,7 +32,7 @@ export class PokemonDetailsComponent implements OnInit{
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.params['id']; // Obtain pokemon id from the URL
-    this.pokemonService.fetchPokemon(id).subscribe((pokemon: Pokemon) => {
+    this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
       this.sortTypes(pokemon.type1, pokemon.type2);
     });

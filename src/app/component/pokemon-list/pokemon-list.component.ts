@@ -4,6 +4,7 @@ import { PokemonService } from '../../pokemon.service';
 import { Pokemon } from '../../model/pokemon';
 
 import * as jsonTypes from '../../../assets/data/typesData.json';
+import { BasicPokemon } from 'src/app/interface/basic-pokemon';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -17,7 +18,7 @@ import * as jsonTypes from '../../../assets/data/typesData.json';
  */
 export class PokemonListComponent implements OnInit {
 
-  pokemones: Pokemon[] = [];  // Will contain the array of every pokemon
+  pokemones: BasicPokemon[] = [];  // Will contain the array of every pokemon
 
   typesData: any = jsonTypes; // Contains the data for each type
 
@@ -34,11 +35,11 @@ export class PokemonListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.pokemonService.fetchAllPokemon().subscribe(((pokemones: Pokemon[]) => this.pokemones = pokemones));
+    this.pokemonService.fetchAllPokemon().subscribe(((pokemones: BasicPokemon[]) => this.pokemones = pokemones));
   }
 
-  getPokemonesFiltered(): Pokemon[] {
-    let result: Pokemon[] = this.pokemones;
+  getPokemonesFiltered(): BasicPokemon[] {
+    let result: BasicPokemon[] = this.pokemones;
 
     if (this.filterGens.length > 0) result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
 
@@ -54,7 +55,7 @@ export class PokemonListComponent implements OnInit {
    * @param pokemon the pokemon to apply the background gradient
    * @returns the background gradient with it's types colors
    */
-  getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
+  getGradientBackground(pokemon: BasicPokemon): { [key: string]: string } {
     let backgroundStyle: { [key: string]: string } = {};
 
     if (pokemon.type1 && pokemon.type2) {
