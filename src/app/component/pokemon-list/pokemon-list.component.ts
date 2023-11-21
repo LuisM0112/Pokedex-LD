@@ -1,21 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
+import { BasicPokemon } from 'src/app/interface/basic-pokemon';
 import { Pokemon } from '../../model/pokemon';
 
 import * as jsonTypes from '../../../assets/data/typesData.json';
-import { BasicPokemon } from 'src/app/interface/basic-pokemon';
-
-@Component({
-  selector: 'app-pokemon-list',
-  templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.css']
-})
 
 /**
  * This Pokemon-list class is going to take the array of pokemon to be displayed
  * by the HTML component, and it sets the background style for the pokemon element
  */
+@Component({
+  selector: 'app-pokemon-list',
+  templateUrl: './pokemon-list.component.html',
+  styleUrls: ['./pokemon-list.component.css']
+})
 export class PokemonListComponent implements OnInit {
 
   pokemones: BasicPokemon[] = [];  // Will contain the array of every pokemon

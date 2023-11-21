@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/model/pokemon';
 import { PokemonService } from 'src/app/pokemon.service';
-import * as jsonTypes from '../../../assets/data/typesData.json';
 import { FullPokemon } from 'src/app/interface/full-pokemon';
+import * as jsonTypes from '../../../assets/data/typesData.json';
 
 @Component({
   selector: 'app-pokemon-details',
