@@ -92,7 +92,7 @@ export class PokemonDetailsComponent implements OnInit{
       let foundType = this.typesData.types.find((type: any) => type.name === pokemon.type1);
       
       if (foundType) {
-        backgroundStyle['background'] = `radial-gradient(${foundType.color} 0%, ${foundType.color} 40%,  ${this.typesData.types.find((type: any) => type.name === 'null').color} 100%)`;
+        backgroundStyle['background'] = `radial-gradient(${foundType.color} 0%, ${foundType.color} 40%,  rgba(146, 146, 146, 0.5) 100%)`;
       }
     }
   
