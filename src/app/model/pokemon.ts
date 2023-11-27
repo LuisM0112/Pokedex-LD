@@ -4,6 +4,8 @@ export class Pokemon {
   spriteShiny: string = '';
   name: string = '';
   description: string = '';
+  evolutionChain: any[] = [];
+  evolutionRequirements: any[] = [];
   type1: string = '';
   type2: string = '';
   height: number = 0;

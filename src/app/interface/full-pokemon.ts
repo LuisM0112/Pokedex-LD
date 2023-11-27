@@ -10,4 +10,6 @@ export interface FullPokemon extends BasicPokemon {
   specialAttack: number;
   specialDefense: number;
   speed: number;
+  evolutionChain: any[];
+  evolutionRequirements: any[];
 }

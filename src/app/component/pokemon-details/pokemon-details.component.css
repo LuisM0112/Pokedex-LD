@@ -78,6 +78,28 @@ li{
   content: ' kg'; /* Agrega Kg después del peso */
 }
 
+#menu{
+  z-index: 3;
+}
+
+#evolution-container{
+  z-index: 2;
+  display: flex;
+  position: absolute;
+  justify-content: space-around;
+  background-color: rgb(145, 145, 145);
+}
+
+.evo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#details-container{
+  z-index: 1;
+}
+
 @keyframes fillAnimation {
   to {
     width: var(--stat-value);

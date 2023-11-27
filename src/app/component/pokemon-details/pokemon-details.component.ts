@@ -35,6 +35,11 @@ export class PokemonDetailsComponent implements OnInit{
     this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
       this.sortTypes(pokemon.type1, pokemon.type2);
+      console.log(pokemon)
+
+      // this.pokemonService.getPokemonEvolutionChain('https://pokeapi.co/api/v2/evolution-chain/1/').subscribe((evolutionChain: any[]) => {
+      //   console.log('Evolution Chain:', evolutionChain);
+      // });
     });
   }
 
