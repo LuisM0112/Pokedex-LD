@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators'
-import { BasicPokemon } from './interface/basic-pokemon';
-import { FullPokemon } from './interface/full-pokemon';
+import { BasicPokemon } from './model/basic-pokemon';
+import { FullPokemon } from './model/full-pokemon';
 
 import * as jsonGens from '../assets/data/generationsData.json';
 
@@ -31,7 +31,7 @@ export class PokemonService {
   fetchAllPokemon(): Observable<BasicPokemon[]> {
     let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
     for (let i = 1; i <= 999; i++) {
-      let request = this.requestBasicPokemon(i);
+      let request = this.requestBasicPokemon(i+"");
       requests.push(request);
     }
 
@@ -39,8 +39,8 @@ export class PokemonService {
     return forkJoin(requests).pipe(map((pokemones: BasicPokemon[]) => pokemones));
   }
 
-  requestBasicPokemon(id: number): Observable<BasicPokemon> {
-    return this.http.get(this.urlPokemon + id).pipe(
+  requestBasicPokemon(value: string): Observable<BasicPokemon> {
+    return this.http.get(this.urlPokemon + value).pipe(
       map((response: any) => ({
         id: response.id,
         spriteNormal: response.sprites.other['official-artwork'].front_default,
@@ -53,64 +53,11 @@ export class PokemonService {
     );
   }
 
-  // requestFullPokemon(id: number): Observable<FullPokemon> {
-  //   return forkJoin({
-  //     basicInfo: this.requestBasicPokemon(id),
-  //     description: this.requestPokemonDescription(id),
-  //     pokemonDetails: this.http.get(this.urlPokemon + id).pipe(
-  //       map((response: any) => ({
-  //         height: response.height / 10,
-  //         weight: response.weight / 10,
-  //         hp: response.stats[0].base_stat,
-  //         attack: response.stats[1].base_stat,
-  //         defense: response.stats[2].base_stat,
-  //         specialAttack: response.stats[3].base_stat,
-  //         specialDefense: response.stats[4].base_stat,
-  //         speed: response.stats[5].base_stat,
-  //       }))
-  //     ),
-  //   }).pipe(
-  //     map((data: any) => ({...data.basicInfo, description: data.description, ...data.pokemonDetails,}) as FullPokemon)
-  //   );
-  // }
-
-  // requestFullPokemon(id: number): Observable<FullPokemon> {
-  //   return forkJoin({
-  //     basicInfo: this.requestBasicPokemon(id),
-  //     descriptionAndEvolutionUrl: this.requestPokemonDescription(id),
-  //     pokemonDetails: this.http.get(this.urlPokemon + id).pipe(
-  //       map((response: any) => ({
-  //         height: response.height / 10,
-  //         weight: response.weight / 10,
-  //         hp: response.stats[0].base_stat,
-  //         attack: response.stats[1].base_stat,
-  //         defense: response.stats[2].base_stat,
-  //         specialAttack: response.stats[3].base_stat,
-  //         specialDefense: response.stats[4].base_stat,
-  //         speed: response.stats[5].base_stat,
-  //       }))
-  //     ),
-  //   }).pipe(
-  //     map((data: any) => {
-  //       let { basicInfo, descriptionAndEvolutionUrl, pokemonDetails } = data;
-  //       let { description, evolutionUrl } = descriptionAndEvolutionUrl;
-  
-  //       // Hacer la solicitud para obtener la cadena evolutiva
-  //       return {
-  //         ...basicInfo,
-  //         description,
-  //         ...pokemonDetails,
-  //         evolutionChain: this.getPokemonEvolutionChain(evolutionUrl)
-  //       } as FullPokemon;
-  //     })
-  //   );
-  // }
-
   requestFullPokemon(id: number): Observable<FullPokemon> {
     return this.requestPokemonDescription(id).pipe(
       switchMap((descriptionAndEvolutionUrl: any) => {
         let evolutionUrl = descriptionAndEvolutionUrl.evolutionUrl;
-        let basicInfo$ = this.requestBasicPokemon(id);
+        let basicInfo$ = this.requestBasicPokemon(id+"");
         let pokemonDetails$ = this.http.get(`${this.urlPokemon}${id}`).pipe(
           map((response: any) => ({
             height: response.height / 10,
@@ -146,21 +93,6 @@ export class PokemonService {
     );
   }
 
-
-  // requestPokemonDescription(id: number): Observable<string> {
-  //   return this.http.get(this.urlSpecies + id + '/').pipe(
-  //     map((response: any) => {
-  //       let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'en');
-  //       let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
-        
-  //       // Limpiar la descripción: eliminar caracteres especiales y saltos de línea
-  //       description = description.replace(/[\r\n\t\f\v]/g, " ");
-
-  //       return description;
-  //     })
-  //   );
-  // }
-
   requestPokemonDescription(id: number): Observable<{ description: string, evolutionUrl: string }> {
     return this.http.get(this.urlSpecies + id + '/').pipe(
       map((response: any) => {
@@ -169,101 +101,11 @@ export class PokemonService {
         description = description.replace(/[\r\n\t\f\v]/g, " ");
   
         let evolutionUrl = response.evolution_chain.url;
-        console.log(evolutionUrl)
   
         return { description, evolutionUrl };
       })
     );
   }
-
-  
-
-  // requestFullPokemon(id: number): Observable<FullPokemon> {
-  //   return forkJoin({
-  //     basicInfo: this.requestBasicPokemon(id),
-  //     descriptionAndEvolutionUrl: this.requestPokemonDescription(id),
-  //     pokemonDetails: this.http.get(this.urlPokemon + id).pipe(
-  //       map((response: any) => ({
-  //         height: response.height / 10,
-  //         weight: response.weight / 10,
-  //         hp: response.stats[0].base_stat,
-  //         attack: response.stats[1].base_stat,
-  //         defense: response.stats[2].base_stat,
-  //         specialAttack: response.stats[3].base_stat,
-  //         specialDefense: response.stats[4].base_stat,
-  //         speed: response.stats[5].base_stat,
-  //       }))
-  //     ),
-  //   }).pipe(
-  //     switchMap((data: any) => {
-  //       let { basicInfo, descriptionAndEvolutionUrl, pokemonDetails } = data;
-  //       let { description, evolutionUrl } = descriptionAndEvolutionUrl;
-  
-  //       return this.getPokemonEvolutionChain(evolutionUrl).pipe(
-  //         map((evolutionChain: any[]) => {
-  //           const pokemonChain: string[] = [];
-  //           const evolutionRequirements: string[] = [];
-  
-  //           const traverseChain = (chain: any) => {
-  //             if (chain.species && chain.species.name) {
-  //               pokemonChain.push(chain.species.name);
-  //             }
-  
-  //             if (chain.evolution_details && chain.evolution_details.length > 0) {
-  //               const details = chain.evolution_details[0];
-  //               const reqString = this.parseEvolutionDetails(details);
-  //               if (reqString) {
-  //                 evolutionRequirements.push(reqString);
-  //               }
-  //             }
-  
-  //             if (chain.evolves_to && chain.evolves_to.length > 0) {
-  //               for (const nextEvolution of chain.evolves_to) {
-  //                 traverseChain(nextEvolution);
-  //               }
-  //             }
-  //           };
-  
-  //           // Traverse the evolution chain
-  //           traverseChain(evolutionChain[0]);
-  
-  //           return {
-  //             ...basicInfo,
-  //             description,
-  //             ...pokemonDetails,
-  //             evolutionChain: pokemonChain,
-  //             evolutionRequirements,
-  //           } as FullPokemon;
-  //         })
-  //       );
-  //     })
-  //   );
-  // }
-  
-  // parseEvolutionDetails(details: any): string {
-  //   let reqString = '';
-  
-  //   if (details) {
-  //     if (details.min_level !== null) {
-  //       reqString += `Level ${details.min_level}`;
-  //     }
-  
-  //     if (details.item && details.item.name) {
-  //       reqString += ` holding ${details.item.name.replace(/-/g, ' ')}`;
-  //     }
-  
-  //     if (details.time_of_day) {
-  //       reqString += ` during ${details.time_of_day}`;
-  //     }
-  
-  //     if (details.location && details.location.name) {
-  //       reqString += ` at ${details.location.name.replace(/-/g, ' ')}`;
-  //     }
-  
-  //   }
-  
-  //   return reqString.trim();
-  // }
 
   private getGeneration(id: number): number {
     let result: number = 0;
@@ -276,41 +118,9 @@ export class PokemonService {
     return result;
   }
 
-  /* //////////////////////////////////////////////////////////////// */
-
   requestEvolutionChain(evolutionUrl: string): Observable<any> {
     return this.http.get(evolutionUrl);
   }
-
-  // getPokemonEvolutionChain(evolutionUrl: string): Observable<any[]> {
-  //   return this.requestEvolutionChain(evolutionUrl).pipe(
-  //     map((response: any) => {
-  //       let pokemonChain: any[] = [];
-  //       this.traverseEvolutionChain(response.chain, pokemonChain);
-  //       return pokemonChain;
-  //     })
-  //   );
-  // }
-  
-  // traverseEvolutionChain(chain: any, result: any[]) {
-  //   let currentPokemon = {
-  //     speciesName: chain.species.name,
-  //     evolutionDetails: chain.evolution_details
-  //   };
-  
-  //   result.push(currentPokemon);
-  
-  //   if (chain.evolves_to && chain.evolves_to.length > 0) {
-  //     for (let nextEvolution of chain.evolves_to) {
-  //       this.traverseEvolutionChain(nextEvolution, result);
-  //     }
-  //   }
-  // }
-  
-  // const evolutionUrl = 'https://pokeapi.co/api/v2/evolution-chain/1/';
-  // this.getPokemonEvolutionChain(evolutionUrl).subscribe((pokemonChain: any[]) => {
-  //   console.log(pokemonChain);
-  // });
 
   getPokemonEvolutionChain(evolutionUrl: string): Observable<any[]> {
     return this.requestEvolutionChain(evolutionUrl).pipe(

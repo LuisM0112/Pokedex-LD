@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-#block-2{
+.block{
   background-color: rgba(154, 154, 154, 0.8);
   width: auto;
   height: auto; 
@@ -18,19 +18,31 @@
   display: flex;
   flex-direction: column;
   justify-self: center;
-  transition: 250ms;
-  cursor: pointer;
   font-size: larger;
 }
 
 #pokemon-details{
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
   width: 100%;
-  flex-direction: row;
 }
 
 .pokemon{
   height: auto;
+}
+
+.evolution{
+  width: min-content;
+  height: min-content; 
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
+  transition: 250ms;
+  cursor: pointer;
+}
+.evolution > .sprite{
+  width: 20%;
+  height: 20%;
 }
 
 .name{
@@ -82,18 +94,15 @@ li{
   z-index: 3;
 }
 
-#evolution-container{
+#block-3{
   z-index: 2;
-  display: flex;
-  position: absolute;
-  justify-content: space-around;
-  background-color: rgb(145, 145, 145);
+  width: min-content;
+  grid-column: 1 / span 2;
 }
 
-.evo{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+#evolution-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 #details-container{

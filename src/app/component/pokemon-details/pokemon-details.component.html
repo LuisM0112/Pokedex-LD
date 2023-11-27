@@ -15,14 +15,8 @@
     </div>
     <img class="rope" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
   </div>
-  <div id="block-2">
+  <div id="block-2" class="block">
     <span id="menu" (click)="changePanelVisibility()">☰</span>
-    <div id="evolution-container" [ngStyle]="{'visibility': visibility}">
-      <div class="evo" *ngFor="let evolution of pokemon.evolutionChain">
-        <div class="name">{{ evolution.speciesName | titlecase }}</div>
-        <div class="trigger">{{ evolution.evolutionDetails }}</div>
-      </div>
-    </div>
     <div id="details-container">
       <ul id="stats">
         
@@ -95,6 +89,26 @@
           Not Effective
           <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</li>
         </ul>
+      </div>
+    </div>
+  </div>
+  <div id="block-3" class="block">
+    <div id="evolution-container">
+      <div class="evolution" *ngFor="let evolution of evolutions; index as i" [routerLink]="'/pokemon-detail/' + evolution.id">
+        <div class="pokemon" [ngStyle]="getGradientBackground(evolution)">
+          <div class="id">{{ evolution.id | idFormat }}</div>
+          <div class="centered">
+            <img class="sprite" 
+        src="{{ isNormalSprite ? evolution.spriteNormal : evolution.spriteShiny }}" 
+        alt="{{evolution.name}} sprite">
+          </div>
+          <div class="name">{{ evolution.name | titlecase }}</div>
+          <div class="centered types">
+            <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type1) }">{{ evolution.type1 | titlecase }}</div>
+            <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type2) }">{{ evolution.type2 | titlecase }}</div>
+          </div>
+        </div>
+        <div class="trigger" *ngFor="let requirements of getRequirements(i)">{{ requirements }}</div>
       </div>
     </div>
   </div>

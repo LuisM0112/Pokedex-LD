@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
-import { BasicPokemon } from 'src/app/interface/basic-pokemon';
+import { BasicPokemon } from 'src/app/model/basic-pokemon';
 import { Pokemon } from '../../model/pokemon';
 
 import * as jsonTypes from '../../../assets/data/typesData.json';

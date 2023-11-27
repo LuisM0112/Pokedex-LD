@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pokemon } from 'src/app/model/pokemon';
 import { PokemonService } from 'src/app/pokemon.service';
-import { FullPokemon } from 'src/app/interface/full-pokemon';
+import { FullPokemon } from 'src/app/model/full-pokemon';
 import * as jsonTypes from '../../../assets/data/typesData.json';
+import { BasicPokemon } from 'src/app/model/basic-pokemon';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-details',
   templateUrl: './pokemon-details.component.html',
   styleUrls: ['./pokemon-details.component.css']
 })
-export class PokemonDetailsComponent implements OnInit{
+export class PokemonDetailsComponent implements OnDestroy{
+
+  subscription: Subscription | null;
 
   typesData: any = jsonTypes;
 
-  pokemon: FullPokemon = new Pokemon;
+  pokemon: FullPokemon = new FullPokemon;
+  evolutions: BasicPokemon[] = [];
   isNormalSprite: boolean = true;
   visibility = "collapse";
 
@@ -28,22 +32,102 @@ export class PokemonDetailsComponent implements OnInit{
   constructor(
     public pokemonService: PokemonService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.subscription = this.activatedRoute.params.subscribe((data: any) => this.loadData(data['id']));
+  }
 
-  ngOnInit() {
-    let id = this.activatedRoute.snapshot.params['id']; // Obtain pokemon id from the URL
+  ngOnDestroy(){
+    this.subscription?.unsubscribe();
+  }
+
+  private loadData(id: any) {
     this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
+      this.evolutions = this.getEvolutions();
       this.sortTypes(pokemon.type1, pokemon.type2);
-      console.log(pokemon)
-
-      // this.pokemonService.getPokemonEvolutionChain('https://pokeapi.co/api/v2/evolution-chain/1/').subscribe((evolutionChain: any[]) => {
-      //   console.log('Evolution Chain:', evolutionChain);
-      // });
+      console.log(pokemon);
     });
   }
 
+  getEvolutions(): BasicPokemon[]{
+    let evolutions: BasicPokemon[] = [];
+    for (let evolution of this.pokemon.evolutionChain) {
+      this.pokemonService.requestBasicPokemon(evolution.speciesName).subscribe((pokemon: BasicPokemon) => evolutions.push(pokemon));
+    }
+    return evolutions;
+  }
+
+  getRequirements(index: number): string[]{
+    let requirements: string[] = [];
+    let evoDetails = this.pokemon.evolutionChain[index];
+    if (evoDetails.evolutionDetails.length != 0) {
+      let evo = evoDetails.evolutionDetails[0]
+      if (evo.gender) {
+        requirements.push(evo.gender = 1? '♂️' : '♀')
+      }
+      if (evo.held_item) {
+        requirements.push(evo.held_item.name)
+      }
+      if (evo.item) {
+        requirements.push(evo.item.name)
+      }
+      if (evo.known_move) {
+        requirements.push(evo.known_move.name)
+      }
+      if (evo.known_move_type) {
+        requirements.push(evo.known_move_type.name)
+      }
+      if (evo.location) {
+        requirements.push('🗺️ '+evo.location.name)
+      }
+      if (evo.min_affection) {
+        requirements.push('❤️ '+evo.min_affection)
+      }
+      if (evo.min_beauty) {
+        requirements.push('🎀 '+evo.min_beauty)
+      }
+      if (evo.min_happiness) {
+        requirements.push('☺️ '+evo.min_happiness)
+      }
+      if (evo.min_level) {
+        requirements.push('⬆️ '+evo.min_level)
+      }
+      if (evo.needs_overworld_rain) {
+        requirements.push('🌧')
+      }
+      if (evo.party_species) {
+        requirements.push(''+evo.party_species)
+      }
+      if (evo.party_type) {
+        requirements.push(''+evo.party_type)
+      }
+      if (evo.relative_physical_stats) {
+        requirements.push('📊 '+evo.relative_physical_stats)
+      }
+      if (evo.time_of_day) {
+        requirements.push('🕛 '+evo.time_of_day)
+      }
+      if (evo.trade_species) {
+        requirements.push('🔃 '+evo.trade_species)
+      }
+      if (evo.trigger) {
+        requirements.push('⚡ '+evo.trigger.name)
+      }
+      if (evo.turn_upside_down) {
+        requirements.push('⤵ '+evo.turn_upside_down)
+      }
+    }
+    return requirements;
+  }
+
   sortTypes(type1: string, type2: string) {
+    this.weakList = [];
+    this.veryWeakList = [];
+    this.strongList = [];
+    this.veryStrongList = [];
+    this.notEffectiveList = [];
+    this.neutralList = [];
+
     let getType = (typeName: string) => this.typesData.types.find((t: any) => t.name === typeName);
     let typeA = getType(type1);
     let typeB = type2 ? getType(type2) : null;
@@ -76,14 +160,13 @@ export class PokemonDetailsComponent implements OnInit{
     let maxStatValue = 255; // Valor máximo de las estadísticas
     let percentage = (value / maxStatValue) * 100; // Calcula el porcentaje
     return `${percentage}%`; // Retorna el porcentaje como string para utilizarlo en el estilo
-
   }
 
   toggleSprite(): void {
     this.isNormalSprite = !this.isNormalSprite;
   }
 
-  getGradientBackground(pokemon: Pokemon): { [key: string]: string } {
+  getGradientBackground(pokemon: BasicPokemon): { [key: string]: string } {
     let backgroundStyle: { [key: string]: string } = {};
   
     if (pokemon.type1 && pokemon.type2) {
