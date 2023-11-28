@@ -39,6 +39,17 @@ export class PokemonService {
     return forkJoin(requests).pipe(map((pokemones: BasicPokemon[]) => pokemones));
   }
 
+  fetchEvolutions(evolutionChain: any[]): Observable<BasicPokemon[]> {
+    let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
+    for (let evolution of evolutionChain) {
+      let request = this.requestBasicPokemon(evolution.speciesName);
+      requests.push(request);
+    }
+
+    // When every pokemon is requested it returns the array
+    return forkJoin(requests).pipe(map((evolutions: BasicPokemon[]) => evolutions));
+  }
+
   requestBasicPokemon(value: string): Observable<BasicPokemon> {
     return this.http.get(this.urlPokemon + value).pipe(
       map((response: any) => ({
