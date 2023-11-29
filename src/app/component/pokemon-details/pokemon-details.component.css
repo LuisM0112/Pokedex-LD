@@ -6,6 +6,21 @@
   grid-template-columns: auto auto;
 }
 
+.pokemon{
+  width: 20vw;
+  height: 30vw;
+}
+
+.sprite{
+  width: 20vw;
+  height: auto;
+}
+
+.name{
+
+  font-size: x-large;
+}
+
 #block-1{
   font-weight: bold;
   display: flex;
@@ -32,9 +47,20 @@
   display: flex;
   width: 10vw;
   margin-top: 0.5vw;
-  
-  
 }
+
+.typesE{
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  width: 8.8vw;
+  padding: 0.8vh;
+  margin: 1vh 1vh 0 1vh;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  border-radius: 1vw;
+  text-shadow: rgb(0, 0, 0) 1px 1px 4px;
+}
+
 .list{
   font-weight: bold;
   width: min-content;

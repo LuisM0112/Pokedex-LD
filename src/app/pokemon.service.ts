@@ -157,4 +157,12 @@ export class PokemonService {
       }
     }
   }
+
+  // getPokemonMoves(evolutionUrl: string): Observable<any[]> {
+  //   return this.http.get(this.urlSpecies + id + '/').pipe(
+
+
+  // }
+
+
 }
