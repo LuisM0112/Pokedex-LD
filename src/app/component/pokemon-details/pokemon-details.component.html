@@ -43,25 +43,26 @@
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.speed) }}"></div>
     </div>
+    <h2>EFFECTIVENESS</h2>
     <div id="effectiveness">
-      <div class="list">
-        Very Weak
-        <div class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</div>
+      <div class="list" *ngIf="this.veryWeakList.length > 0">
+        VERY WEAK
+        <div class="type"  [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</div>
       </div>
-      <div class="list">
-        Weakdiv
+      <div class="list" *ngIf="this.weakList.length > 0">
+        WEAK
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</div>
       </div>
-      <div class="list">
-        Strong
+      <div class="list" *ngIf="this.strongList.length > 0">
+        STRONG
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</div>
       </div>
-      <div class="list">
-        Very Strong
+      <div class="list" *ngIf="this.veryStrongList.length > 0">
+        VERY STRONG
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</div>
       </div>
-      <div class="list">
-        Not Effective
+      <div class="list" *ngIf="this.notEffectiveList.length > 0">
+        NOT EFFECTIVE
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</div>
       </div>
     </div>

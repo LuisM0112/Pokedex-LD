@@ -31,14 +31,20 @@
 #effectiveness{
   display: flex;
   width: 10vw;
+  margin-top: 0.5vw;
+  
+  
 }
 .list{
   font-weight: bold;
   width: min-content;
-  margin: 1vw;
+  margin: 6px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: solid #000000 3px;
+  border-radius: 20px;
+  padding: 10px 3px 20px 3px;
 }
 
 .block{
@@ -81,7 +87,7 @@
   height: 100%;
   background-color: #298fd3;
   border-radius: 5vw;
-  animation: fillAnimation 2s forwards;
+  animation: fillAnimation 2s ease forwards;
 }
 
 .stat-name{
@@ -97,7 +103,10 @@
 }
 
 @keyframes fillAnimation {
-  to {
-    width: var(--stat-value);
+  0% {
+    width: 0; /* Estado inicial, la animación comienza desde cero ancho */
+  }
+  100% {
+    width: var(--stat-value); /* Estado final, utiliza tu variable */
   }
 }
