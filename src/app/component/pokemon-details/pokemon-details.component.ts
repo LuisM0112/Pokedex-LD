@@ -45,6 +45,7 @@ export class PokemonDetailsComponent implements OnDestroy{
       this.pokemon = pokemon;
       this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions))
       this.sortTypes(pokemon.type1, pokemon.type2);
+      console.log(pokemon);
     });
   }
 
