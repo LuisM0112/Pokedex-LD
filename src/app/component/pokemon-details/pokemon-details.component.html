@@ -2,114 +2,83 @@
   <div id="block-1">
     <div class="pokemon" [ngStyle]="getGradientBackground(pokemon)" (click)="toggleSprite()">
       <div class="id">{{ pokemon.id | idFormat }}</div>
-      <div class="centered">
-        <img class="sprite" 
-    src="{{ isNormalSprite ? pokemon.spriteNormal : pokemon.spriteShiny }}" 
-    alt="{{pokemon.name}} sprite">
-      </div>
+      <img class="sprite" src="{{ isNormalSprite ? pokemon.spriteNormal : pokemon.spriteShiny }}" alt="{{pokemon.name}} sprite">
       <div class="name">{{ pokemon.name | titlecase }}</div>
-      <div class="centered types">
+      <div class="types">
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type1) }">{{ pokemon.type1 | titlecase }}</div>
         <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type2) }">{{ pokemon.type2 | titlecase }}</div>
       </div>
     </div>
-    <img class="rope" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
+    <img id="home" class="rope" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
   </div>
-  <div id="block-2" class="block">
-    <span id="menu" (click)="changePanelVisibility()">☰</span>
-    <div id="details-container">
-      <ul id="stats">
-        
-        <h2>Height and weight</h2>
-        <div class="height">{{ pokemon.height }}</div>
-        <div class="weight">{{ pokemon.weight }}</div>
-        <h2>Description</h2>
-        <div class="description">{{ pokemon.description }}</div>
-    
-        <h2>Base Stats</h2>
-        <li>
-          <span class="stat-name">Health: {{ pokemon.hp }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.hp) }}"></div>
-          </div>
-        </li>
-        <li>
-          <span class="stat-name">Attack: {{ pokemon.attack }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.attack) }}"></div>
-          </div>
-        </li>
-        <li>
-          <span class="stat-name">Defense: {{ pokemon.defense }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.defense) }}"></div>
-          </div>
-        </li>
-        <li>
-          <span class="stat-name">Special Attack: {{ pokemon.specialAttack }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialAttack) }}"></div>
-          </div>
-        </li>
-        <li>
-          <span class="stat-name">Special Defense: {{ pokemon.specialDefense }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialDefense) }}"></div>
-          </div>
-        </li>
-        <li>
-          <span class="stat-name">Speed: {{ pokemon.speed }}</span>
-          <div class="stat-bar">
-            <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.speed) }}"></div>
-          </div>
-        </li>
-      </ul>
-      <div id="effectiveness">
-        <ul>
-          Very Weak
-          <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</li>
-        </ul>
-      
-        <ul>
-          Weak
-          <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</li>
-        </ul>
-      
-        <ul>
-          Strong
-          <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</li>
-        </ul>
-      
-        <ul>
-          Very Strong
-          <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</li>
-        </ul>
-      
-        <ul>
-          Not Effective
-          <li class="type" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</li>
-        </ul>
+  <div id="details-container" class="block">      
+    <h2>Height and weight</h2>
+    <div class="height">{{ pokemon.height }}</div>
+    <div class="weight">{{ pokemon.weight }}</div>
+    <h2>Description</h2>
+    <div class="description">{{ pokemon.description }}</div>
+
+    <h2>Base Stats</h2>
+    <span class="stat-name">Health: {{ pokemon.hp }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.hp) }}"></div>
+    </div>
+    <span class="stat-name">Attack: {{ pokemon.attack }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.attack) }}"></div>
+    </div>
+    <span class="stat-name">Defense: {{ pokemon.defense }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.defense) }}"></div>
+    </div>
+    <span class="stat-name">Special Attack: {{ pokemon.specialAttack }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialAttack) }}"></div>
+    </div>
+    <span class="stat-name">Special Defense: {{ pokemon.specialDefense }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialDefense) }}"></div>
+    </div>
+    <span class="stat-name">Speed: {{ pokemon.speed }}</span>
+    <div class="stat-bar">
+      <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.speed) }}"></div>
+    </div>
+    <h2>EFFECTIVENESS</h2>
+    <div id="effectiveness">
+      <div class="list" *ngIf="this.veryWeakList.length > 0">
+        VERY WEAK
+        <div class="typesE"  [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</div>
+      </div>
+      <div class="list" *ngIf="this.weakList.length > 0">
+        WEAK
+        <div class="typesE" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</div>
+      </div>
+      <div class="list" *ngIf="this.strongList.length > 0">
+        STRONG
+        <div class="typesE" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</div>
+      </div>
+      <div class="list" *ngIf="this.veryStrongList.length > 0">
+        VERY STRONG
+        <div class="typesE" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</div>
+      </div>
+      <div class="list" *ngIf="this.notEffectiveList.length > 0">
+        NOT EFFECTIVE
+        <div class="typesE" [ngStyle]="{ 'background-color': getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</div>
       </div>
     </div>
   </div>
-  <div id="block-3" class="block">
-    <div id="evolution-container">
-      <div class="evolution" *ngFor="let evolution of evolutions; index as i" [routerLink]="'/pokemon-detail/' + evolution.id">
-        <div class="pokemon" [ngStyle]="getGradientBackground(evolution)">
-          <div class="id">{{ evolution.id | idFormat }}</div>
-          <div class="centered">
-            <img class="sprite" 
-        src="{{ isNormalSprite ? evolution.spriteNormal : evolution.spriteShiny }}" 
-        alt="{{evolution.name}} sprite">
-          </div>
-          <div class="name">{{ evolution.name | titlecase }}</div>
-          <div class="centered types">
-            <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type1) }">{{ evolution.type1 | titlecase }}</div>
-            <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type2) }">{{ evolution.type2 | titlecase }}</div>
-          </div>
+  <div id="evolution-container" class="block">
+    <div class="evolution" *ngFor="let evolution of evolutions; index as i" [routerLink]="'/pokemon-detail/' + evolution.id">
+      <div class="pokemon" [ngStyle]="getGradientBackground(evolution)">
+        <div class="id">{{ evolution.id | idFormat }}</div>
+          <img class="sprite" src="{{ evolution.spriteNormal }}" alt="{{evolution.name}} sprite">
+        <div class="name">{{ evolution.name | titlecase }}</div>
+        <div class="types">
+          <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type1) }">{{ evolution.type1 | titlecase }}</div>
+          <div class="type" [ngStyle]="{ 'background-color': getTypeColor(evolution.type2) }">{{ evolution.type2 | titlecase }}</div>
         </div>
-        <div class="trigger" *ngFor="let requirements of getRequirements(i)">{{ requirements }}</div>
       </div>
+      <div class="trigger" *ngFor="let requirements of getRequirements(i)">{{ requirements }}</div>
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from 'src/app/pokemon.service';
-import { FullPokemon } from 'src/app/model/full-pokemon';
-import * as jsonTypes from '../../../assets/data/typesData.json';
 import { BasicPokemon } from 'src/app/model/basic-pokemon';
+import { FullPokemon } from 'src/app/model/full-pokemon';
 import { Subscription } from 'rxjs';
+import * as jsonTypes from '../../../assets/data/typesData.json';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -43,18 +43,10 @@ export class PokemonDetailsComponent implements OnDestroy{
   private loadData(id: any) {
     this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
-      this.evolutions = this.getEvolutions();
+      this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions))
       this.sortTypes(pokemon.type1, pokemon.type2);
       console.log(pokemon);
     });
-  }
-
-  getEvolutions(): BasicPokemon[]{
-    let evolutions: BasicPokemon[] = [];
-    for (let evolution of this.pokemon.evolutionChain) {
-      this.pokemonService.requestBasicPokemon(evolution.speciesName).subscribe((pokemon: BasicPokemon) => evolutions.push(pokemon));
-    }
-    return evolutions;
   }
 
   getRequirements(index: number): string[]{
@@ -195,9 +187,5 @@ export class PokemonDetailsComponent implements OnDestroy{
   getTypeColor(type: string): string {
     let foundType = this.typesData.types.find((t: any) => t.name === type);
     return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
-  }
-
-  changePanelVisibility(){
-    (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
   }
 }

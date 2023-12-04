@@ -1,5 +1,26 @@
 @import url(../../app.component.css);
 
+#pokemon-details{
+  margin: 1vw;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.pokemon{
+  width: 20vw;
+  height: 30vw;
+}
+
+.sprite{
+  width: 20vw;
+  height: auto;
+}
+
+.name{
+
+  font-size: x-large;
+}
+
 #block-1{
   font-weight: bold;
   display: flex;
@@ -7,62 +28,80 @@
   flex-direction: column;
 }
 
-.block{
-  background-color: rgba(154, 154, 154, 0.8);
-  width: auto;
-  height: auto; 
-  margin: 20px;
-  padding-right: 40px;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  font-size: larger;
-}
-
-#pokemon-details{
-  display: grid;
-  grid-template-columns: auto auto;
-  width: 100%;
-}
-
-.pokemon{
+#details-container{
   height: auto;
+  padding: 1vw;
 }
 
-.evolution{
-  width: min-content;
-  height: min-content; 
-  margin: 20px;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
+#evolution-container{
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(300px, 100%/6)), 1fr));
+  margin-top: 3vh;
+  padding: 1vw;
+  height: auto;
   transition: 250ms;
-  cursor: pointer;
-}
-.evolution > .sprite{
-  width: 20%;
-  height: 20%;
-}
-
-.name{
-  font-size: x-large;
-}
-
-li{
-  list-style: none;
 }
 
 #effectiveness{
   display: flex;
+  width: 10vw;
+  margin-top: 0.5vw;
+}
+
+.typesE{
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  width: 8.8vw;
+  padding: 0.8vh;
+  margin: 1vh 1vh 0 1vh;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  border-radius: 1vw;
+  text-shadow: rgb(0, 0, 0) 1px 1px 4px;
+}
+
+.list{
+  font-weight: bold;
+  width: min-content;
+  margin: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: solid #000000 3px;
+  border-radius: 20px;
+  padding: 10px 3px 20px 3px;
+}
+
+.block{
+  background-color: rgba(154, 154, 154, 0.8);
+  border-radius: 1vw;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 1vw;
+}
+
+.evolution{
+  display: flex;
+  width: min-content;
+  height: min-content;
+  justify-self: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+  padding: 1vh;
+  border-radius: 1vw;
+  background-color: rgb(212, 212, 212);
+  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
 }
 
 .stat-bar {
-  height: 17px;
+  height: 2vh;
   background-color: #ffffffc4;
-  border-radius: 5px;
+  border-radius: 5vw;
   overflow: hidden;
-  width: 500px;
+  width: 50vw;
 }
 
 .rope:hover {
@@ -73,14 +112,13 @@ li{
 .stat-bar-fill {
   height: 100%;
   background-color: #298fd3;
-  border-radius: 5px;
-  animation: fillAnimation 2s forwards;
+  border-radius: 5vw;
+  animation: fillAnimation 2s ease forwards;
 }
 
 .stat-name{
   font-weight: bold;
 }
-
 
 .height::after {
   content: ' m'; /* Agrega Metros después de la altura */
@@ -88,25 +126,6 @@ li{
 
 .weight::after {
   content: ' kg'; /* Agrega Kg después del peso */
-}
-
-#menu{
-  z-index: 3;
-}
-
-#block-3{
-  z-index: 2;
-  width: min-content;
-  grid-column: 1 / span 2;
-}
-
-#evolution-container{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-#details-container{
-  z-index: 1;
 }
 
 @keyframes fillAnimation {
@@ -117,5 +136,3 @@ li{
     width: var(--stat-value); /* Estado final, utiliza tu variable */
   }
 }
-
-
