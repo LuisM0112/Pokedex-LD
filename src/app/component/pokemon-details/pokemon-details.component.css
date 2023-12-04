@@ -6,6 +6,21 @@
   grid-template-columns: auto auto;
 }
 
+.pokemon{
+  width: 20vw;
+  height: 30vw;
+}
+
+.sprite{
+  width: 20vw;
+  height: auto;
+}
+
+.name{
+
+  font-size: x-large;
+}
+
 #block-1{
   font-weight: bold;
   display: flex;
@@ -31,14 +46,31 @@
 #effectiveness{
   display: flex;
   width: 10vw;
+  margin-top: 0.5vw;
 }
+
+.typesE{
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  width: 8.8vw;
+  padding: 0.8vh;
+  margin: 1vh 1vh 0 1vh;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  border-radius: 1vw;
+  text-shadow: rgb(0, 0, 0) 1px 1px 4px;
+}
+
 .list{
   font-weight: bold;
   width: min-content;
-  margin: 1vw;
+  margin: 6px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: solid #000000 3px;
+  border-radius: 20px;
+  padding: 10px 3px 20px 3px;
 }
 
 .block{
@@ -81,7 +113,7 @@
   height: 100%;
   background-color: #298fd3;
   border-radius: 5vw;
-  animation: fillAnimation 2s forwards;
+  animation: fillAnimation 2s ease forwards;
 }
 
 .stat-name{
@@ -97,7 +129,10 @@
 }
 
 @keyframes fillAnimation {
-  to {
-    width: var(--stat-value);
+  0% {
+    width: 0; /* Estado inicial, la animación comienza desde cero ancho */
+  }
+  100% {
+    width: var(--stat-value); /* Estado final, utiliza tu variable */
   }
 }
