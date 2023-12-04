@@ -3,7 +3,10 @@
 #pokemon-details{
   margin: 1vw;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(2, 1fr);
+}
+#pokemon-details > div{
+  margin: 2vw;
 }
 
 #block-1{

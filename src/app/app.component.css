@@ -32,7 +32,7 @@ app-footer{
 }
 
 .name{
-  font-size: 1vw;
+  font-size: 1em;
   margin: auto auto;
 }
 
@@ -42,20 +42,22 @@ app-footer{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(300px, 100%/6)), 1fr));
 }
+#pokemon-list > div{
+  margin: 3vw;
+}
 
 .pokemon{
   display: flex;
   justify-self: center;
   flex-direction: column;
   cursor: pointer;
-  width: 15vw;
-  height: min-content;
-  margin: 1ch;
+  width: 90%;
+  height: auto;
   padding: 1vw;
   border-radius: 1vw;
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   transition: 250ms;
-  font-size: 1vw;
+  font-size: 4vw;
   font-weight: bolder;
 }
 .pokemon:hover{
@@ -67,8 +69,8 @@ app-footer{
   position: relative;
   user-select: none;
   margin: auto;
-  width: 15em;
-  height: 15em;
+  width: 100%;
+  height: auto;
 }
 .pokemon:hover .sprite{
   animation: pokemonIdle 0.6s infinite alternate;
@@ -85,7 +87,7 @@ app-footer{
   color: white;
   font-weight: bolder;
   text-align: center;
-  width: 10vw;
+  width: 20vw;
   padding: 0.8vh;
   margin: 1vh 1vh 0 1vh;
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
