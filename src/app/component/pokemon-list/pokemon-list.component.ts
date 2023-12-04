@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { BasicPokemon } from 'src/app/model/basic-pokemon';
+import { Pokemon } from '../../model/pokemon';
 
 import * as jsonTypes from '../../../assets/data/typesData.json';
 
@@ -26,7 +28,10 @@ export class PokemonListComponent implements OnInit {
   @Input()
   filterGens: number[] = [];  // Gets the generations selected to filter the array
 
-  constructor(public pokemonService: PokemonService) {}
+  constructor(
+    public pokemonService: PokemonService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: BasicPokemon[]) => this.pokemones = pokemones));

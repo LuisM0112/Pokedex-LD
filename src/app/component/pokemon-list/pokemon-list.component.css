@@ -1,32 +1,96 @@
 @import url(../../app.component.css);
 
 #pokemon-list{
+  font-size: 30px;
+  font-weight: bolder;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(400px, 100%/6)), 1fr));
 }
 
-/* @media (max-width: 768px) {
+.pokemon{
+  width: 430px;
+  height: min-content; 
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  transition: 250ms;
+  cursor: pointer;
+}
+.pokemon:hover{
+  transform: scale(1.02);
+  animation: pulse 1.2s infinite ;
+}
+
+.sprite{
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  position: relative;
+  user-select: none;
+}
+.pokemon:hover .sprite{
+  animation: pokemonIdle 0.6s infinite alternate;
+}
+
+/* Agrega una media query para dispositivos más pequeños */
+@media (max-width: 768px) {
   #pokemon-list {
-    font-size: 1em;
+    font-size: 1em; /* Reducir el tamaño de fuente para pantallas más pequeñas */
     text-align: center;
+  }
+
+  .pokemon {
+    width: min(90%, 460px); /* Ajustar el ancho máximo y mínimo según tus necesidades */
+  }
+
+  .types > div:not(:empty) {
+    width: 150px; /* Ajustar el ancho de los tipos */
   }
 }
 
 @media (max-width: 1080px) {
   #pokemon-list {
-    font-size: 1em;
+    font-size: 1em; /* Reducir el tamaño de fuente para pantallas más pequeñas */
     text-align: center;
+  }
+
+  .pokemon {
+    width: min(96%, 460px); /* Ajustar el ancho máximo y mínimo según tus necesidades */
+  }
+
+  .types > div:not(:empty) {
+    width: 150px; /* Ajustar el ancho de los tipos */
   }
 }
 
+
 @media (min-width: 1680px) {
   #pokemon-list {
-    font-size: 2em;
+    font-size: 2em; /* Aumenta el tamaño de fuente para pantallas muy grandes */
+  }
+
+  .pokemon {
+    width: min(96%, 2000px); /* Ajusta el ancho máximo y mínimo según tus necesidades */
+  }
+
+  .types > div:not(:empty) {
+    width: 250px; /* Ajusta el ancho de los tipos para pantallas muy grandes */
   }
 }
 
 @media (min-width: 3660px) {
   #pokemon-list {
-    font-size: 4em;
+    font-size: 4em; /* Aumenta el tamaño de fuente para pantallas muy grandes */
   }
-} */
+
+  .pokemon {
+    width: min(96%, 3000px); /* Ajusta el ancho máximo y mínimo según tus necesidades */
+  }
+
+  .types > div:not(:empty) {
+    width: 250px; /* Ajusta el ancho de los tipos para pantallas muy grandes */
+  }
+}

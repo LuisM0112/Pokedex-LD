@@ -1,9 +1,11 @@
 <div id="pokemon-list">
   <div class="pokemon" *ngFor="let pokemon of getPokemonesFiltered()" [ngStyle]="getGradientBackground(pokemon)" [routerLink]="'/pokemon-detail/' + pokemon.id">
     <div class="id">{{ pokemon.id | idFormat }}</div>
-    <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
+    <div class="centered">
+      <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
+    </div>
     <div class="name">{{ pokemon.name | titlecase }}</div>
-    <div class="types">
+    <div class="centered types">
       <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type1) }">{{ pokemon.type1 | titlecase }}</div>
       <div class="type" [ngStyle]="{ 'background-color': getTypeColor(pokemon.type2) }">{{ pokemon.type2 | titlecase }}</div>
     </div>
