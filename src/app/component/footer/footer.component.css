@@ -1,9 +1,10 @@
 #footer-container{
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: rgba(190, 190, 190, 0.8);
-  border-radius: 1vw;
-  height: 5vh;
-  font-size: 1vw;
+  border-radius: 15px;
+}
+
+#content{
+  margin: 15px;
 }
