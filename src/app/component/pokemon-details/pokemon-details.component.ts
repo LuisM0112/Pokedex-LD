@@ -5,6 +5,7 @@ import { BasicPokemon } from 'src/app/model/basic-pokemon';
 import { FullPokemon } from 'src/app/model/full-pokemon';
 import { Subscription } from 'rxjs';
 import * as jsonTypes from '../../../assets/data/typesData.json';
+import { Move } from 'src/app/model/move';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -19,6 +20,9 @@ export class PokemonDetailsComponent implements OnDestroy{
 
   pokemon: FullPokemon = new FullPokemon;
   evolutions: BasicPokemon[] = [];
+  lvlMoves: Move[] = [];
+  machineMoves: Move[] = [];
+
   isNormalSprite: boolean = true;
   visibility = "collapse";
 
@@ -43,11 +47,28 @@ export class PokemonDetailsComponent implements OnDestroy{
   private loadData(id: any) {
     this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
-      this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions))
+      this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions));
       this.sortTypes(pokemon.type1, pokemon.type2);
-      console.log(pokemon);
+      this.pokemonService.fetchAllMoves(this.pokemon.learnedMoves).subscribe((moves: Move[]) => {
+        this.machineMoves = moves.filter((move) => this.getMoveLearnMethod(move) === 'machine').sort((a,b) => {
+          if (a.machine > b.machine) return 1;
+          if (a.machine < b.machine) return -1;
+          return 0;
+        });
+        this.lvlMoves = moves.filter((move) => this.getMoveLearnMethod(move) === 'level-up').sort((a,b) => this.getMoveLearnLvl(a) - this.getMoveLearnLvl(b));
+      });
     });
   }
+
+  getMoveLearnLvl(move: Move): number {
+    let result = this.pokemon.learnedMoves.find(learned => learned.name === move.name);
+    return result ? result.learnLevel : 0;
+  }
+
+  getMoveLearnMethod(move: Move): string {
+    let result = this.pokemon.learnedMoves.find(learned => learned.name === move.name);
+    return result ? result.learnMethod : '';
+  }  
 
   getRequirements(index: number): string[]{
     let requirements: string[] = [];
@@ -156,36 +177,5 @@ export class PokemonDetailsComponent implements OnDestroy{
 
   toggleSprite(): void {
     this.isNormalSprite = !this.isNormalSprite;
-  }
-
-  getGradientBackground(pokemon: BasicPokemon): { [key: string]: string } {
-    let backgroundStyle: { [key: string]: string } = {};
-  
-    if (pokemon.type1 && pokemon.type2) {
-      let foundType1 = this.typesData.types.find((type: any) => type.name === pokemon.type1);
-      let foundType2 = this.typesData.types.find((type: any) => type.name === pokemon.type2);
-  
-      if (foundType1 && foundType2) {
-        backgroundStyle['background'] = `radial-gradient(${foundType2.color} 0%, ${foundType1.color} 100%)`;
-      }
-    } else if (pokemon.type1) {
-      let foundType = this.typesData.types.find((type: any) => type.name === pokemon.type1);
-      
-      if (foundType) {
-        backgroundStyle['background'] = `radial-gradient(${foundType.color} 0%, ${foundType.color} 40%,  rgba(146, 146, 146, 0.5) 100%)`;
-      }
-    }
-  
-    return backgroundStyle;
-  }
-
-  /**
-   * Gets the background color which is going to be applied to the type box of the pokemon
-   * @param pokemon the pokemon to apply the background color for it's types
-   * @returns the background color for the type
-   */
-  getTypeColor(type: string): string {
-    let foundType = this.typesData.types.find((t: any) => t.name === type);
-    return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
   }
 }

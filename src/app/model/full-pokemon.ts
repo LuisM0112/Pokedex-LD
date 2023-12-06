@@ -1,4 +1,5 @@
 import { BasicPokemon } from "./basic-pokemon";
+import { LearnedMove } from "./learned-move";
 
 export class FullPokemon extends BasicPokemon {
   description: string = '';
@@ -11,4 +12,5 @@ export class FullPokemon extends BasicPokemon {
   specialDefense: number = 0;
   speed: number = 0;
   evolutionChain: any[] = [];
+  learnedMoves: LearnedMove[] = []
 }

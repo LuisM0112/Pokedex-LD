@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators'
 import { BasicPokemon } from './model/basic-pokemon';
 import { FullPokemon } from './model/full-pokemon';
+import { Move } from './model/move';
 
+import * as jsonTypes from '../assets/data/typesData.json';
 import * as jsonGens from '../assets/data/generationsData.json';
 
 /** 
@@ -16,11 +18,14 @@ import * as jsonGens from '../assets/data/generationsData.json';
 })
 export class PokemonService {
 
-  gensData: any = jsonGens;
+  typesData: any = jsonTypes; // Contains the data for each type
+  gensData: any = jsonGens;   // Contains the data for each generation
+
   generationLimits: number[] = this.gensData.generations.map((gen: any) => gen.limit);
 
   urlPokemon: string = 'https://pokeapi.co/api/v2/pokemon/';
   urlSpecies: string = 'https://pokeapi.co/api/v2/pokemon-species/';
+  urlMove: string = 'https://pokeapi.co/api/v2/move/';
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +35,7 @@ export class PokemonService {
    */
   fetchAllPokemon(): Observable<BasicPokemon[]> {
     let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
-    for (let i = 1; i <= 999; i++) {
+    for (let i = 1; i <= 493; i++) {
       let request = this.requestBasicPokemon(i+"");
       requests.push(request);
     }
@@ -68,7 +73,7 @@ export class PokemonService {
     return this.requestPokemonDescription(id).pipe(
       switchMap((descriptionAndEvolutionUrl: any) => {
         let evolutionUrl = descriptionAndEvolutionUrl.evolutionUrl;
-        let basicInfo$ = this.requestBasicPokemon(id+"");
+        let basicInfo$ = this.requestBasicPokemon(id + '');
         let pokemonDetails$ = this.http.get(`${this.urlPokemon}${id}`).pipe(
           map((response: any) => ({
             height: response.height / 10,
@@ -79,24 +84,41 @@ export class PokemonService {
             specialAttack: response.stats[3].base_stat,
             specialDefense: response.stats[4].base_stat,
             speed: response.stats[5].base_stat,
+            learnedMoves: response.moves,
           }))
         );
-        let evolutionChain$ = this.getPokemonEvolutionChain(evolutionUrl);
 
         return forkJoin({
           basicInfo: basicInfo$,
           pokemonDetails: pokemonDetails$,
-          evolutionChain: evolutionChain$
+          evolutionChain: this.getPokemonEvolutionChain(evolutionUrl),
         }).pipe(
           map((data: any) => {
             let { basicInfo, pokemonDetails, evolutionChain } = data;
             let { description } = descriptionAndEvolutionUrl;
 
+            // Filter and map learned movements
+            let learnedMoves = pokemonDetails.learnedMoves
+              .filter((move: any) =>
+                move.version_group_details.some(
+                  (details: any) =>
+                    details.version_group.name === 'diamond-pearl' &&
+                    details.move_learn_method.name !== 'egg' &&
+                    details.move_learn_method.name !== 'tutor'
+                )
+              )
+              .map((move: any) => ({
+                name: move.move.name,
+                learnLevel: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').level_learned_at,
+                learnMethod: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').move_learn_method.name,
+              }));
+
             return {
               ...basicInfo,
               description,
               ...pokemonDetails,
-              evolutionChain
+              evolutionChain,
+              learnedMoves,
             } as FullPokemon;
           })
         );
@@ -120,10 +142,11 @@ export class PokemonService {
 
   private getGeneration(id: number): number {
     let result: number = 0;
+    let stop: boolean = false;
     for (let i = 0; i < this.generationLimits.length; i++) {
-      if (id <= this.generationLimits[i]) {
+      if (id <= this.generationLimits[i] && !stop) {
         result = i + 1;
-        break;
+        stop = true;
       }
     }
     return result;
@@ -158,11 +181,79 @@ export class PokemonService {
     }
   }
 
-  // getPokemonMoves(evolutionUrl: string): Observable<any[]> {
-  //   return this.http.get(this.urlSpecies + id + '/').pipe(
+  fetchAllMoves(learnedMoveList: any): Observable<Move[]> {
+    let requests: Observable<Move>[] = []; // Observable of the movement array
 
+    for (let move of learnedMoveList) {
+      let request = this.requestMoveDetails(move.name);
+      requests.push(request);
+    }
 
-  // }
+    // When every movement is requested it returns the array
+    return forkJoin(requests).pipe(map((moves: Move[]) => moves));
+  }
 
+  requestMoveDetails(value: string): Observable<Move> {
+    return this.http.get(this.urlMove + value).pipe(
+      switchMap((response: any) => {
+        let move: Move = {
+          id: response.id,
+          name: response.name,
+          power: response.power,
+          accuracy: response.accuracy,
+          type: response.type.name,
+          damageClass: response.damage_class.name,
+          machine: ""
+        };
 
+        if (response.machines.length > 0) {
+          let machineUrl = response.machines.find((machine: any) => machine.version_group.name === 'diamond-pearl')?.machine.url;
+
+          if (machineUrl) {
+            return this.requestMachineName(machineUrl).pipe(
+              map((mt: string) => {
+                move.machine = mt;
+                return move;
+              })
+            );
+          }
+        }
+
+        return of(move); // if there's no machines it returns the move with the machine attribute empty
+      })
+    );
+  }
+
+  requestMachineName(machineUrl: string): Observable<string> {
+    return this.http.get(machineUrl).pipe(
+      map((response: any) => response.item.name)
+    );
+  }
+
+  /**
+   * Gets the background gradient which is going to be applied to the pokemon card
+   * @param pokemon the pokemon to apply the background gradient
+   * @returns the background gradient with it's types colors
+   */
+  getGradientBackground(pokemon: BasicPokemon): { [key: string]: string } {
+    let backgroundStyle: { [key: string]: string } = {};
+
+    if (pokemon.type1 && pokemon.type2) {
+      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type2).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 100%)`;
+    } else {
+      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 40%, rgba(146, 146, 146, 0.5) 100%)`;
+    }
+
+    return backgroundStyle;
+  }
+
+  /**
+   * Gets the background color which is going to be applied to the type box of the pokemon
+   * @param pokemon the pokemon to apply the background color for it's types
+   * @returns the background color for the type
+   */
+  getTypeColor(type: string): string {
+    let foundType = this.typesData.types.find((t: any) => t.name === type);
+    return foundType ? foundType.color : "rgba(146, 146, 146, 0.5)";
+  }
 }
