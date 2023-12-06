@@ -237,13 +237,22 @@ export class PokemonService {
    */
   getGradientBackground(pokemon: BasicPokemon): { [key: string]: string } {
     let backgroundStyle: { [key: string]: string } = {};
-
+  
     if (pokemon.type1 && pokemon.type2) {
-      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type2).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 100%)`;
-    } else {
-      backgroundStyle['background'] = `radial-gradient(${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 0%, ${this.typesData.types.find((type: any) => type.name === pokemon.type1).color} 40%, rgba(146, 146, 146, 0.5) 100%)`;
+      let foundType1 = this.typesData.types.find((type: any) => type.name === pokemon.type1);
+      let foundType2 = this.typesData.types.find((type: any) => type.name === pokemon.type2);
+  
+      if (foundType1 && foundType2) {
+        backgroundStyle['background'] = `radial-gradient(${foundType2.color} 0%, ${foundType1.color} 100%)`;
+      }
+    } else if (pokemon.type1) {
+      let foundType = this.typesData.types.find((type: any) => type.name === pokemon.type1);
+      
+      if (foundType) {
+        backgroundStyle['background'] = `radial-gradient(${foundType.color} 0%, ${foundType.color} 40%,  rgba(146, 146, 146, 0.5) 100%)`;
+      }
     }
-
+  
     return backgroundStyle;
   }
 
