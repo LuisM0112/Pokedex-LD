@@ -4,8 +4,8 @@ import { PokemonService } from 'src/app/pokemon.service';
 import { BasicPokemon } from 'src/app/model/basic-pokemon';
 import { FullPokemon } from 'src/app/model/full-pokemon';
 import { Subscription } from 'rxjs';
-import * as jsonTypes from '../../../assets/data/typesData.json';
 import { Move } from 'src/app/model/move';
+import { GenType } from 'src/app/interface/gen-type';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -15,8 +15,6 @@ import { Move } from 'src/app/model/move';
 export class PokemonDetailsComponent implements OnDestroy{
 
   subscription: Subscription | null;
-
-  typesData: any = jsonTypes;
 
   pokemon: FullPokemon = new FullPokemon;
   evolutions: BasicPokemon[] = [];
@@ -44,7 +42,7 @@ export class PokemonDetailsComponent implements OnDestroy{
     this.subscription?.unsubscribe();
   }
 
-  private loadData(id: any) {
+  private loadData(id: string) {
     this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
       this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions));
@@ -141,11 +139,11 @@ export class PokemonDetailsComponent implements OnDestroy{
     this.notEffectiveList = [];
     this.neutralList = [];
 
-    let getType = (typeName: string) => this.typesData.types.find((t: any) => t.name === typeName);
+    let getType = (typeName: string) => this.pokemonService.typesData.types.find((t: GenType) => t.name === typeName);
     let typeA = getType(type1);
     let typeB = type2 ? getType(type2) : null;
 
-    for (let pos of this.typesData.types) {
+    for (let pos of this.pokemonService.typesData.types) {
       let effectiveness = typeA.effectiveness[pos.name];
       let otherEffectiveness = typeB ? typeB.effectiveness[pos.name] : null;
 
@@ -170,9 +168,9 @@ export class PokemonDetailsComponent implements OnDestroy{
   }
 
   getPercentage(value: number): string {
-    let maxStatValue = 255; // Valor máximo de las estadísticas
-    let percentage = (value / maxStatValue) * 100; // Calcula el porcentaje
-    return `${percentage}%`; // Retorna el porcentaje como string para utilizarlo en el estilo
+    let maxStatValue = 255;
+    let percentage = (value / maxStatValue) * 100;
+    return `${percentage}%`;
   }
 
   toggleSprite(): void {

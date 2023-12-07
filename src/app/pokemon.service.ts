@@ -18,8 +18,8 @@ import * as jsonGens from '../assets/data/generationsData.json';
 })
 export class PokemonService {
 
-  typesData: any = jsonTypes; // Contains the data for each type
-  gensData: any = jsonGens;   // Contains the data for each generation
+  typesData: any = jsonTypes; // Contains the data for each type (name, color, effectiveness)
+  gensData: any = jsonGens;   // Contains the data for each generation (name, color, limit)
 
   generationLimits: number[] = this.gensData.generations.map((gen: any) => gen.limit);
 
@@ -45,14 +45,12 @@ export class PokemonService {
   }
 
   fetchEvolutions(evolutionChain: any[]): Observable<BasicPokemon[]> {
-    let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
-    for (let evolution of evolutionChain) {
-      let request = this.requestBasicPokemon(evolution.speciesName);
-      requests.push(request);
-    }
-
-    // When every pokemon is requested it returns the array
-    return forkJoin(requests).pipe(map((evolutions: BasicPokemon[]) => evolutions));
+    let requests: Observable<BasicPokemon>[] = evolutionChain.map(evolution =>
+      this.requestBasicPokemon(evolution.speciesName)
+    );
+    
+    // When every pokemon evolution is requested it returns the array
+    return forkJoin(requests);
   }
 
   requestBasicPokemon(value: string): Observable<BasicPokemon> {
@@ -69,7 +67,7 @@ export class PokemonService {
     );
   }
 
-  requestFullPokemon(id: number): Observable<FullPokemon> {
+  requestFullPokemon(id: string): Observable<FullPokemon> {
     return this.requestPokemonDescription(id).pipe(
       switchMap((descriptionAndEvolutionUrl: any) => {
         let evolutionUrl = descriptionAndEvolutionUrl.evolutionUrl;
@@ -126,7 +124,7 @@ export class PokemonService {
     );
   }
 
-  requestPokemonDescription(id: number): Observable<{ description: string, evolutionUrl: string }> {
+  requestPokemonDescription(id: string): Observable<{ description: string, evolutionUrl: string }> {
     return this.http.get(this.urlSpecies + id + '/').pipe(
       map((response: any) => {
         let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'es');
@@ -140,16 +138,15 @@ export class PokemonService {
     );
   }
 
+  /**
+   * Retrieves the generation number based on the provided ID.
+   * @param {number} id - The ID for which to determine the generation.
+   * @returns The generation number corresponding to the provided ID.
+   *          Returns 0 if no generation matches the ID.
+   */
   private getGeneration(id: number): number {
-    let result: number = 0;
-    let stop: boolean = false;
-    for (let i = 0; i < this.generationLimits.length; i++) {
-      if (id <= this.generationLimits[i] && !stop) {
-        result = i + 1;
-        stop = true;
-      }
-    }
-    return result;
+    let index = this.generationLimits.findIndex((limit) => id <= limit);
+    return index != -1 ? index + 1 : 0;
   }
 
   requestEvolutionChain(evolutionUrl: string): Observable<any> {
@@ -182,15 +179,10 @@ export class PokemonService {
   }
 
   fetchAllMoves(learnedMoveList: any): Observable<Move[]> {
-    let requests: Observable<Move>[] = []; // Observable of the movement array
-
-    for (let move of learnedMoveList) {
-      let request = this.requestMoveDetails(move.name);
-      requests.push(request);
-    }
-
+    let requests: Observable<Move>[] = learnedMoveList.map((move: Move) => this.requestMoveDetails(move.name));
+    
     // When every movement is requested it returns the array
-    return forkJoin(requests).pipe(map((moves: Move[]) => moves));
+    return forkJoin(requests);
   }
 
   requestMoveDetails(value: string): Observable<Move> {

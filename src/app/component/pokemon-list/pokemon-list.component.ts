@@ -25,19 +25,23 @@ export class PokemonListComponent implements OnInit {
   constructor(public pokemonService: PokemonService) {}
 
   ngOnInit() {
+    // Fetches all Pokemon from the service and assigns them to 'pokemones'.
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: BasicPokemon[]) => this.pokemones = pokemones));
   }
 
+  /**
+   * Filters the Pokemon list based on filterText, filterTypes, and filterGens.
+   * @returns An array of BasicPokemon that matches the applied filters.
+   */
   getPokemonesFiltered(): BasicPokemon[] {
     let result: BasicPokemon[] = this.pokemones;
 
-    if (this.filterGens.length > 0) result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
+    if (this.filterGens.length) result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
 
-    if (this.filterTypes.length > 0) result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
+    if (this.filterTypes.length) result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
 
     if (this.filterText) result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.id.toString().includes(this.filterText));
 
     return result;
   }
-
 }
