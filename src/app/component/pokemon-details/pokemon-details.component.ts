@@ -70,63 +70,26 @@ export class PokemonDetailsComponent implements OnDestroy{
 
   getRequirements(index: number): string[]{
     let requirements: string[] = [];
-    let evoDetails = this.pokemon.evolutionChain[index];
-    if (evoDetails.evolutionDetails.length != 0) {
-      let evo = evoDetails.evolutionDetails[0]
-      if (evo.gender) {
-        requirements.push(evo.gender = 1? '♂️' : '♀')
-      }
-      if (evo.held_item) {
-        requirements.push(evo.held_item.name)
-      }
-      if (evo.item) {
-        requirements.push(evo.item.name)
-      }
-      if (evo.known_move) {
-        requirements.push(evo.known_move.name)
-      }
-      if (evo.known_move_type) {
-        requirements.push(evo.known_move_type.name)
-      }
-      if (evo.location) {
-        requirements.push('🗺️ '+evo.location.name)
-      }
-      if (evo.min_affection) {
-        requirements.push('❤️ '+evo.min_affection)
-      }
-      if (evo.min_beauty) {
-        requirements.push('🎀 '+evo.min_beauty)
-      }
-      if (evo.min_happiness) {
-        requirements.push('☺️ '+evo.min_happiness)
-      }
-      if (evo.min_level) {
-        requirements.push('⬆️ '+evo.min_level)
-      }
-      if (evo.needs_overworld_rain) {
-        requirements.push('🌧')
-      }
-      if (evo.party_species) {
-        requirements.push(''+evo.party_species)
-      }
-      if (evo.party_type) {
-        requirements.push(''+evo.party_type)
-      }
-      if (evo.relative_physical_stats) {
-        requirements.push('📊 '+evo.relative_physical_stats)
-      }
-      if (evo.time_of_day) {
-        requirements.push('🕛 '+evo.time_of_day)
-      }
-      if (evo.trade_species) {
-        requirements.push('🔃 '+evo.trade_species)
-      }
-      if (evo.trigger) {
-        requirements.push('⚡ '+evo.trigger.name)
-      }
-      if (evo.turn_upside_down) {
-        requirements.push('⤵ '+evo.turn_upside_down)
-      }
+    let evo = this.pokemon.evolutionChain[index];
+    if (evo) {
+      if (evo.gender) requirements.push(evo.gender = 1? '♂️' : '♀')
+      if (evo.held_item) requirements.push(evo.held_item)
+      if (evo.item) requirements.push(evo.item)
+      if (evo.known_move) requirements.push(evo.known_move)
+      if (evo.known_move_type) requirements.push(evo.known_move_type)
+      if (evo.location) requirements.push(`🗺️ ${evo.location}`)
+      if (evo.min_affection) requirements.push(`❤️ ${evo.min_affection}`)
+      if (evo.min_beauty) requirements.push(`🎀 ${evo.min_beauty}`)
+      if (evo.min_happiness) requirements.push(`☺️ ${evo.min_happiness}`)
+      if (evo.min_level) requirements.push(`⬆️ ${evo.min_level}`)
+      if (evo.needs_overworld_rain) requirements.push('🌧')
+      if (evo.party_species) requirements.push(''+evo.party_species)
+      if (evo.party_type) requirements.push(''+evo.party_type)
+      if (evo.relative_physical_stats) requirements.push(`📊 ${evo.relative_physical_stats}`)
+      if (evo.time_of_day) requirements.push(`🕛 ${evo.time_of_day}`)
+      if (evo.trade_species) requirements.push(`🔃 ${evo.trade_species}`)
+      if (evo.trigger) requirements.push(`⚡ ${evo.trigger}`)
+      if (evo.turn_upside_down) requirements.push(`⤵ ${evo.turn_upside_down}`)
     }
     return requirements;
   }
@@ -168,9 +131,7 @@ export class PokemonDetailsComponent implements OnDestroy{
   }
 
   getPercentage(value: number): string {
-    let maxStatValue = 255;
-    let percentage = (value / maxStatValue) * 100;
-    return `${percentage}%`;
+    return `${(value / 255) * 100}%`;
   }
 
   toggleSprite(): void {
