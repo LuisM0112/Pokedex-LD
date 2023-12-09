@@ -8,6 +8,8 @@ import { Move } from './model/move';
 
 import * as jsonTypes from '../assets/data/typesData.json';
 import * as jsonGens from '../assets/data/generationsData.json';
+import { Evolution } from './interface/evolution';
+import { LearnedMove } from './model/learned-move';
 
 /** 
  * This Pokemon Service Class will be used by the pokemon-list, pokemon-details components
@@ -18,8 +20,8 @@ import * as jsonGens from '../assets/data/generationsData.json';
 })
 export class PokemonService {
 
-  typesData: any = jsonTypes; // Contains the data for each type
-  gensData: any = jsonGens;   // Contains the data for each generation
+  typesData: any = jsonTypes; // Contains the data for each type (name, color, effectiveness)
+  gensData: any = jsonGens;   // Contains the data for each generation (name, color, limit)
 
   generationLimits: number[] = this.gensData.generations.map((gen: any) => gen.limit);
 
@@ -44,15 +46,13 @@ export class PokemonService {
     return forkJoin(requests).pipe(map((pokemones: BasicPokemon[]) => pokemones));
   }
 
-  fetchEvolutions(evolutionChain: any[]): Observable<BasicPokemon[]> {
-    let requests: Observable<BasicPokemon>[] = []; // Observable of the pokemon array
-    for (let evolution of evolutionChain) {
-      let request = this.requestBasicPokemon(evolution.speciesName);
-      requests.push(request);
-    }
-
-    // When every pokemon is requested it returns the array
-    return forkJoin(requests).pipe(map((evolutions: BasicPokemon[]) => evolutions));
+  fetchEvolutions(evolutionChain: Evolution[]): Observable<BasicPokemon[]> {
+    let requests: Observable<BasicPokemon>[] = evolutionChain.map(evolution =>
+      this.requestBasicPokemon(evolution.name)
+    );
+    
+    // When every pokemon evolution is requested it returns the array
+    return forkJoin(requests);
   }
 
   requestBasicPokemon(value: string): Observable<BasicPokemon> {
@@ -69,50 +69,25 @@ export class PokemonService {
     );
   }
 
-  requestFullPokemon(id: number): Observable<FullPokemon> {
+  requestFullPokemon(id: string): Observable<FullPokemon> {
     return this.requestPokemonDescription(id).pipe(
       switchMap((descriptionAndEvolutionUrl: any) => {
         let evolutionUrl = descriptionAndEvolutionUrl.evolutionUrl;
         let basicInfo$ = this.requestBasicPokemon(id + '');
-        let pokemonDetails$ = this.http.get(`${this.urlPokemon}${id}`).pipe(
-          map((response: any) => ({
-            height: response.height / 10,
-            weight: response.weight / 10,
-            hp: response.stats[0].base_stat,
-            attack: response.stats[1].base_stat,
-            defense: response.stats[2].base_stat,
-            specialAttack: response.stats[3].base_stat,
-            specialDefense: response.stats[4].base_stat,
-            speed: response.stats[5].base_stat,
-            learnedMoves: response.moves,
-          }))
-        );
-
+        let pokemonDetails$ = this.getPokemonDetails(id);
+        let evolutionChain$ = this.getPokemonEvolutionChain(evolutionUrl);
+  
         return forkJoin({
           basicInfo: basicInfo$,
           pokemonDetails: pokemonDetails$,
-          evolutionChain: this.getPokemonEvolutionChain(evolutionUrl),
+          evolutionChain: evolutionChain$,
         }).pipe(
           map((data: any) => {
             let { basicInfo, pokemonDetails, evolutionChain } = data;
             let { description } = descriptionAndEvolutionUrl;
-
-            // Filter and map learned movements
-            let learnedMoves = pokemonDetails.learnedMoves
-              .filter((move: any) =>
-                move.version_group_details.some(
-                  (details: any) =>
-                    details.version_group.name === 'diamond-pearl' &&
-                    details.move_learn_method.name !== 'egg' &&
-                    details.move_learn_method.name !== 'tutor'
-                )
-              )
-              .map((move: any) => ({
-                name: move.move.name,
-                learnLevel: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').level_learned_at,
-                learnMethod: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').move_learn_method.name,
-              }));
-
+  
+            let learnedMoves = this.filterLearnedMoves(pokemonDetails.learnedMoves);
+  
             return {
               ...basicInfo,
               description,
@@ -125,8 +100,41 @@ export class PokemonService {
       })
     );
   }
+  
+  private getPokemonDetails(id: string): Observable<any> {
+    return this.http.get(`${this.urlPokemon}${id}`).pipe(
+      map((response: any) => ({
+        height: response.height / 10,
+        weight: response.weight / 10,
+        hp: response.stats[0].base_stat,
+        attack: response.stats[1].base_stat,
+        defense: response.stats[2].base_stat,
+        specialAttack: response.stats[3].base_stat,
+        specialDefense: response.stats[4].base_stat,
+        speed: response.stats[5].base_stat,
+        learnedMoves: response.moves,
+      }))
+    );
+  }
+  
+  private filterLearnedMoves(moves: any[]): LearnedMove[] {
+    return moves
+      .filter((move: any) =>
+        move.version_group_details.some(
+          (details: any) =>
+            details.version_group.name === 'diamond-pearl' &&
+            details.move_learn_method.name !== 'egg' &&
+            details.move_learn_method.name !== 'tutor'
+        )
+      )
+      .map((move: any) => ({
+        name: move.move.name,
+        learnLevel: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').level_learned_at,
+        learnMethod: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').move_learn_method.name,
+      }));
+  }
 
-  requestPokemonDescription(id: number): Observable<{ description: string, evolutionUrl: string }> {
+  requestPokemonDescription(id: string): Observable<{ description: string, evolutionUrl: string }> {
     return this.http.get(this.urlSpecies + id + '/').pipe(
       map((response: any) => {
         let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'es');
@@ -140,36 +148,52 @@ export class PokemonService {
     );
   }
 
+  /**
+   * Retrieves the generation number based on the provided ID.
+   * @param {number} id - The ID for which to determine the generation.
+   * @returns The generation number corresponding to the provided ID.
+   *          Returns 0 if no generation matches the ID.
+   */
   private getGeneration(id: number): number {
-    let result: number = 0;
-    let stop: boolean = false;
-    for (let i = 0; i < this.generationLimits.length; i++) {
-      if (id <= this.generationLimits[i] && !stop) {
-        result = i + 1;
-        stop = true;
-      }
-    }
-    return result;
+    let index = this.generationLimits.findIndex((limit) => id <= limit);
+    return index != -1 ? index + 1 : 0;
   }
 
   requestEvolutionChain(evolutionUrl: string): Observable<any> {
     return this.http.get(evolutionUrl);
   }
 
-  getPokemonEvolutionChain(evolutionUrl: string): Observable<any[]> {
+  getPokemonEvolutionChain(evolutionUrl: string): Observable<Evolution[]> {
     return this.requestEvolutionChain(evolutionUrl).pipe(
       map((response: any) => {
-        let pokemonChain: any[] = [];
+        let pokemonChain: Evolution[] = [];
         this.traverseEvolutionChain(response.chain, pokemonChain);
         return pokemonChain;
       })
     );
   }
   
-  traverseEvolutionChain(chain: any, result: any[]) {
-    let currentPokemon = {
-      speciesName: chain.species.name,
-      evolutionDetails: chain.evolution_details
+  traverseEvolutionChain(chain: any, result: Evolution[]) {
+    let currentPokemon: Evolution = {
+      name: chain.species.name,
+      gender: chain.evolution_details[0]?.gender,
+      held_item: chain.evolution_details[0]?.held_item?.name,
+      item: chain.evolution_details[0]?.item?.name,
+      known_move: chain.evolution_details[0]?.known_move?.name,
+      known_move_type: chain.evolution_details[0]?.known_move_type?.name,
+      location: chain.evolution_details[0]?.location?.name,
+      min_affection: chain.evolution_details[0]?.min_affection,
+      min_beauty: chain.evolution_details[0]?.min_beauty,
+      min_happiness: chain.evolution_details[0]?.min_happiness,
+      min_level: chain.evolution_details[0]?.min_level,
+      needs_overworld_rain: chain.evolution_details[0]?.needs_overworld_rain,
+      party_species: chain.evolution_details[0]?.party_species,
+      party_type: chain.evolution_details[0]?.party_type,
+      relative_physical_stats: chain.evolution_details[0]?.relative_physical_stats,
+      time_of_day: chain.evolution_details[0]?.time_of_day,
+      trade_species: chain.evolution_details[0]?.trade_species,
+      trigger: chain.evolution_details[0]?.trigger?.name,
+      turn_upside_down: chain.evolution_details[0]?.turn_upside_down,
     };
   
     result.push(currentPokemon);
@@ -182,19 +206,14 @@ export class PokemonService {
   }
 
   fetchAllMoves(learnedMoveList: any): Observable<Move[]> {
-    let requests: Observable<Move>[] = []; // Observable of the movement array
-
-    for (let move of learnedMoveList) {
-      let request = this.requestMoveDetails(move.name);
-      requests.push(request);
-    }
-
+    let requests: Observable<Move>[] = learnedMoveList.map((move: Move) => this.requestMoveDetails(move.name));
+    
     // When every movement is requested it returns the array
-    return forkJoin(requests).pipe(map((moves: Move[]) => moves));
+    return forkJoin(requests);
   }
 
-  requestMoveDetails(value: string): Observable<Move> {
-    return this.http.get(this.urlMove + value).pipe(
+  requestMoveDetails(name: string): Observable<Move> {
+    return this.http.get(this.urlMove + name).pipe(
       switchMap((response: any) => {
         let move: Move = {
           id: response.id,

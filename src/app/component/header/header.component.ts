@@ -1,24 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { PokemonService } from 'src/app/pokemon.service';
 import { Filter } from 'src/app/model/filter';
-
-import * as jsonGens from '../../../assets/data/generationsData.json'
-import * as jsonTypes from '../../../assets/data/typesData.json';
+import { GenType } from 'src/app/interface/gen-type';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
-
-  typesData: any = jsonTypes;
-  gensData: any = jsonGens;
+export class HeaderComponent{
 
   typesFilter: Filter[] = [];
   gensFilter: Filter[] = [];
 
-  types = this.getTypes();
-  gens = this.getGens();
+  types: GenType[] = [];
+  gens: GenType[] = [];
 
   @Output()
   filterTextEvent = new EventEmitter();
@@ -33,7 +29,17 @@ export class HeaderComponent implements OnInit{
 
   visibility = "collapse";
 
-  ngOnInit(): void {
+  constructor(public pokemonService: PokemonService) {
+    this.types = this.pokemonService.typesData.types.map((type: GenType) => ({
+      name: type.name,
+      color: type.color,
+    }));
+
+    this.gens = this.pokemonService.gensData.generations.map((gen: GenType) => ({
+      name: gen.name,
+      color: gen.color,
+    }));
+
     this.typesFilter = this.fillTypesFilters();
     this.gensFilter = this.fillGensFilters();
   }
@@ -49,34 +55,11 @@ export class HeaderComponent implements OnInit{
   }
 
   fillTypesFilters(): Filter[]{
-    let filters: Filter[] = [];
-    for (let i = 0; i < this.types.length; i++) {
-      filters.push(new Filter(i, this.types[i].name, false));
-    }
-    return filters;
+    return this.types.map((type, index) => new Filter(index + 1, type.name, false));
   }
 
-  fillGensFilters(): Filter[]{
-    let filters: Filter[] = [];  
-    for (let i = 0; i < this.gens.length; i++) {
-      filters.push(new Filter(i + 1, this.gens[i].name, false));
-    }
-  
-    return filters;
-  }
-
-  getTypes() {
-    return this.typesData.types.map((type: any) => ({
-      name: type.name,
-      color: type.color
-    }));
-  }
-
-  getGens() {
-    return this.gensData.generations.map((gen: any) => ({
-      name: gen.name,
-      colors: gen.colors,
-    }));
+  fillGensFilters(): Filter[] {
+    return this.gens.map((gen, index) => new Filter(index + 1, gen.name, false));
   }
 
   changePanelVisibility(){
@@ -97,19 +80,11 @@ export class HeaderComponent implements OnInit{
     return this.gensFilter[index].active ? 'active' : '';
   }
 
-  getSelectedTypes(): string[]{
-    let selectedTypes: string[] = [];
-    for (let i = 0; i < 18; i++) {
-      if (this.typesFilter[i].active) selectedTypes.push(this.typesFilter[i].name);
-    }
-    return selectedTypes;
+  getSelectedTypes(): string[] {
+    return this.typesFilter.filter(type => type.active).map(type => type.name);
   }
-  getSelectedGens(): number[]{
-    let selectedTypes: number[] = [];
-    for (let i = 0; i < 4; i++) {
-      if (this.gensFilter[i].active) selectedTypes.push(this.gensFilter[i].id);
-    }
-    return selectedTypes;
+  getSelectedGens(): number[] {
+    return this.gensFilter.filter(gen => gen.active).map(gen => gen.id);
   }
 
   toggleDarkMode() {
