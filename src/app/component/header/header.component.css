@@ -6,8 +6,7 @@
   height: min-content;
   background-color: rgba(213, 46, 46, 0.8);
   border-radius: 1vw;
-  font-size: 1vw;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -15,12 +14,11 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-left: 1vw;
-  width: 30vw;
-  background-color: rgba(221, 142, 142, 0.9);
+  margin-left: 1%;
+  width: 100%;
+  background-color: rgba(219, 219, 219, 0.562);
   border-radius: 1vw;
 }
-
 #search-bar:hover{
   animation: pulse 1.2s ;
 }
@@ -37,11 +35,11 @@
 
 input{
   border: hidden;
-  width: 90%;
-  padding: 0.8vw;
+  width: 100%;
+  padding: 2%;
   background: #d7101000;
   border-radius: 1vw;
-  font-size: 1.5vw;
+  font-size: 100%;
 }
 input[type="search"]::-webkit-search-cancel-button {
   height: 1vw;
@@ -55,10 +53,10 @@ input::placeholder{
 }
 
 span{
-  margin: 0.1vh 0 0.1vh 2vh;
-  font-size: 2vw;
+  margin: 0.1% 0 0.1% 2%;
+  font-size: 100%;
   user-select: none;
-  color: #000000;
+  color: gray;
 }
 #search-bar:hover span{
   animation: shake 0.3s;
@@ -111,7 +109,7 @@ span{
   position: absolute;
   margin: 1%;
   left: 0vw;
-  top: 12vh;
+  top: 100%;
   background-color: rgba(188, 80, 80, 0.9);
   border-radius: 1vw;
   padding: 1vw;
@@ -129,7 +127,11 @@ hr{
 
 .logo {
   transform: scale(0.6);
-  padding-left: 4%;
+  margin-left: 4%;
+
+  @media screen and (max-width: 600px) {
+    visibility: collapse;
+  }
 }
 
 .logo img {
@@ -143,14 +145,13 @@ hr{
 }
 
 .logoDarkMode{
-  padding-right: 10%;
+  margin-right: 1%;
   transform: scale(0.6);
 }
 
 .logoDarkMode img {
-  width: 6vw; 
-  height: auto; 
-  
+  width: 50%;
+  height: auto;
 }
 
 .logoDarkMode:hover img {
@@ -158,31 +159,42 @@ hr{
   animation: shake 0.3s;
 }
 
-@keyframes parpadeo {
-  0% { opacity: 1; } /* Visible */
-  50% { opacity: 0; } /* Invisible */
-  100% { opacity: 1; } /* Visible nuevamente */
-}
-
 /* Aplicar animación a las imágenes */
 .luz1 img {
   animation: parpadeo 1.5s infinite alternate; /* La primera imagen parpadea */
   transform: scale(0.5);
-  width: 4vw; 
+  width: 100%; 
   height: auto;
+  
+  @media screen and (max-width: 800px) {
+    visibility: collapse;
+  }
 }
 
 .luz2 img {
   animation: parpadeo 1.5s infinite alternate 0.3s; /* La segunda imagen parpadea con un retraso */
   transform: scale(0.5);
-  width: 4vw; 
+  width: 100%; 
   height: auto;
+  
+  @media screen and (max-width: 800px) {
+    visibility: collapse;
+  }
 }
 
 .luz3 img {
   animation: parpadeo 1.5s infinite alternate 0.6s; /* La tercera imagen parpadea con un retraso mayor */
   transform: scale(0.6);
-  width: 4vw; 
+  width: 100%; 
   height: auto;
+  
+  @media screen and (max-width: 800px) {
+    visibility: collapse;
+  }
 }
 
+@keyframes parpadeo {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}

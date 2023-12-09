@@ -1,16 +1,16 @@
 @import url(../../app.component.css);
 
-h2{
-  color: #000000;
-  font-size: 2em;
-}
 #pokemon-details{
   display: grid;
   grid-template-columns: auto auto;
+  padding: 1%;
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(auto-fit, minmax(calc(90% / 1), 1fr));
+  }
 }
 
 .pokemon{
-  margin-top: 1vw;
   width: 80%;
   height: auto;
 }
@@ -23,70 +23,66 @@ h2{
 }
 
 #details-container{
-  margin-top: 1vw;
-  padding-left: 3vw;
+  padding-right: 4%;
+  @media screen and (max-width: 1000px) {
+    grid-column: 1 / span 2;
+  }
 }
 
 #evolution-container{
   grid-column: 1 / span 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
-  margin-top: 3vh;
-  padding: 1vw;
-  height: auto;
-  width: auto;
+  grid-template-columns: repeat(auto-fit, minmax(calc(90% / 3), 1fr)); /* Tres Pokémon por fila por defecto */
+  gap: 1%;
+
+  /* Media query para ajustar a dos Pokémon por fila al reducir el zoom (móviles) */
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(auto-fit, minmax(calc(90% / 2), 1fr));
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(calc(90% / 1), 1fr));
+  }
 }
 
 .move-table{
   grid-column: 1 / span 2;
-  padding: 1vw;
 }
 
 table{
   text-align: center;
+  width: 90%;
 }
-#movimientos{
-  color: #ffffff;
-align-items: center; /* Centrar horizontalmente */
-justify-content: center;
-width: auto;
-padding-bottom: 2em;
-background-color: rgba(213, 46, 46, 0.8);
 
+
+#effectiveness-container{
+  grid-column: 1 / span 2;
+  align-items: center;
+  justify-content: center;
 }
 
 .effectiveness{
   display:flex;
-  flex-direction:row
+  width: 100%;
+  gap: 5%;
+  justify-content: space-around;
 }
 
-.typesE{
-  color: white;
-  font-weight: bolder;
-  text-align: center;
-  width: 7.4vw;
-  padding: 0.8vh;
-  margin: 1vh 1vh 0 1vh;
-  box-shadow: rgba(0, 0, 0, 0.5) 0.4vh 0.4vh 0.4vh;
-  border-radius: 1vw;
-  text-shadow: rgb(0, 0, 0) 0.1vw 0.1vw 0.4vw;
-}
 .statsBasic{
   display: flex;
-  gap: 4%;
-  font-size: 1.2em;
+  font-size: 100%;
   color: #ffffff;
 }
 .list{
-  font-weight: bold;
-  width: auto;
-  margin: 0.3vw;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: solid #000000 0.3em;
+  background-color: rgba(255, 255, 255, 0.151);
   border-radius: 2em;
-  padding: 0.4vw 0.4vw 0.8vw 0.4vw;
+  padding: 2%;
+}
+.list .type{
+  margin: 5%;
 }
 
 .block{
@@ -95,21 +91,18 @@ background-color: rgba(213, 46, 46, 0.8);
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   display: flex;
   flex-direction: column;
-  font-size: 1vw;
+  font-size: 100%;
   font-weight: bold;
-  margin-top: 2vw;
-  margin: 2vw 3vw;
+  padding: 2%;
+  margin-bottom: 5%;
 }
 
 .evolution{
   display: flex;
-  margin-top: 1%;
   justify-self: center;
   flex-direction: column;
   align-items: center;
   padding: 2vh;
-  border-radius: 1vw;
-  background-color: rgba(244, 239, 239, 0);
   font-weight: bold;
 }
 
@@ -119,13 +112,6 @@ background-color: rgba(213, 46, 46, 0.8);
   border-radius: 5vw;
   overflow: hidden;
   width: 40vw;
-}
-
-.rope{
-  transform: scale(0.9);
-}
-.rope:hover {
-  filter: brightness(1.2);
 }
 
 .stat-bar-fill {
@@ -148,13 +134,7 @@ background-color: rgba(213, 46, 46, 0.8);
 }
 
 .description{
-  width: 40em;
-  font-size: 1.2em;
   color: #ffffff;
-}
-
-h3{
-  font-size: 1.5vw;
 }
 
 @keyframes fillAnimation {

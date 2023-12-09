@@ -1,12 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-/* Estilos generales */
+/* General styles */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 html {
   font-family: 'Open Sans', sans-serif;
 }
 
-/* Estilos para el modo oscuro */
+/* Dark mode style */
 .dark-mode {
   background-color: black;
-  color: rgb(0, 0, 0); /* Cambiar el color del texto según sea necesario */
 }

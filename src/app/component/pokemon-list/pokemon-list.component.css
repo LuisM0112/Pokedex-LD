@@ -7,14 +7,12 @@
 }
 .default-pokemon-width .pokemon {
   width: 80%;
-
 }
-/* Clase para un solo Pokémon */
+/* One pokemon width */
 .one-pokemon-width .pokemon {
   width: 25%;
-
 }
-/* Clase para dos Pokémon */
+/* Two pokemon width */
 .two-pokemon-width .pokemon {
   width: 60%;
 }

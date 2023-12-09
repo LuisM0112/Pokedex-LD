@@ -7,15 +7,17 @@ app-footer{
 }
 
 #pokemon-list {
-  font-size: 1vw;
   font-weight: bolder;
   display: grid;
   gap: 0.02%; /* Espacio entre Pokémon */
-  grid-template-columns: repeat(auto-fit, minmax(calc((100% - 4%) / 3), 1fr)); /* Tres Pokémon por fila por defecto */
+  grid-template-columns: repeat(auto-fit, minmax(calc(90% / 3), 1fr)); /* Tres Pokémon por fila por defecto */
 
   /* Media query para ajustar a dos Pokémon por fila al reducir el zoom (móviles) */
   @media screen and (max-width: 800px) {
-    grid-template-columns: repeat(auto-fit, minmax(calc((100% - 4%) / 2), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(90% / 2), 1fr));
+  }
+  @media screen and (max-width: 400px) {
+    grid-template-columns: repeat(auto-fit, minmax(calc(90% / 1), 1fr));
   }
 }
 
@@ -23,7 +25,7 @@ app-footer{
   cursor: pointer;
   user-select: none;
   width: 10vw;
-  transition: 200ms;
+  transition: 150ms;
 }
 
 #home:hover{
@@ -32,12 +34,12 @@ app-footer{
 }
 
 .id{
-  padding: 1vh;
+  padding: 2%;
   width: min-content;
   background-color: rgba(243, 243, 243, 0.418);
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   border-radius: 1vw;
-  font-size: 1.5vw;
+  font-size: 1em;
 }
 .id:before{
   content: 'nº\00A0';
@@ -47,7 +49,7 @@ app-footer{
 }
 
 .name{
-  font-size: 2vw;
+  font-size: 2em;
   margin: auto auto;
 }
 
@@ -59,7 +61,7 @@ app-footer{
   width: 80%;
   height: auto;
   margin: 1%;
-  padding: 1vw;
+  padding: 2%;
   border-radius: 1vw;
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   transition: 250ms;
@@ -92,15 +94,15 @@ app-footer{
 .type:not(:empty){
   color: rgb(255, 255, 255);
   font-weight: bolder;
-  font-size: 1.5vw;
+  font-size: 100%;
   text-align: center;
-  width: 8vw;
+  width: 90%;
   height: auto;
-  padding: 1vh;
-  margin: 1vh 1vh 0 1vh;
-  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  padding: 1%;
+  margin: 2%;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.25em 0.25em 0.25em;
   border-radius: 1vw;
-  text-shadow: rgb(0, 0, 0) 2px 2px 4px;
+  text-shadow: rgb(0, 0, 0) 0.1em 0.1em 0.2em;
 }
 
 .types {
