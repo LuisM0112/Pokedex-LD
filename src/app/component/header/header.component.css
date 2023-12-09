@@ -1,9 +1,10 @@
 @import url(../../app.component.css);
 
 #header-container{
+  margin: 1%;
   display: flex;
   height: min-content;
-  background-color: rgba(190, 190, 190, 0.8);
+  background-color: rgba(213, 46, 46, 0.8);
   border-radius: 1vw;
   font-size: 1vw;
   justify-content: space-between;
@@ -16,9 +17,10 @@
   align-items: center;
   margin-left: 1vw;
   width: 30vw;
-  background-color: rgb(168, 168, 168);
+  background-color: rgba(221, 142, 142, 0.9);
   border-radius: 1vw;
 }
+
 #search-bar:hover{
   animation: pulse 1.2s ;
 }
@@ -37,7 +39,7 @@ input{
   border: hidden;
   width: 90%;
   padding: 0.8vw;
-  background: #f8000000;
+  background: #d7101000;
   border-radius: 1vw;
   font-size: 1.5vw;
 }
@@ -56,7 +58,7 @@ span{
   margin: 0.1vh 0 0.1vh 2vh;
   font-size: 2vw;
   user-select: none;
-  color: #757575;
+  color: #000000;
 }
 #search-bar:hover span{
   animation: shake 0.3s;
@@ -78,8 +80,10 @@ span{
   color: white;
   font-weight: bolder;
   text-align: center;
+  font-size: 1.5vw;
   width: 8vw;
-  padding: 0.8vh;
+  height: auto;
+  padding: 1vh;
   margin: 1vh;
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   border-radius: 1vw;
@@ -105,9 +109,10 @@ span{
 #filter-container{
   z-index: 1;
   position: absolute;
+  margin: 1%;
   left: 0vw;
-  top: 15vh;
-  background-color: rgba(206, 206, 206, 0.9);
+  top: 12vh;
+  background-color: rgba(188, 80, 80, 0.9);
   border-radius: 1vw;
   padding: 1vw;
   user-select: none;
@@ -117,14 +122,14 @@ hr{
   border: hidden;
   height: 1vh;
   border-radius: 3vw;
-  background-color: #666;
+  background-color: #000000;
   text-align: center;
-  box-shadow: 0 0.2vh 0.5vh 0.2vh rgb(114, 114, 114);
   margin: 2vh 0 2vh 0;
 }
 
 .logo {
   transform: scale(0.6);
+  padding-left: 4%;
 }
 
 .logo img {
@@ -134,5 +139,50 @@ hr{
 }
 
 .logo:hover img {
-  filter: brightness(1.2);
+  filter: brightness(1.4);
 }
+
+.logoDarkMode{
+  padding-right: 10%;
+  transform: scale(0.6);
+}
+
+.logoDarkMode img {
+  width: 6vw; 
+  height: auto; 
+  
+}
+
+.logoDarkMode:hover img {
+  filter: brightness(1.2);
+  animation: shake 0.3s;
+}
+
+@keyframes parpadeo {
+  0% { opacity: 1; } /* Visible */
+  50% { opacity: 0; } /* Invisible */
+  100% { opacity: 1; } /* Visible nuevamente */
+}
+
+/* Aplicar animación a las imágenes */
+.luz1 img {
+  animation: parpadeo 1.5s infinite alternate; /* La primera imagen parpadea */
+  transform: scale(0.5);
+  width: 4vw; 
+  height: auto;
+}
+
+.luz2 img {
+  animation: parpadeo 1.5s infinite alternate 0.3s; /* La segunda imagen parpadea con un retraso */
+  transform: scale(0.5);
+  width: 4vw; 
+  height: auto;
+}
+
+.luz3 img {
+  animation: parpadeo 1.5s infinite alternate 0.6s; /* La tercera imagen parpadea con un retraso mayor */
+  transform: scale(0.6);
+  width: 4vw; 
+  height: auto;
+}
+

@@ -106,9 +106,14 @@ export class HeaderComponent implements OnInit{
   }
   getSelectedGens(): number[]{
     let selectedTypes: number[] = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 4; i++) {
       if (this.gensFilter[i].active) selectedTypes.push(this.gensFilter[i].id);
     }
     return selectedTypes;
+  }
+
+  toggleDarkMode() {
+    const body = document.querySelector('body');
+    body?.classList.toggle('dark-mode');
   }
 }

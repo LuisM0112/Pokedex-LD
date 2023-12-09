@@ -1,24 +1,18 @@
 @import url(../../app.component.css);
 
+h2{
+  color: #000000;
+  font-size: 2em;
+}
 #pokemon-details{
-  margin: 1vw;
   display: grid;
   grid-template-columns: auto auto;
 }
 
 .pokemon{
-  width: 20vw;
-  height: 30vw;
-}
-
-.sprite{
-  width: 20vw;
+  margin-top: 1vw;
+  width: 80%;
   height: auto;
-}
-
-.name{
-
-  font-size: x-large;
 }
 
 #block-1{
@@ -29,18 +23,18 @@
 }
 
 #details-container{
-  height: auto;
-  padding: 1vw;
+  margin-top: 1vw;
+  padding-left: 3vw;
 }
 
 #evolution-container{
   grid-column: 1 / span 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(300px, 100%/6)), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
   margin-top: 3vh;
   padding: 1vw;
   height: auto;
-  transition: 250ms;
+  width: auto;
 }
 
 .move-table{
@@ -51,58 +45,72 @@
 table{
   text-align: center;
 }
+#movimientos{
+  color: #ffffff;
+align-items: center; /* Centrar horizontalmente */
+justify-content: center;
+width: auto;
+padding-bottom: 2em;
+background-color: rgba(213, 46, 46, 0.8);
 
-#effectiveness{
-  display: flex;
-  width: 10vw;
-  margin-top: 0.5vw;
+}
+
+.effectiveness{
+  display:flex;
+  flex-direction:row
 }
 
 .typesE{
   color: white;
   font-weight: bolder;
   text-align: center;
-  width: 8.8vw;
+  width: 7.4vw;
   padding: 0.8vh;
   margin: 1vh 1vh 0 1vh;
-  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  box-shadow: rgba(0, 0, 0, 0.5) 0.4vh 0.4vh 0.4vh;
   border-radius: 1vw;
-  text-shadow: rgb(0, 0, 0) 1px 1px 4px;
+  text-shadow: rgb(0, 0, 0) 0.1vw 0.1vw 0.4vw;
 }
-
+.statsBasic{
+  display: flex;
+  gap: 4%;
+  font-size: 1.2em;
+  color: #ffffff;
+}
 .list{
   font-weight: bold;
-  width: min-content;
-  margin: 6px;
+  width: auto;
+  margin: 0.3vw;
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: solid #000000 3px;
-  border-radius: 20px;
-  padding: 10px 3px 20px 3px;
+  border: solid #000000 0.3em;
+  border-radius: 2em;
+  padding: 0.4vw 0.4vw 0.8vw 0.4vw;
 }
 
 .block{
-  background-color: rgba(154, 154, 154, 0.8);
+  background-color: rgba(213, 46, 46, 0.8);
   border-radius: 1vw;
   box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
   display: flex;
   flex-direction: column;
   font-size: 1vw;
-  margin-top: 2vh;
+  font-weight: bold;
+  margin-top: 2vw;
+  margin: 2vw 3vw;
 }
 
 .evolution{
   display: flex;
-  width: min-content;
-  height: min-content;
+  margin-top: 1%;
   justify-self: center;
   flex-direction: column;
   align-items: center;
-  padding: 1vh;
+  padding: 2vh;
   border-radius: 1vw;
-  background-color: rgb(212, 212, 212);
-  box-shadow: rgba(0, 0, 0, 0.5) 0.8vh 0.8vh 0.8vh;
+  background-color: rgba(244, 239, 239, 0);
+  font-weight: bold;
 }
 
 .stat-bar {
@@ -110,17 +118,19 @@ table{
   background-color: #ffffffc4;
   border-radius: 5vw;
   overflow: hidden;
-  width: 50vw;
+  width: 40vw;
 }
 
+.rope{
+  transform: scale(0.9);
+}
 .rope:hover {
   filter: brightness(1.2);
-  transform: scale(0.9);
 }
 
 .stat-bar-fill {
   height: 100%;
-  background-color: #298fd3;
+  background-color: #4ca1db;
   border-radius: 5vw;
   animation: fillAnimation 2s ease forwards;
 }
@@ -135,6 +145,16 @@ table{
 
 .weight::after {
   content: ' kg'; /* Agrega Kg después del peso */
+}
+
+.description{
+  width: 40em;
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+h3{
+  font-size: 1.5vw;
 }
 
 @keyframes fillAnimation {

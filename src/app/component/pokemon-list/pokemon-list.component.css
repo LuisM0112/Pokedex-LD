@@ -1,9 +1,5 @@
 @import url(../../app.component.css);
 
-#pokemon-list{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(400px, 100%/6)), 1fr));
-}
 
 /* @media (max-width: 768px) {
   #pokemon-list {

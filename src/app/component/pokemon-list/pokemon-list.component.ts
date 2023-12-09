@@ -40,4 +40,10 @@ export class PokemonListComponent implements OnInit {
     return result;
   }
 
+  isDarkMode: boolean = false;
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
+
 }
