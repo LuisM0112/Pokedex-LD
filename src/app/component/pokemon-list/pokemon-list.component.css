@@ -1,6 +1,23 @@
 @import url(../../app.component.css);
 
+.default-pokemon-width {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.default-pokemon-width .pokemon {
+  width: 80%;
 
+}
+/* Clase para un solo Pokémon */
+.one-pokemon-width .pokemon {
+  width: 25%;
+
+}
+/* Clase para dos Pokémon */
+.two-pokemon-width .pokemon {
+  width: 60%;
+}
 /* @media (max-width: 768px) {
   #pokemon-list {
     font-size: 1em;

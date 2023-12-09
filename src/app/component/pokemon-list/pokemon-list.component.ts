@@ -39,6 +39,18 @@ export class PokemonListComponent implements OnInit {
 
     return result;
   }
+  
+  getPokemonWidthClass(): string {
+    const filteredPokemonsCount = this.getPokemonesFiltered().length;
+  
+    if (filteredPokemonsCount === 1) {
+      return 'one-pokemon-width'; //  un Pokémon
+    } else if (filteredPokemonsCount === 2) {
+      return 'two-pokemon-width'; // dos Pokémon
+    } else {
+      return 'default-pokemon-width'; // defecto
+    }
+  }
 
   isDarkMode: boolean = false;
 

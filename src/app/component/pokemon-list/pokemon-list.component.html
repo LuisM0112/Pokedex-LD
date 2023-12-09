@@ -1,5 +1,6 @@
-<div id="pokemon-list">
+<div id="pokemon-list" [ngClass]="getPokemonWidthClass()">
   <div class="pokemon" *ngFor="let pokemon of getPokemonesFiltered()" [ngStyle]="this.pokemonService.getGradientBackground(pokemon)" [routerLink]="'/pokemon-detail/' + pokemon.id">
+    <!-- Contenido del Pokémon -->
     <div class="id">{{ pokemon.id | idFormat }}</div>
     <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
     <div class="name">{{ pokemon.name | titlecase }}</div>
