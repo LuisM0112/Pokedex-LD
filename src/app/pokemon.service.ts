@@ -62,7 +62,7 @@ export class PokemonService {
         spriteNormal: response.sprites.other['official-artwork'].front_default,
         spriteShiny: response.sprites.other['official-artwork'].front_shiny,
         name: response.name,
-        generation: this.getGeneration(response.pokemonId),
+        generation: this.getGeneration(response.id),
         type1: response.types[0] ? response.types[0].type.name : '',
         type2: response.types[1] ? response.types[1].type.name : '',
       }))
