@@ -8,5 +8,6 @@ html {
 /* Dark mode style */
 .dark-mode {
   background-color: black;
-  font-size: xx-small;
+  color: rgb(255, 255, 255);
+  text-shadow: rgb(0, 0, 0) 0.1em 0.1em 0.2em;
 }
