@@ -5,8 +5,8 @@
     <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
     <div class="name">{{ pokemon.name | titlecase }}</div>
     <div class="types">
-      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type1) }">{{ pokemon.type1 | titlecase }}</div>
-      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type2) }">{{ pokemon.type2 | titlecase }}</div>
+      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type1) }">{{ pokemon.type1 | traducir:'es' | titlecase}}</div>
+      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type2) }">{{ pokemon.type2 | traducir:'es' | titlecase}}</div>
     </div>
   </div>
 </div>

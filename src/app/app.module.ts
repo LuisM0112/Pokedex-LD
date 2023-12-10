@@ -14,6 +14,7 @@ import { PokemonDetailsComponent } from './component/pokemon-details/pokemon-det
 import { MainContainerComponent } from './component/main-container/main-container.component';
 import { Page404Component } from './component/page404/page404.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { TraducePipe } from './traduce.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     FooterComponent,
     PokemonDetailsComponent,
     MainContainerComponent,
-    Page404Component
+    Page404Component,
+    TraducePipe
   ],
   imports: [
     BrowserModule,

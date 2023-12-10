@@ -159,6 +159,15 @@ hr{
   animation: shake 0.3s;
 }
 
+.traducir{
+  transform: scale(0.9);
+}
+
+.traducir:hover img {
+  filter: brightness(1.2);
+  animation: shake 0.3s;
+}
+
 /* Aplicar animación a las imágenes */
 .luz1 img {
   animation: parpadeo 1.5s infinite alternate; /* La primera imagen parpadea */

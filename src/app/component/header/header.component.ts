@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PokemonService } from 'src/app/pokemon.service';
 import { Filter } from 'src/app/model/filter';
 import { GenType } from 'src/app/interface/gen-type';
@@ -8,7 +8,7 @@ import { GenType } from 'src/app/interface/gen-type';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
 
   typesFilter: Filter[] = [];
   gensFilter: Filter[] = [];
@@ -42,6 +42,9 @@ export class HeaderComponent{
 
     this.typesFilter = this.fillTypesFilters();
     this.gensFilter = this.fillGensFilters();
+  }
+  ngOnInit(): void {
+    console.log("recargar")
   }
 
   sendInputText(){
@@ -90,5 +93,14 @@ export class HeaderComponent{
   toggleDarkMode() {
     const body = document.querySelector('body');
     body?.classList.toggle('dark-mode');
+  }
+
+  changeLan(){
+    if(localStorage.getItem('language') == 'en'){
+      localStorage.setItem('language','es')
+    }else{
+      localStorage.setItem('language','en')
+    }
+    window.location.reload()
   }
 }

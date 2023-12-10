@@ -6,7 +6,7 @@
         <div id="filter-container" [ngStyle]="{'visibility': visibility}">
             <div id="types-container" class="types">
                 <div class="type button" *ngFor="let type of types; index as i" (click)="changeFilterTypesStatus(i); sendInputTypes()" [ngClass]="getTypeStatus(i)" [ngStyle]="{'background-color': type.color}">
-                    {{type.name | titlecase }}
+                    {{type.name | traducir:'es'| titlecase}}
                 </div>
             </div>
             <hr>
@@ -17,9 +17,11 @@
             </div>
         </div>
     </div>
+    
     <div class="logo"><img src="../../../assets/images/logo.png" alt="header image"></div>
     <div class="luz1"><img src="../../../assets/images/rojo.png" alt="luz image"></div>
     <div class="luz2"><img src="../../../assets/images/amarillo.png" alt="luz2 image"></div>
     <div class="luz3"><img src="../../../assets/images/verde.png" alt="luz3 image"></div>
+    <div class="traducir"><img src="../../../assets/images/azul.png" (click)="changeLan()" alt="luztraducir image"></div>
     <div class="logoDarkMode"><img (click)="toggleDarkMode()" src="../../../assets/images/tr.png" alt="darkMode image"></div>
 </div>

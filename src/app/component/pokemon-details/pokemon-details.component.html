@@ -87,57 +87,56 @@
     </div>
   </div>
 
-  <div id="lvl-moves-table" class="block move-table">
+  <div id="lvl-moves-table" class="blockA">
     <table class="move-table">
       <tr>
-        <th> Learned by level </th>
+        <td colspan="6" style="text-align: center;">
+          <h2>Learned by Level</h2>
+        </td>
       </tr>
+      <br>
       <tr>
-        <th> Name </th>
-        <th> Accuracy </th>
-        <th> Power </th>
-        <th> Type </th>
-        <th> Class </th>
-        <th> Learn Level</th>
+        <th><h3>Name</h3></th>
+        <th><h3>Accuracy</h3></th>
+        <th><h3>Power</h3></th>
+        <th><h3>Type</h3></th>
+        <th><h3>Class</h3></th>
+        <th><h3>Level</h3></th>
       </tr>
       <tr *ngFor="let move of lvlMoves">
         <td> {{move.name}} </td>
         <td> {{move.accuracy}} </td>
         <td> {{move.power}} </td>
-        <td>
-          <div class="type" [ngStyle]="{ 'background-color': pokemonService.getTypeColor(move.type) }">
-            {{move.type}}
-          </div>
-        </td>
-        <td> {{move.damageClass}} </td>
-        <td> {{getMoveLearnLvl(move)}} </td>
+        <td><img style="width: 30%;" src="../../../assets/images/{{move.type}}.png"></td >
+        <td><img style="width: 40%;" src="../../../assets/images/{{move.damageClass}}.png" ></td>
+        <td>{{getMoveLearnLvl(move)}}</td>
       </tr>
     </table>
   </div>
+  <br>
 
-  <div id="machine-moves-table" class="block move-table">
+  <div id="machine-moves-table" class="blockA">
     <table class="move-table">
       <tr>
-        <th> Learned by machine </th>
+        <td colspan="6" style="text-align: center;">
+          <h2>Learned by machine</h2>
+        </td>
       </tr>
+      <br>
       <tr>
-        <th> Name </th>
-        <th> Accuracy </th>
-        <th> Power </th>
-        <th> Type  </th>
-        <th> Class </th>
-        <th> Machine </th>
+        <th><h3> Name </h3></th>
+        <th><h3>Accuracy</h3></th>
+        <th><h3>Power</h3></th>
+        <th><h3>Type</h3></th>
+        <th><h3>Class</h3></th>
+        <th><h3>MT</h3></th>
       </tr>
       <tr *ngFor="let move of machineMoves">
         <td> {{move.name}} </td>
         <td> {{move.accuracy}} </td>
         <td> {{move.power}} </td>
-        <td>
-          <div class="type" [ngStyle]="{ 'background-color': pokemonService.getTypeColor(move.type) }">
-            {{move.type}}
-          </div>
-        </td>
-        <td> {{move.damageClass}} </td>
+        <td><img style="width: 30%;" src="../../../assets/images/{{move.type}}.png"></td>
+        <td><img style="width: 40%;" src="../../../assets/images/{{move.damageClass}}.png" ></td>
         <td> {{move.machine}} </td>
       </tr>
     </table>
