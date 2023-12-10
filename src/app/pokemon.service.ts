@@ -58,7 +58,7 @@ export class PokemonService {
   requestBasicPokemon(value: string): Observable<BasicPokemon> {
     return this.http.get(this.urlPokemon + value).pipe(
       map((response: any) => ({
-        pokemonId: response.pokemonId,
+        pokemonId: response.id,
         spriteNormal: response.sprites.other['official-artwork'].front_default,
         spriteShiny: response.sprites.other['official-artwork'].front_shiny,
         name: response.name,
@@ -154,8 +154,8 @@ export class PokemonService {
    * @returns The generation number corresponding to the provided ID.
    *          Returns 0 if no generation matches the ID.
    */
-  private getGeneration(generationId: number): number {
-    let index = this.generationLimits.findIndex((limit) => generationId <= limit);
+  private getGeneration(pokemonId: number): number {
+    let index = this.generationLimits.findIndex((limit) => pokemonId <= limit);
     return index != -1 ? index + 1 : 0;
   }
 
@@ -216,7 +216,7 @@ export class PokemonService {
     return this.http.get(this.urlMove + name).pipe(
       switchMap((response: any) => {
         let move: Move = {
-          moveId: response.moveId,
+          moveId: response.id,
           name: response.name,
           power: response.power,
           accuracy: response.accuracy,
