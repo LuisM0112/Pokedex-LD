@@ -35,15 +35,15 @@ export class PokemonDetailsComponent implements OnDestroy{
     public pokemonService: PokemonService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.subscription = this.activatedRoute.params.subscribe((data: any) => this.loadData(data['id']));
+    this.subscription = this.activatedRoute.params.subscribe((data: any) => this.loadData(data['pokemonId']));
   }
 
   ngOnDestroy(){
     this.subscription?.unsubscribe();
   }
 
-  private loadData(id: string) {
-    this.pokemonService.requestFullPokemon(id).subscribe((pokemon: FullPokemon) => {
+  private loadData(pokemonId: string) {
+    this.pokemonService.requestFullPokemon(pokemonId).subscribe((pokemon: FullPokemon) => {
       this.pokemon = pokemon;
       this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions));
       this.sortTypes(pokemon.type1, pokemon.type2);

@@ -1,5 +1,5 @@
 export class BasicPokemon {
-  id: number = 0;
+  pokemonId: number = 0;
   spriteNormal: string = '';
   spriteShiny: string = '';
   name: string = '';

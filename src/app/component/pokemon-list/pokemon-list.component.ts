@@ -40,16 +40,17 @@ export class PokemonListComponent implements OnInit {
 
     if (this.filterTypes.length) result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
 
-    if (this.filterText) result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.id.toString().includes(this.filterText));
+    if (this.filterText) result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.pokemonId.toString().includes(this.filterText));
 
     return result;
   }
-    getPokemonWidthClass(): string {
-    const filteredPokemonsCount = this.getPokemonesFiltered().length;
+
+  getPokemonWidthClass(): string {
+    const filteredPokemonCount = this.getPokemonesFiltered().length;
   
-    if (filteredPokemonsCount === 1) {
+    if (filteredPokemonCount === 1) {
       return 'one-pokemon-width'; //  un Pokémon
-    } else if (filteredPokemonsCount === 2) {
+    } else if (filteredPokemonCount === 2) {
       return 'two-pokemon-width'; // dos Pokémon
     } else {
       return 'default-pokemon-width'; // defecto
@@ -61,5 +62,4 @@ export class PokemonListComponent implements OnInit {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
   }
-
 }

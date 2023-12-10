@@ -1,5 +1,5 @@
 export class Move {
-  id: number = 0;
+  moveId: number = 0;
   name: string = "";
   accuracy: number = 0;
   power: number = 0;

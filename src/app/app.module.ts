@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonListComponent } from './component/pokemon-list/pokemon-list.component';
-import { IdFormatPipe } from './id-format.pipe';
+import { PokemonIdFormatPipe } from './pokemon-id-format.pipe';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { PokemonDetailsComponent } from './component/pokemon-details/pokemon-details.component';
@@ -18,7 +18,7 @@ import { Page404Component } from './component/page404/page404.component';
   declarations: [
     AppComponent,
     PokemonListComponent,
-    IdFormatPipe,
+    PokemonIdFormatPipe,
     HeaderComponent,
     FooterComponent,
     PokemonDetailsComponent,

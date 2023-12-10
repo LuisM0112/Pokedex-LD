@@ -6,7 +6,7 @@ import { Page404Component } from './component/page404/page404.component';
 
 const routes: Routes = [
   {path: 'pokemon-list', component: MainContainerComponent},
-  {path: 'pokemon-detail/:id', component: PokemonDetailsComponent},
+  {path: 'pokemon-detail/:pokemonId', component: PokemonDetailsComponent},
   {path: '', redirectTo: '/pokemon-list', pathMatch: 'full'},
   {path: '**', component: Page404Component},
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

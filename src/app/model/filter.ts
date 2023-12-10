@@ -1,10 +1,10 @@
 export class Filter {
-  id: number;
+  filterId: number;
   name: string;
   active: boolean;
 
-  constructor(id: number, name: string, active: boolean){
-    this.id = id;
+  constructor(filterId: number, name: string, active: boolean){
+    this.filterId = filterId;
     this.name = name;
     this.active = active;
   }

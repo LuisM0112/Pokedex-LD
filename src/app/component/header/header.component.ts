@@ -84,7 +84,7 @@ export class HeaderComponent{
     return this.typesFilter.filter(type => type.active).map(type => type.name);
   }
   getSelectedGens(): number[] {
-    return this.gensFilter.filter(gen => gen.active).map(gen => gen.id);
+    return this.gensFilter.filter(gen => gen.active).map(gen => gen.filterId);
   }
 
   toggleDarkMode() {

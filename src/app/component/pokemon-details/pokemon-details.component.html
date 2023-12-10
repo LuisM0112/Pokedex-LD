@@ -1,7 +1,7 @@
 <div id="pokemon-details">
   <div id="block-1">
     <div class="pokemon" [ngStyle]="this.pokemonService.getGradientBackground(pokemon)" (click)="toggleSprite()">
-      <div class="id">{{ pokemon.id | idFormat }}</div>
+      <div class="id">{{ pokemon.pokemonId | pokemonIdFormat }}</div>
       <img class="sprite" src="{{ isNormalSprite ? pokemon.spriteNormal : pokemon.spriteShiny }}" alt="{{pokemon.name}} sprite">
       <div class="name">{{ pokemon.name | titlecase }}</div>
       <div class="types">
@@ -73,9 +73,9 @@
   </div>
 
   <div id="evolution-container" class="block">
-    <div class="evolution" *ngFor="let evolution of evolutions; index as i" [routerLink]="'/pokemon-detail/' + evolution.id">
+    <div class="evolution" *ngFor="let evolution of evolutions; index as i" [routerLink]="'/pokemon-detail/' + evolution.pokemonId">
       <div class="pokemon" [ngStyle]="this.pokemonService.getGradientBackground(evolution)">
-        <div class="id">{{ evolution.id | idFormat }}</div>
+        <div class="id">{{ evolution.pokemonId | pokemonIdFormat }}</div>
           <img class="sprite" src="{{ evolution.spriteNormal }}" alt="{{evolution.name}} sprite">
         <div class="name">{{ evolution.name | titlecase }}</div>
         <div class="types">

@@ -5,11 +5,11 @@ import { map, switchMap } from 'rxjs/operators'
 import { BasicPokemon } from './model/basic-pokemon';
 import { FullPokemon } from './model/full-pokemon';
 import { Move } from './model/move';
+import { Evolution } from './interface/evolution';
+import { LearnedMove } from './model/learned-move';
 
 import * as jsonTypes from '../assets/data/typesData.json';
 import * as jsonGens from '../assets/data/generationsData.json';
-import { Evolution } from './interface/evolution';
-import { LearnedMove } from './model/learned-move';
 
 /** 
  * This Pokemon Service Class will be used by the pokemon-list, pokemon-details components
@@ -58,23 +58,23 @@ export class PokemonService {
   requestBasicPokemon(value: string): Observable<BasicPokemon> {
     return this.http.get(this.urlPokemon + value).pipe(
       map((response: any) => ({
-        id: response.id,
+        pokemonId: response.pokemonId,
         spriteNormal: response.sprites.other['official-artwork'].front_default,
         spriteShiny: response.sprites.other['official-artwork'].front_shiny,
         name: response.name,
-        generation: this.getGeneration(response.id),
+        generation: this.getGeneration(response.pokemonId),
         type1: response.types[0] ? response.types[0].type.name : '',
         type2: response.types[1] ? response.types[1].type.name : '',
       }))
     );
   }
 
-  requestFullPokemon(id: string): Observable<FullPokemon> {
-    return this.requestPokemonDescription(id).pipe(
+  requestFullPokemon(pokemonId: string): Observable<FullPokemon> {
+    return this.requestPokemonDescription(pokemonId).pipe(
       switchMap((descriptionAndEvolutionUrl: any) => {
         let evolutionUrl = descriptionAndEvolutionUrl.evolutionUrl;
-        let basicInfo$ = this.requestBasicPokemon(id + '');
-        let pokemonDetails$ = this.getPokemonDetails(id);
+        let basicInfo$ = this.requestBasicPokemon(pokemonId + '');
+        let pokemonDetails$ = this.getPokemonDetails(pokemonId);
         let evolutionChain$ = this.getPokemonEvolutionChain(evolutionUrl);
   
         return forkJoin({
@@ -101,8 +101,8 @@ export class PokemonService {
     );
   }
   
-  private getPokemonDetails(id: string): Observable<any> {
-    return this.http.get(`${this.urlPokemon}${id}`).pipe(
+  private getPokemonDetails(pokemonId: string): Observable<any> {
+    return this.http.get(`${this.urlPokemon}${pokemonId}`).pipe(
       map((response: any) => ({
         height: response.height / 10,
         weight: response.weight / 10,
@@ -134,8 +134,8 @@ export class PokemonService {
       }));
   }
 
-  requestPokemonDescription(id: string): Observable<{ description: string, evolutionUrl: string }> {
-    return this.http.get(this.urlSpecies + id + '/').pipe(
+  requestPokemonDescription(pokemonId: string): Observable<{ description: string, evolutionUrl: string }> {
+    return this.http.get(this.urlSpecies + pokemonId + '/').pipe(
       map((response: any) => {
         let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'es');
         let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
@@ -150,12 +150,12 @@ export class PokemonService {
 
   /**
    * Retrieves the generation number based on the provided ID.
-   * @param {number} id - The ID for which to determine the generation.
+   * @param {number} pokemonId - The ID for which to determine the generation.
    * @returns The generation number corresponding to the provided ID.
    *          Returns 0 if no generation matches the ID.
    */
-  private getGeneration(id: number): number {
-    let index = this.generationLimits.findIndex((limit) => id <= limit);
+  private getGeneration(generationId: number): number {
+    let index = this.generationLimits.findIndex((limit) => generationId <= limit);
     return index != -1 ? index + 1 : 0;
   }
 
@@ -216,7 +216,7 @@ export class PokemonService {
     return this.http.get(this.urlMove + name).pipe(
       switchMap((response: any) => {
         let move: Move = {
-          id: response.id,
+          moveId: response.moveId,
           name: response.name,
           power: response.power,
           accuracy: response.accuracy,
