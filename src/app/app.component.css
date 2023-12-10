@@ -33,7 +33,7 @@ app-footer{
   transform: scale(1.1);
 }
 
-.id{
+.pokemonId{
   padding: 2%;
   width: min-content;
   background-color: rgba(243, 243, 243, 0.418);
@@ -41,10 +41,10 @@ app-footer{
   border-radius: 1vw;
   font-size: 1em;
 }
-.id:before{
+.pokemonId:before{
   content: 'nº\00A0';
 }
-.pokemon:hover .id{
+.pokemon:hover .pokemonId{
   animation: shake 0.3s;
 }
 
