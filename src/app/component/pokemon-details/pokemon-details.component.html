@@ -49,23 +49,23 @@
   <div id="effectiveness-container" class="block">
     <h2>Effectiveness</h2>
     <div class="effectiveness">
-      <div class="list" *ngIf="this.veryWeakList.length > 0">
+      <div class="list" *ngIf="this.veryWeakList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
         <h2>Very weak</h2>
         <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</div>
       </div>
-      <div class="list" *ngIf="this.weakList.length > 0">
+      <div class="list" *ngIf="this.weakList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
         <h2>Weak</h2>
         <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</div>
       </div>
-      <div class="list" *ngIf="this.strongList.length > 0">
+      <div class="list" *ngIf="this.strongList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
         <h2>Strong</h2>
         <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</div>
       </div>
-      <div class="list" *ngIf="this.veryStrongList.length > 0">
+      <div class="list" *ngIf="this.veryStrongList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
         <h2>Very strong</h2>
         <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</div>
       </div>
-      <div class="list" *ngIf="this.notEffectiveList.length > 0">
+      <div class="list" *ngIf="this.notEffectiveList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
         <h2>Not effective</h2>
         <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</div>
       </div>
@@ -104,7 +104,11 @@
         <td> {{move.name}} </td>
         <td> {{move.accuracy}} </td>
         <td> {{move.power}} </td>
-        <td> {{move.type}} </td>
+        <td>
+          <div class="type" [ngStyle]="{ 'background-color': pokemonService.getTypeColor(move.type) }">
+            {{move.type}}
+          </div>
+        </td>
         <td> {{move.damageClass}} </td>
         <td> {{getMoveLearnLvl(move)}} </td>
       </tr>
@@ -120,7 +124,7 @@
         <th> Name </th>
         <th> Accuracy </th>
         <th> Power </th>
-        <th> Type </th>
+        <th> Type  </th>
         <th> Class </th>
         <th> Machine </th>
       </tr>
@@ -128,7 +132,11 @@
         <td> {{move.name}} </td>
         <td> {{move.accuracy}} </td>
         <td> {{move.power}} </td>
-        <td> {{move.type}} </td>
+        <td>
+          <div class="type" [ngStyle]="{ 'background-color': pokemonService.getTypeColor(move.type) }">
+            {{move.type}}
+          </div>
+        </td>
         <td> {{move.damageClass}} </td>
         <td> {{move.machine}} </td>
       </tr>
