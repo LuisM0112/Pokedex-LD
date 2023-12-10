@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1702230205909,
+  "timestamp": 1702233010097,
   "index": "https://LuisM0112.github.io/Pokedex-LD/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://LuisM0112.github.io/Pokedex-LD/favicon.ico",
         "https://LuisM0112.github.io/Pokedex-LD/index.html",
-        "https://LuisM0112.github.io/Pokedex-LD/main.179f50c11e42d815.js",
+        "https://LuisM0112.github.io/Pokedex-LD/main.6cb526ddf4a0fb4b.js",
         "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest",
         "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js",
         "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js",
@@ -72,9 +72,9 @@
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/transition.gif": "12547457fc0656171b06b0adf1a36eb706b485e0",
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png": "38df123fd052053373b2353e68591800232fb216",
     "https://LuisM0112.github.io/Pokedex-LD/favicon.ico": "40c44369090308ceafcc035971b4b9544346b656",
-    "https://LuisM0112.github.io/Pokedex-LD/index.html": "17ca941097f32400a4b125e3ab8d9f0df898e5b7",
-    "https://LuisM0112.github.io/Pokedex-LD/main.179f50c11e42d815.js": "1e36c1143a36de893f1ede0e018fd7a58de64f00",
-    "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest": "862e639db8f00a2334434fa7d44455cd6044c02a",
+    "https://LuisM0112.github.io/Pokedex-LD/index.html": "0ecb20c6d6b189843e6cde0479924e6717fe3f5d",
+    "https://LuisM0112.github.io/Pokedex-LD/main.6cb526ddf4a0fb4b.js": "fcff599072777094b961fea6cfbbf5e40e693b28",
+    "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest": "26ac722e9d3a7e48b3dfa0f64d5a07d7939c9b55",
     "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js": "876b9051ad0f42cf8e1075fa2f7faac6c0da05c6",
     "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js": "69ce55a031b49e51b9510d9348c567f0d147f650",
     "https://LuisM0112.github.io/Pokedex-LD/styles.fda4360ef5961a94.css": "f6448c8ffd1763354c00eba77e5156da234bd87b"
