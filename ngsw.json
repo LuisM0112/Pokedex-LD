@@ -1,0 +1,101 @@
+{
+  "configVersion": 1,
+  "timestamp": 1702230205909,
+  "index": "https://LuisM0112.github.io/Pokedex-LD/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://LuisM0112.github.io/Pokedex-LD/favicon.ico",
+        "https://LuisM0112.github.io/Pokedex-LD/index.html",
+        "https://LuisM0112.github.io/Pokedex-LD/main.179f50c11e42d815.js",
+        "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest",
+        "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js",
+        "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js",
+        "https://LuisM0112.github.io/Pokedex-LD/styles.fda4360ef5961a94.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://LuisM0112.github.io/Pokedex-LD/assets/data/generationsData.json",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/data/typesData.json",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-128x128.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-144x144.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-152x152.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-192x192.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-384x384.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-512x512.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-72x72.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-96x96.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/amarillo.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/azul.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/escapeRope.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/logo.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/rojo.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/tr.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/transition.gif",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://LuisM0112.github.io/Pokedex-LD/assets/data/generationsData.json": "862c6fc1741988967745e3df9d6b35c27a0fe91b",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/data/typesData.json": "1d719acda4eef3741049a0b1bf866035223d04f5",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/amarillo.png": "98c37c58aaa968ffddd33997719ac4f43fc24553",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/azul.png": "966b07107b985dda4a2a36f075984c26d768c47d",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/escapeRope.png": "e9b4668e146098ec118457b74d7271d705ad64a9",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/logo.png": "97bf5224794954a3adb1c6298bd3d4dc5ce23579",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/rojo.png": "76a5d651f2ddf194b3dff6bc83cb17d69528dd5f",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/tr.png": "53a3163111ed20e2854f0ac41a15f006364ffe00",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/transition.gif": "12547457fc0656171b06b0adf1a36eb706b485e0",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png": "38df123fd052053373b2353e68591800232fb216",
+    "https://LuisM0112.github.io/Pokedex-LD/favicon.ico": "40c44369090308ceafcc035971b4b9544346b656",
+    "https://LuisM0112.github.io/Pokedex-LD/index.html": "17ca941097f32400a4b125e3ab8d9f0df898e5b7",
+    "https://LuisM0112.github.io/Pokedex-LD/main.179f50c11e42d815.js": "1e36c1143a36de893f1ede0e018fd7a58de64f00",
+    "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest": "862e639db8f00a2334434fa7d44455cd6044c02a",
+    "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js": "876b9051ad0f42cf8e1075fa2f7faac6c0da05c6",
+    "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js": "69ce55a031b49e51b9510d9348c567f0d147f650",
+    "https://LuisM0112.github.io/Pokedex-LD/styles.fda4360ef5961a94.css": "f6448c8ffd1763354c00eba77e5156da234bd87b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

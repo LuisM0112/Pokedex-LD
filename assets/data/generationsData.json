@@ -1,0 +1,24 @@
+{
+  "generations": [
+    {
+      "name": "gen 1",
+      "limit": 151,
+      "color": "linear-gradient(to bottom, rgb(11, 188, 11), rgb(229, 58, 11))"
+    },
+    {
+      "name": "gen 2",
+      "limit": 251,
+      "color": "linear-gradient(to bottom, rgb(175, 173, 167), rgb(214, 214, 4))"
+    },
+    {
+      "name": "gen 3",
+      "limit": 386,
+      "color": "linear-gradient(to bottom, rgb(255, 8, 8), rgb(74, 171, 29), rgb(39, 25, 195))"
+    },
+    {
+      "name": "gen 4",
+      "limit": 493,
+      "colors": "linear-gradient(to bottom, rgb(82, 148, 223), rgb(231, 66, 220))"
+    }
+  ]
+}
