@@ -1,7 +1,7 @@
 <div id="header-container">
     <div id="search-bar">
         <span>🔍︎</span>
-        <input type="search" placeholder="Busca tu Pokemon" [(ngModel)]="inputText" (ngModelChange)="sendInputText()"/>
+        <input type="search" placeholder="Pokemon..." [(ngModel)]="inputText" (ngModelChange)="sendInputText()"/>
         <span id="menu" (click)="changePanelVisibility()">☰</span>
         <div id="filter-container" [ngStyle]="{'visibility': visibility}">
             <div id="types-container" class="types">

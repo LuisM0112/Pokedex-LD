@@ -215,17 +215,16 @@ export class PokemonService {
   requestMoveDetails(name: string): Observable<Move> {
     return this.http.get(this.urlMove + name).pipe(
       switchMap((response: any) => {
-        let name:any;
-        if(localStorage.getItem('language') == 'en'){
-          name = response.name
-        }else{
-          name = response.names.find((name: any) => name.language.name === 'es').name;
-          console.log(name);
-        }
-        
+        // let name:any;
+        // if(localStorage.getItem('language') == 'en'){
+          // name = response.name
+        // }else{
+        //   name = response.names.find((name: any) => name.language.name === 'es').name;
+        //   console.log(name);
+        // }
         let move: Move = {
           moveId: response.id,
-          name: name,
+          name: response.name,
           power: response.power,
           accuracy: response.accuracy,
           type: response.type.name,

@@ -5,69 +5,69 @@
       <img class="sprite" src="{{ isNormalSprite ? pokemon.spriteNormal : pokemon.spriteShiny }}" alt="{{pokemon.name}} sprite">
       <div class="name">{{ pokemon.name | titlecase }}</div>
       <div class="types">
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type1) }">{{ pokemon.type1 | titlecase }}</div>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type2) }">{{ pokemon.type2 | titlecase }}</div>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type1) }">{{ pokemon.type1 | traducir:'es'  | titlecase }}</div>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type2) }">{{ pokemon.type2 | traducir:'es'  | titlecase }}</div>
       </div>
     </div>
     <img id="home" src="../../../assets/images/escapeRope.png" alt="Escape Rope!" [routerLink]="''">
   </div>
 
   <div id="details-container" class="block">      
-    <h2>Height and weight</h2>
+    <h2>{{'Height and weight' | traducir:'es' }}</h2>
     <div class="statsBasic">
       <div class="height">{{ pokemon.height }}</div>
       <div class="weight">{{ pokemon.weight }}</div>
     </div>
-    <h2>Description</h2>
+    <h2>{{'Description' | traducir:'es' }}</h2>
     <div class="description">{{ pokemon.description }}</div>
-    <h2>Base Stats</h2>
-    <span class="stat-name">Health: {{ pokemon.hp }}</span>
+    <h2>{{'Base Stats' | traducir:'es' }}</h2>
+    <span class="stat-name">{{'Health: ' | traducir:'es'}}{{ pokemon.hp }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.hp) }}"></div>
     </div>
-    <span class="stat-name">Attack: {{ pokemon.attack }}</span>
+    <span class="stat-name">{{'Attack: ' | traducir:'es'}}{{ pokemon.attack }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.attack) }}"></div>
     </div>
-    <span class="stat-name">Defense: {{ pokemon.defense }}</span>
+    <span class="stat-name">{{'Defense: ' | traducir:'es'}}{{ pokemon.defense }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.defense) }}"></div>
     </div>
-    <span class="stat-name">Special Attack: {{ pokemon.specialAttack }}</span>
+    <span class="stat-name">{{'Special Attack: ' | traducir:'es'}}{{ pokemon.specialAttack }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialAttack) }}"></div>
     </div>
-    <span class="stat-name">Special Defense: {{ pokemon.specialDefense }}</span>
+    <span class="stat-name">{{'Special Defense: ' | traducir:'es'}}{{ pokemon.specialDefense }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.specialDefense) }}"></div>
     </div>
-    <span class="stat-name">Speed: {{ pokemon.speed }}</span>
+    <span class="stat-name">{{'Speed: ' | traducir:'es'}}{{ pokemon.speed }}</span>
     <div class="stat-bar">
       <div class="stat-bar-fill" style="--stat-value: {{ getPercentage(pokemon.speed) }}"></div>
     </div>
   </div>
   <div id="effectiveness-container" class="block">
-    <h2>Effectiveness</h2>
+    <h2>{{'Effectiveness' | traducir:'es' }}</h2>
     <div class="effectiveness">
       <div class="list" *ngIf="this.veryWeakList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
-        <h2>Very weak</h2>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type | titlecase }}</div>
+        <h2>{{'Very Weak' | traducir:'es'}}</h2>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryWeakList">{{ type| traducir:'es'  | titlecase }}</div>
       </div>
       <div class="list" *ngIf="this.weakList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
-        <h2>Weak</h2>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type | titlecase }}</div>
+        <h2>{{'Weak' | traducir:'es'}}</h2>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.weakList">{{ type| traducir:'es'  | titlecase }}</div>
       </div>
       <div class="list" *ngIf="this.strongList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
-        <h2>Strong</h2>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type | titlecase }}</div>
+        <h2>{{'Strong' | traducir:'es'}}</h2>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.strongList">{{ type| traducir:'es'  | titlecase }}</div>
       </div>
       <div class="list" *ngIf="this.veryStrongList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
-        <h2>Very strong</h2>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type | titlecase }}</div>
+        <h2>{{'Very Strong' | traducir:'es'}}</h2>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.veryStrongList">{{ type| traducir:'es'  | titlecase }}</div>
       </div>
       <div class="list" *ngIf="this.notEffectiveList.length > 0"  [ngStyle]="this.pokemonService.getGradientBackground(pokemon)">
-        <h2>Not effective</h2>
-        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type | titlecase }}</div>
+        <h2>{{'Not Effective' | traducir:'es'}}</h2>
+        <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(type) }" *ngFor="let type of this.notEffectiveList">{{ type| traducir:'es'  | titlecase }}</div>
       </div>
     </div>
   </div>
@@ -79,8 +79,8 @@
           <img class="sprite" src="{{ evolution.spriteNormal }}" alt="{{evolution.name}} sprite">
         <div class="name">{{ evolution.name | titlecase }}</div>
         <div class="types">
-          <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(evolution.type1) }">{{ evolution.type1 | titlecase }}</div>
-          <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(evolution.type2) }">{{ evolution.type2 | titlecase }}</div>
+          <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(evolution.type1) }">{{ evolution.type1 | traducir:'es'  | titlecase }}</div>
+          <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(evolution.type2) }">{{ evolution.type2 | traducir:'es'  | titlecase }}</div>
         </div>
       </div>
       <div class="trigger" *ngFor="let requirements of getRequirements(i)">{{ requirements }}</div>
@@ -91,17 +91,17 @@
     <table class="move-table">
       <tr>
         <td colspan="6" style="text-align: center;">
-          <h2>Learned by Level</h2>
+          <h2>{{'Learned By Level' | traducir:'es'}}</h2>
         </td>
       </tr>
       <br>
       <tr>
-        <th><h3>Name</h3></th>
-        <th><h3>Accuracy</h3></th>
-        <th><h3>Power</h3></th>
-        <th><h3>Type</h3></th>
-        <th><h3>Class</h3></th>
-        <th><h3>Level</h3></th>
+        <th><h3>{{'Name' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Accuracy' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Power' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Type' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Class' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Level' | traducir:'es'}}</h3></th>
       </tr>
       <tr *ngFor="let move of lvlMoves">
         <td> {{move.name}} </td>
@@ -119,16 +119,16 @@
     <table class="move-table">
       <tr>
         <td colspan="6" style="text-align: center;">
-          <h2>Learned by machine</h2>
+          <h2>{{'Learned By MT' | traducir:'es'}}</h2>
         </td>
       </tr>
       <br>
       <tr>
-        <th><h3> Name </h3></th>
-        <th><h3>Accuracy</h3></th>
-        <th><h3>Power</h3></th>
-        <th><h3>Type</h3></th>
-        <th><h3>Class</h3></th>
+        <th><h3>{{'Name' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Accuracy' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Power' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Type' | traducir:'es'}}</h3></th>
+        <th><h3>{{'Class' | traducir:'es'}}</h3></th>
         <th><h3>MT</h3></th>
       </tr>
       <tr *ngFor="let move of machineMoves">
