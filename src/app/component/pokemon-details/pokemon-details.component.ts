@@ -48,6 +48,7 @@ export class PokemonDetailsComponent implements OnDestroy{
       this.pokemonService.fetchEvolutions(this.pokemon.evolutionChain).subscribe(((evolutions: BasicPokemon[]) => this.evolutions = evolutions));
       this.sortTypes(pokemon.type1, pokemon.type2);
       this.pokemonService.fetchAllMoves(this.pokemon.learnedMoves).subscribe((moves: Move[]) => {
+        console.log(moves);
         this.machineMoves = moves.filter((move) => this.getMoveLearnMethod(move) === 'machine').sort((a,b) => {
           if (a.machine > b.machine) return 1;
           if (a.machine < b.machine) return -1;

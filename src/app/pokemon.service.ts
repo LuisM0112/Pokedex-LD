@@ -129,8 +129,8 @@ export class PokemonService {
       )
       .map((move: any) => ({
         name: move.move.name,
-        learnLevel: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').level_learned_at,
-        learnMethod: move.version_group_details.find((details: any) => details.version_group.name === 'diamond-pearl').move_learn_method.name,
+        learnLevel: move.version_group_details.find((details: any) => details.version_group.name === 'platinum').level_learned_at,
+        learnMethod: move.version_group_details.find((details: any) => details.version_group.name === 'platinum').move_learn_method.name,
       }));
   }
 
@@ -219,10 +219,9 @@ export class PokemonService {
       switchMap((response: any) => {
         // let name:any;
         // if(localStorage.getItem('language') == 'en'){
-          // name = response.name
+        //   name = response.name
         // }else{
         //   name = response.names.find((name: any) => name.language.name === 'es').name;
-        //   console.log(name);
         // }
         let move: Move = {
           moveId: response.id,
@@ -235,7 +234,7 @@ export class PokemonService {
         };
 
         if (response.machines.length > 0) {
-          let machineUrl = response.machines.find((machine: any) => machine.version_group.name === 'diamond-pearl')?.machine.url;
+          let machineUrl = response.machines.find((machine: any) => machine.version_group.name === 'platinum')?.machine.url;
 
           if (machineUrl) {
             return this.requestMachineName(machineUrl).pipe(
