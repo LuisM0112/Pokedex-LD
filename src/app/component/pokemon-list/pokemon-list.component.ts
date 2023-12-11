@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/pokemon.service';
 import { BasicPokemon } from 'src/app/model/basic-pokemon';
+import { ElementRef, ViewChild } from '@angular/core';
 
-/**
- * This Pokemon-list class is going to take the array of pokemon to be displayed
- * by the HTML component, and it sets the background style for the pokemon element
- */
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
@@ -13,26 +10,21 @@ import { BasicPokemon } from 'src/app/model/basic-pokemon';
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemones: BasicPokemon[] = [];  // Will contain the array of every pokemon
-
+  pokemones: BasicPokemon[] = [];
+  
   @Input()
-  filterText: string = '';    // Gets the name or id to filter the array
+  filterText: string = '';
   @Input()
-  filterTypes: string[] = []; // Gets the types selected to filter the array
+  filterTypes: string[] = [];
   @Input()
-  filterGens: number[] = [];  // Gets the generations selected to filter the array
+  filterGens: number[] = [];
 
   constructor(public pokemonService: PokemonService) {}
 
   ngOnInit() {
-    // Fetches all Pokemon from the service and assigns them to 'pokemones'.
     this.pokemonService.fetchAllPokemon().subscribe(((pokemones: BasicPokemon[]) => this.pokemones = pokemones));
   }
 
-  /**
-   * Filters the Pokemon list based on filterText, filterTypes, and filterGens.
-   * @returns An array of BasicPokemon that matches the applied filters.
-   */
   getPokemonesFiltered(): BasicPokemon[] {
     let result: BasicPokemon[] = this.pokemones;
 
@@ -62,4 +54,47 @@ export class PokemonListComponent implements OnInit {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
   }
+
+  @ViewChild('audioPlayer') audioPlayerRef!: ElementRef;
+
+  playSound(pokemonId: number) {
+    const audioPlayer = this.audioPlayerRef.nativeElement as HTMLAudioElement;
+
+    switch (pokemonId) {
+      case 67:
+        audioPlayer.src = 'assets/sound/siuu.mp3';
+        audioPlayer.play();
+        break;
+      case 143:
+        audioPlayer.src = 'assets/sound/knekro.mp3';
+        audioPlayer.play();
+        break;
+      case 39:
+        audioPlayer.src = 'assets/sound/away.mp3';
+        audioPlayer.play();
+        break;
+      case 149:
+        audioPlayer.src = 'assets/sound/esp.mp3';
+        audioPlayer.play();
+        break;
+      case 50:
+        audioPlayer.src = 'assets/sound/mondongo.mp3';
+        audioPlayer.play();
+        break;
+      case 493:
+        audioPlayer.src = 'assets/sound/illo.mp3';
+        audioPlayer.play();
+        break;        // Agregar
+      default:
+        // Sonido por defecto 
+        break;
+    }
+  }
+
+  stopSound() {
+    const audioPlayer = this.audioPlayerRef.nativeElement as HTMLAudioElement;
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+  }
 }
+
