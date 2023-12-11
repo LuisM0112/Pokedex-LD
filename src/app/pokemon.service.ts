@@ -135,9 +135,11 @@ export class PokemonService {
   }
 
   requestPokemonDescription(pokemonId: string): Observable<{ description: string, evolutionUrl: string }> {
+    const language = localStorage.getItem('language') === 'es' ? 'es' : 'en';
+  
     return this.http.get(this.urlSpecies + pokemonId + '/').pipe(
       map((response: any) => {
-        let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === 'es');
+        let descriptionObj = response.flavor_text_entries.find((entry: any) => entry.language.name === language);
         let description = descriptionObj ? descriptionObj.flavor_text : 'No description available';
         description = description.replace(/[\r\n\t\f\v]/g, " ");
   

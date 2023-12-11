@@ -48,22 +48,18 @@ h3{
   }
 }
 
-.move-table{
+.move-table {
 width: 100%;
 text-align: center;
 vertical-align: center;
+border-spacing: 20px;
 }
 
 th{
-  border-radius: 10px;
+  border-radius: 20px;
   border: solid black 2px;
+  background-color: rgba(215, 160, 160, 0.927);
 }
-
-tr{
-  vertical-align: center;
-}
-
-
 
 #effectiveness-container{
   grid-column: 1 / span 2;
@@ -177,8 +173,49 @@ td{
 
 #lvl-moves-table{
   grid-column: 1 / span 2;
+  
 }
 
 #machine-moves-table{
   grid-column: 1 / span 2;
+  
+}
+
+/* Media query para dispositivos móviles */
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 700px) {
+  /* Reducción del tamaño de las tablas */
+  .move-table {
+    font-size: 14px;
+  }
+
+  /* Reducción del espacio entre las celdas de la tabla */
+  .move-table th,
+  .move-table td {
+    padding: 6px;
+  }
+
+  /* Reducción del tamaño de letra de los th */
+  .move-table th {
+    font-size: 12px;
+  }
+}
+
+/* Estilos para dispositivos móviles con pantalla aún más pequeña */
+@media screen and (max-width: 400px) {
+  /* Reducción adicional del tamaño de las tablas */
+  .move-table {
+    font-size: 12px;
+  }
+
+  /* Reducción del espacio entre las celdas de la tabla */
+  .move-table th,
+  .move-table td {
+    padding: 4px;
+  }
+
+  /* Reducción adicional del tamaño de letra de los th */
+  .move-table th {
+    font-size: 10px;
+  }
 }
