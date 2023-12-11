@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1702309627815,
+  "timestamp": 1702310646109,
   "index": "https://LuisM0112.github.io/Pokedex-LD/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://LuisM0112.github.io/Pokedex-LD/favicon.ico",
         "https://LuisM0112.github.io/Pokedex-LD/index.html",
-        "https://LuisM0112.github.io/Pokedex-LD/main.a8b70c729cfec3d3.js",
+        "https://LuisM0112.github.io/Pokedex-LD/main.8b3a86e582e32ac7.js",
         "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest",
         "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js",
         "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js",
@@ -114,8 +114,8 @@
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png": "38df123fd052053373b2353e68591800232fb216",
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/water.png": "e187f2b6dfd71848dc9eaff747dddb72aabb438b",
     "https://LuisM0112.github.io/Pokedex-LD/favicon.ico": "40c44369090308ceafcc035971b4b9544346b656",
-    "https://LuisM0112.github.io/Pokedex-LD/index.html": "e3f139af4e5888bb7a4776cc7dad7868b043a452",
-    "https://LuisM0112.github.io/Pokedex-LD/main.a8b70c729cfec3d3.js": "852c0514b360f0f9729f72e624af9f4a3901a8a5",
+    "https://LuisM0112.github.io/Pokedex-LD/index.html": "504288d1dccb453bcb1af1e208f0f135a7a01226",
+    "https://LuisM0112.github.io/Pokedex-LD/main.8b3a86e582e32ac7.js": "64bcf07a08e81f3d62a9c1f07c3af085ac9ea4b9",
     "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest": "26ac722e9d3a7e48b3dfa0f64d5a07d7939c9b55",
     "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js": "876b9051ad0f42cf8e1075fa2f7faac6c0da05c6",
     "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js": "69ce55a031b49e51b9510d9348c567f0d147f650",
