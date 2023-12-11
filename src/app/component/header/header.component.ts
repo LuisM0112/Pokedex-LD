@@ -8,7 +8,7 @@ import { GenType } from 'src/app/interface/gen-type';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   typesFilter: Filter[] = [];
   gensFilter: Filter[] = [];
@@ -42,22 +42,32 @@ export class HeaderComponent implements OnInit{
 
     this.typesFilter = this.fillTypesFilters();
     this.gensFilter = this.fillGensFilters();
+
+    // Comprueba si el modo oscuro está activado al iniciar
+    const isDarkMode = localStorage.getItem('darkMode');
+    if (isDarkMode && JSON.parse(isDarkMode)) {
+      const body = document.querySelector('body');
+      body?.classList.add('dark-mode');
+    }
   }
+
   ngOnInit(): void {
     console.log("recargar")
   }
 
-  sendInputText(){
-    this.filterTextEvent.emit({filter: this.inputText.toLowerCase()});
-  }
-  sendInputTypes(){
-    this.filterTypesEvent.emit({filter: this.getSelectedTypes()});
-  }
-  sendInputGens(){
-    this.filterGensEvent.emit({filter: this.getSelectedGens()});
+  sendInputText() {
+    this.filterTextEvent.emit({ filter: this.inputText.toLowerCase() });
   }
 
-  fillTypesFilters(): Filter[]{
+  sendInputTypes() {
+    this.filterTypesEvent.emit({ filter: this.getSelectedTypes() });
+  }
+
+  sendInputGens() {
+    this.filterGensEvent.emit({ filter: this.getSelectedGens() });
+  }
+
+  fillTypesFilters(): Filter[] {
     return this.types.map((type, index) => new Filter(index + 1, type.name, false));
   }
 
@@ -65,27 +75,30 @@ export class HeaderComponent implements OnInit{
     return this.gens.map((gen, index) => new Filter(index + 1, gen.name, false));
   }
 
-  changePanelVisibility(){
-    (this.visibility === "visible") ? this.visibility = "collapse" : this.visibility = "visible";
+  changePanelVisibility() {
+    this.visibility = (this.visibility === "visible") ? "collapse" : "visible";
   }
 
-  changeFilterTypesStatus(index: number): void{
+  changeFilterTypesStatus(index: number): void {
     this.typesFilter[index].active = !this.typesFilter[index].active;
   }
-  changeFilterGensStatus(index: number): void{
+
+  changeFilterGensStatus(index: number): void {
     this.gensFilter[index].active = !this.gensFilter[index].active;
   }
 
-  getTypeStatus(index: number): string{
+  getTypeStatus(index: number): string {
     return this.typesFilter[index].active ? 'active' : '';
   }
-  getGenStatus(index: number): string{
+
+  getGenStatus(index: number): string {
     return this.gensFilter[index].active ? 'active' : '';
   }
 
   getSelectedTypes(): string[] {
     return this.typesFilter.filter(type => type.active).map(type => type.name);
   }
+
   getSelectedGens(): number[] {
     return this.gensFilter.filter(gen => gen.active).map(gen => gen.filterId);
   }
@@ -93,14 +106,21 @@ export class HeaderComponent implements OnInit{
   toggleDarkMode() {
     const body = document.querySelector('body');
     body?.classList.toggle('dark-mode');
+
+    // Verifica si el modo oscuro está activado
+    const isDarkMode = body?.classList.contains('dark-mode');
+
+    // Guarda el estado en el Local Storage
+    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
   }
 
-  changeLan(){
-    if(localStorage.getItem('language') == 'en'){
-      localStorage.setItem('language','es')
-    }else{
-      localStorage.setItem('language','en')
+  changeLan() {
+    if (localStorage.getItem('language') == 'en') {
+      localStorage.setItem('language', 'es')
+    } else {
+      localStorage.setItem('language', 'en')
     }
     window.location.reload()
   }
 }
+
