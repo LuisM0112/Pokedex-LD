@@ -125,7 +125,7 @@ const TRADUCCIONES = [
   es: 'Muy fuerte',
 },
 {
-  en: 'Not effective',
+  en: 'Not Effective',
   es: 'No afecta',
 },
 {
