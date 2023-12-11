@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { PokemonService } from 'src/app/pokemon.service';
 import { Filter } from 'src/app/model/filter';
 import { GenType } from 'src/app/interface/gen-type';
@@ -8,7 +8,7 @@ import { GenType } from 'src/app/interface/gen-type';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit{
 
   typesFilter: Filter[] = [];
   gensFilter: Filter[] = [];
@@ -50,7 +50,6 @@ export class HeaderComponent implements OnInit {
       body?.classList.add('dark-mode');
     }
   }
-
   ngOnInit(): void {
     console.log("recargar")
   }
