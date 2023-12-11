@@ -66,6 +66,14 @@ span{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   width: min-content;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
 }
 
 #gen-container{
