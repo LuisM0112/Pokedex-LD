@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1702335360772,
+  "timestamp": 1702398199682,
   "index": "https://LuisM0112.github.io/Pokedex-LD/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://LuisM0112.github.io/Pokedex-LD/favicon.ico",
         "https://LuisM0112.github.io/Pokedex-LD/index.html",
-        "https://LuisM0112.github.io/Pokedex-LD/main.96da1a03ca91789a.js",
+        "https://LuisM0112.github.io/Pokedex-LD/main.b494c3847aaaf36f.js",
         "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest",
         "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js",
         "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js",
@@ -68,6 +68,7 @@
         "https://LuisM0112.github.io/Pokedex-LD/assets/images/transition.gif",
         "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png",
         "https://LuisM0112.github.io/Pokedex-LD/assets/images/water.png",
+        "https://LuisM0112.github.io/Pokedex-LD/assets/sound/3mundo.mp3",
         "https://LuisM0112.github.io/Pokedex-LD/assets/sound/away.mp3",
         "https://LuisM0112.github.io/Pokedex-LD/assets/sound/esp.mp3",
         "https://LuisM0112.github.io/Pokedex-LD/assets/sound/illo.mp3",
@@ -119,6 +120,7 @@
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/transition.gif": "12547457fc0656171b06b0adf1a36eb706b485e0",
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/verde.png": "38df123fd052053373b2353e68591800232fb216",
     "https://LuisM0112.github.io/Pokedex-LD/assets/images/water.png": "e187f2b6dfd71848dc9eaff747dddb72aabb438b",
+    "https://LuisM0112.github.io/Pokedex-LD/assets/sound/3mundo.mp3": "cab68e45ed9ffffe416f1655f1c3746cedb884db",
     "https://LuisM0112.github.io/Pokedex-LD/assets/sound/away.mp3": "e3df7db850dd86c588009472e89eb1d7ddd0183a",
     "https://LuisM0112.github.io/Pokedex-LD/assets/sound/esp.mp3": "eb6e49111212dd5c9381562fa37be0a8303b5776",
     "https://LuisM0112.github.io/Pokedex-LD/assets/sound/illo.mp3": "83e402b8b556430a4a4f88769cf0aca6a83bebd0",
@@ -126,8 +128,8 @@
     "https://LuisM0112.github.io/Pokedex-LD/assets/sound/mondongo.mp3": "822ba1229eaf974eb99ce43b9e87b2d8757f7d53",
     "https://LuisM0112.github.io/Pokedex-LD/assets/sound/siuu.mp3": "0ce2dbe436ecb7997b77ea709d1dd683a8945e9d",
     "https://LuisM0112.github.io/Pokedex-LD/favicon.ico": "40c44369090308ceafcc035971b4b9544346b656",
-    "https://LuisM0112.github.io/Pokedex-LD/index.html": "303b168b67c488a692e71a526262b0b06be33ea3",
-    "https://LuisM0112.github.io/Pokedex-LD/main.96da1a03ca91789a.js": "bc522a39b8944ee6fa3ac9f14a9be68833a88ddd",
+    "https://LuisM0112.github.io/Pokedex-LD/index.html": "60e5d7f30deaba0d411a56dc2d14f9198177bea9",
+    "https://LuisM0112.github.io/Pokedex-LD/main.b494c3847aaaf36f.js": "9ddb406b5f6859e64c9b5817703cf540944fde20",
     "https://LuisM0112.github.io/Pokedex-LD/manifest.webmanifest": "26ac722e9d3a7e48b3dfa0f64d5a07d7939c9b55",
     "https://LuisM0112.github.io/Pokedex-LD/polyfills.e8da45e43ace5751.js": "876b9051ad0f42cf8e1075fa2f7faac6c0da05c6",
     "https://LuisM0112.github.io/Pokedex-LD/runtime.c6cab3f2014a57b8.js": "69ce55a031b49e51b9510d9348c567f0d147f650",
