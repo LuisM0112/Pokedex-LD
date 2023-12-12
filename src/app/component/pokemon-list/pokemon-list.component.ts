@@ -27,13 +27,24 @@ export class PokemonListComponent implements OnInit {
 
   getPokemonesFiltered(): BasicPokemon[] {
     let result: BasicPokemon[] = this.pokemones;
-
-    if (this.filterGens.length) result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
-
-    if (this.filterTypes.length) result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
-
-    if (this.filterText) result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.pokemonId.toString().includes(this.filterText));
-
+  
+    if (this.filterText === 'tercero del mundo') {
+      const specificPokemonIds = [65, 143, 121, 145, 144, 112];
+      result = result.filter((pokemon) => specificPokemonIds.includes(pokemon.pokemonId));
+    } else {
+      if (this.filterGens.length) {
+        result = result.filter((pokemon) => this.filterGens.includes(pokemon.generation));
+      }
+  
+      if (this.filterTypes.length) {
+        result = result.filter((pokemon) => this.filterTypes.includes(pokemon.type1) || this.filterTypes.includes(pokemon.type2));
+      }
+  
+      if (this.filterText) {
+        result = result.filter((pokemon) => pokemon.name.includes(this.filterText) || pokemon.pokemonId.toString().includes(this.filterText));
+      }
+    }
+  
     return result;
   }
 

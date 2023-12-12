@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { PokemonService } from 'src/app/pokemon.service';
 import { Filter } from 'src/app/model/filter';
 import { GenType } from 'src/app/interface/gen-type';
@@ -8,54 +8,49 @@ import { GenType } from 'src/app/interface/gen-type';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
-
+export class HeaderComponent implements OnInit {
   typesFilter: Filter[] = [];
   gensFilter: Filter[] = [];
-
   types: GenType[] = [];
   gens: GenType[] = [];
-
-  @Output()
-  filterTextEvent = new EventEmitter();
-
-  @Output()
-  filterTypesEvent = new EventEmitter();
-
-  @Output()
-  filterGensEvent = new EventEmitter();
-
+  @Output() filterTextEvent = new EventEmitter();
+  @Output() filterTypesEvent = new EventEmitter();
+  @Output() filterGensEvent = new EventEmitter();
   inputText = "";
-
   visibility = "collapse";
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
   constructor(public pokemonService: PokemonService) {
     this.types = this.pokemonService.typesData.types.map((type: GenType) => ({
       name: type.name,
       color: type.color,
     }));
-
     this.gens = this.pokemonService.gensData.generations.map((gen: GenType) => ({
       name: gen.name,
       color: gen.color,
     }));
-
     this.typesFilter = this.fillTypesFilters();
     this.gensFilter = this.fillGensFilters();
-
-    // Comprueba si el modo oscuro está activado al iniciar
     const isDarkMode = localStorage.getItem('darkMode');
     if (isDarkMode && JSON.parse(isDarkMode)) {
       const body = document.querySelector('body');
       body?.classList.add('dark-mode');
     }
   }
+
   ngOnInit(): void {
-    console.log("recargar")
+    console.log("recargar");
   }
 
   sendInputText() {
-    this.filterTextEvent.emit({ filter: this.inputText.toLowerCase() });
+    const searchText = this.inputText.toLowerCase();
+  
+    if (searchText === 'tercero del mundo') {
+      const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+      audio.play();
+    }
+  
+    this.filterTextEvent.emit({ filter: searchText });
   }
 
   sendInputTypes() {
@@ -105,11 +100,7 @@ export class HeaderComponent implements OnInit{
   toggleDarkMode() {
     const body = document.querySelector('body');
     body?.classList.toggle('dark-mode');
-
-    // Verifica si el modo oscuro está activado
     const isDarkMode = body?.classList.contains('dark-mode');
-
-    // Guarda el estado en el Local Storage
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
   }
 
@@ -122,4 +113,3 @@ export class HeaderComponent implements OnInit{
     window.location.reload()
   }
 }
-
