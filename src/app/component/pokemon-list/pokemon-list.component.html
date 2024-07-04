@@ -1,19 +1,37 @@
 <div id="pokemon-list" [ngClass]="getPokemonWidthClass()">
-  <div class="pokemon" *ngFor="let pokemon of getPokemonesFiltered()" 
-       [ngStyle]="this.pokemonService.getGradientBackground(pokemon)" 
-       [routerLink]="'/pokemon-detail/' + pokemon.pokemonId"
-       (mouseenter)="playSound(pokemon.pokemonId)"
-       (mouseleave)="stopSound()">
+  <div
+    class="pokemon"
+    *ngFor="let pokemon of getPokemonesFiltered()"
+    [ngStyle]="this.pokemonService.getGradientBackground(pokemon)"
+    [routerLink]="'/pokemon-detail/' + pokemon.pokemonId"
+    (mouseenter)="playSound(pokemon.pokemonId)"
+    (mouseleave)="stopSound()"
+  >
     <!-- Contenido del Pokémon -->
     <div class="pokemonId">{{ pokemon.pokemonId | pokemonIdFormat }}</div>
-    <img class="sprite" src="{{pokemon.spriteNormal}}" alt="{{pokemon.name}} sprite">
+    <img
+      class="sprite"
+      src="{{ pokemon.spriteNormal }}"
+      alt="{{ pokemon.name }} sprite"
+    />
     <div class="name">{{ pokemon.name | titlecase }}</div>
     <div class="types">
-      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type1) }">{{ pokemon.type1 | traducir:'es' | titlecase}}</div>
-      <div class="type" [ngStyle]="{ 'background-color': this.pokemonService.getTypeColor(pokemon.type2) }">{{ pokemon.type2 | traducir:'es' | titlecase}}</div>
+      <div
+        class="type"
+        [ngStyle]="{
+          'background-color': this.pokemonService.getTypeColor(pokemon.type1)
+        }"
+      >
+        {{ pokemon.type1 | traducir : "es" | titlecase }}
+      </div>
+      <div
+        class="type"
+        [ngStyle]="{
+          'background-color': this.pokemonService.getTypeColor(pokemon.type2)
+        }"
+      >
+        {{ pokemon.type2 | traducir : "es" | titlecase }}
+      </div>
     </div>
   </div>
-  <audio #audioPlayer>
-    
-  </audio>
 </div>
