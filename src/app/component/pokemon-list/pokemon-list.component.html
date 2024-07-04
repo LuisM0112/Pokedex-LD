@@ -4,8 +4,6 @@
     *ngFor="let pokemon of getPokemonesFiltered()"
     [ngStyle]="this.pokemonService.getGradientBackground(pokemon)"
     [routerLink]="'/pokemon-detail/' + pokemon.pokemonId"
-    (mouseenter)="playSound(pokemon.pokemonId)"
-    (mouseleave)="stopSound()"
   >
     <!-- Contenido del Pokémon -->
     <div class="pokemonId">{{ pokemon.pokemonId | pokemonIdFormat }}</div>
